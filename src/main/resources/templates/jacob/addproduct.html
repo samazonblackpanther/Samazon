@@ -9,7 +9,33 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
+<h1>Hello</h1>
 
+<form action="#" th:action="@{/postproduct}" th:object="${product}" method="post" enctype="multipart/form-data">
+    <input type="hidden" th:field="*{id}" />
+    <h4>Name: </h4> <input type="text" th:field="*{name}" />
+    <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span> <br />
+
+    <!--                        <h4>Posted By: </h4><input type="text" th:field="*{postedBy}" />-->
+    <!--                        <span th:if="${#fields.hasErrors('postedBy')}" th:errors="*{postedBy}"></span><br />-->
+
+    <h4>Posted By: </h4><span th:text="${user.getUsername()}"></span>
+
+    <h4>Category: </h4><input type="text" th:field="*{category}" />
+    <span th:if="${#fields.hasErrors('category')}" th:errors="*{category}"></span><br />
+
+    <h4>Category: </h4><input type="text" th:field="*{category}" />
+    <span th:if="${#fields.hasErrors('category')}" th:errors="*{category}"></span><br />
+
+    <h4>Description: </h4><textarea rows="5" cols="50" th:field="*{description}" ></textarea>
+    <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span> <br />
+
+    Product Image:
+    <input type="file" name="file"><br />
+
+
+    <input type="submit" value="Submit" />
+</form>
 
 
 <!--Bootstrap JS-->

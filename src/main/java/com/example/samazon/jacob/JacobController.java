@@ -1,9 +1,7 @@
 package com.example.samazon.jacob;
 
-import com.example.samazon.security.RoleRepository;
-import com.example.samazon.security.User;
-import com.example.samazon.security.UserRepository;
-import com.example.samazon.security.UserService;
+import com.cloudinary.utils.ObjectUtils;
+import com.example.samazon.security.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,8 +9,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.IOException;
+import java.util.Map;
 
 @Controller
 public class JacobController {
@@ -29,24 +31,39 @@ public class JacobController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    CloudinaryConfig cloudc;
+
 
 
     @GetMapping("/addproduct")
     public String showProductPage(Model model) {
         model.addAttribute("product", new Product());
-        return "security/registration";
+        model.addAttribute("currentuser", userService.getCurrentUser());
+        return "jacob/addproduct";
     }
 
     @PostMapping("/postproduct")
-    public String processProductPage(@Valid @ModelAttribute("user") User user, BindingResult result, Model model) {
-        model.addAttribute("user",user);
-        if(result.hasErrors()) {
-            return "/security/registration";
+    public String processForm(@Valid Product product, BindingResult result, @RequestParam("file")MultipartFile file, Model model) {
+        model.addAttribute("product", product);
+
+        if (result.hasErrors()) {
+            return "jacob/addproduct";
         }
-        else {
-            userService.saveUser(user);
-            model.addAttribute("message", "User Account Successfully Created");
+        if (file.isEmpty()) {
+
+        } else {
+            try {
+                Map uploadResult = cloudc.upload(file.getBytes(), ObjectUtils.asMap("resourcetype", "auto"));
+                product.setImage(uploadResult.get("url").toString());
+            } catch (IOException e) {
+                e.printStackTrace();
+                return "redirect:/addproduct";
+            }
+
         }
-        return "security/index";
+
+        productRepository.save(product);
+        return "redirect:/";
     }
 }
