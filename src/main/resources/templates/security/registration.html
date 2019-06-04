@@ -15,7 +15,7 @@
 
 <h2>New User Registration</h2>
 
-<form autocomplete="off" action="#" th:action="@{/register}" th:object="${user}" method="post">
+<form autocomplete="off" action="#" th:action="@{/register}" th:object="${user}" method="post" enctype="multipart/form-data">
     First Name
     <mark>
         <strong>
@@ -37,13 +37,13 @@
         </strong>
     </mark>
     <input type="text" id="email" placeholder="Email" th:field="*{email}"/><br/>
-    Username
-    <mark>
-        <strong>
-            <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username Error</span>
-        </strong>
-    </mark>
-    <input type="text" id="username" placeholder="Username" th:field="*{username}"/><br/>
+    <!--Username-->
+    <!--<mark>-->
+        <!--<strong>-->
+            <!--<span th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username Error</span>-->
+        <!--</strong>-->
+    <!--</mark>-->
+    <!--<input type="text" id="username" placeholder="Username" th:field="*{username}"/><br/>-->
     Password
     <mark>
         <strong>
@@ -51,6 +51,11 @@
         </strong>
     </mark>
     <input type="text" id="password" placeholder="Password" th:field="*{password}"/><br/>
+
+
+    <input type="hidden" name="role" value="USER"><br>
+    <!--input type="radio" name="role" value="ADMIN">I am a Admin<br>-->
+
     <button type="submit" class="btn btn-default">Submit</button>
 </form>
 
