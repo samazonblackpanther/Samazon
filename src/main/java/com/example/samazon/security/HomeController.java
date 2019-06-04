@@ -19,37 +19,37 @@ public class HomeController {
     @GetMapping("/register")
     public String showRegistrationPage(Model model) {
         model.addAttribute("user", new User());
-        return "/registration";
+        return "security/registration";
     }
 
     @PostMapping("/register")
     public String processRegistrationPage(@Valid @ModelAttribute("user") User user, BindingResult result, Model model) {
         model.addAttribute("user",user);
         if(result.hasErrors()) {
-            return "registration";
+            return "/security/registration";
         }
         else {
             userService.saveUser(user);
             model.addAttribute("message", "User Account Successfully Created");
         }
-        return "index";
+        return "security/index";
     }
 
     @RequestMapping("/")
     public String index() {
-        return "index";
+        return "security/index";
     }
 
     @RequestMapping("/login")
     public String login() {
-        return "login";
+        return "security/login";
     }
 
     @RequestMapping("/secure")
     public String secure(Model model) {
         // Gets the currently logged in user and maps it to "user" in the Thymeleaf template
         model.addAttribute("user", userService.getCurrentUser());
-        return "secure";
+        return "security/secure";
     }
 
 }
