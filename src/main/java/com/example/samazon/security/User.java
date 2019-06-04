@@ -160,4 +160,12 @@ public class User {
     public void setCarts(Set<Cart> carts) {
         this.carts = carts;
     }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
 }
