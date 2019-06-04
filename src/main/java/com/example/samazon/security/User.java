@@ -6,6 +6,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.Set;
+import com.example.samazon.chau.*;
 
 @Entity
 @Table(name = "USER_DATA")
@@ -38,6 +40,10 @@ public class User {
 
     @ManyToMany(mappedBy = "customer")
     private Collection<Product> products;
+
+    @ManyToMany
+    private Set<Cart> carts;
+
 
     @OneToOne
     private Address address;
@@ -141,5 +147,17 @@ public class User {
 
     public void setProducts(Product product) {
         products.add(product);
+    }
+
+    public void setProducts(Collection<Product> products) {
+        this.products = products;
+    }
+
+    public Set<Cart> getCarts() {
+        return carts;
+    }
+
+    public void setCarts(Set<Cart> carts) {
+        this.carts = carts;
     }
 }

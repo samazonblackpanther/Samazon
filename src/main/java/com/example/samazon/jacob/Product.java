@@ -5,6 +5,9 @@ import com.example.samazon.security.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
+import com.example.samazon.chau.*;
 
 @Entity
 public class Product {
@@ -30,10 +33,16 @@ public class Product {
 
     private String image;
 
+    private int quantity;
+
     @ManyToMany
     private Collection<User> customer;
 
+    @ManyToMany(mappedBy = "products", fetch = FetchType.LAZY)
+    private Set<Cart> carts;
+
     public Product() {
+        this.carts=new HashSet<>();
     }
 
     public Product(@NotNull @Size(min = 2) String name, @NotNull @Size(min = 2) String category, double price, @NotNull @Size(min = 2) String description, String image) {
@@ -98,5 +107,21 @@ public class Product {
 
     public void setCustomer(Collection<User> customer) {
         this.customer = customer;
+    }
+
+    public Set<Cart> getCarts() {
+        return carts;
+    }
+
+    public void setCarts(Set<Cart> carts) {
+        this.carts = carts;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }
