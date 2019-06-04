@@ -1,5 +1,7 @@
 package com.example.samazon.security;
 
+import com.example.samazon.jacob.Product;
+import com.example.samazon.jacob.Address;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
@@ -33,6 +35,12 @@ public class User {
 
     @ManyToMany(fetch = FetchType.EAGER)
     private Collection<Role> roles;
+
+    @ManyToMany(mappedBy = "customer")
+    private Collection<Product> products;
+
+    @OneToOne
+    private Address address;
 
     public User() {
     }
@@ -125,5 +133,13 @@ public class User {
 
     public void setRoles(Collection<Role> roles) {
         this.roles = roles;
+    }
+
+    public Collection<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(Product product) {
+        products.add(product);
     }
 }
