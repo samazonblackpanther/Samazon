@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User Details</title>
+</head>
+<body>
+<div>
+    <div>
+        First Name : <span th:text="${user.firstName}"></span><br/>
+        Last Name :  <span th:text="${user.lastName}"></span><br/>
+        Email :   <span th:text="${user.email}"></span><br/>
+        Address : <span th:text="${user.address.getStreetAddress()}"></span><br/>
+        Address : <span th:text="${user.address.getCity()}"></span><br/>
+        Address : <span th:text="${user.address.getState()}"></span><br/>
+
+        <a th:href="@{/updateUser/{id}(id=${user.id})}" class="btn btn-info" role="button">Update</a>
+    </div>
+</div>
+
+</body>
+</html>
