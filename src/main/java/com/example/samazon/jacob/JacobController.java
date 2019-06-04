@@ -1,6 +1,9 @@
 package com.example.samazon.jacob;
 
 import com.cloudinary.utils.ObjectUtils;
+import com.example.samazon.chau.Cart;
+import com.example.samazon.chau.CartRepository;
+import com.example.samazon.chau.CartService;
 import com.example.samazon.security.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.util.Map;
+import java.util.Set;
 
 @Controller
 public class JacobController {
@@ -29,6 +33,12 @@ public class JacobController {
     UserService userService;
 
     @Autowired
+    CartRepository cartRepository;
+
+    @Autowired
+    CartService cartService;
+
+    @Autowired
     CloudinaryConfig cloudc;
 
 
@@ -36,6 +46,10 @@ public class JacobController {
     public String homePage(Model model){
         model.addAttribute("products", productRepository.findAll());
         model.addAttribute("user", userService.getCurrentUser());
+        model.addAttribute("cart", cartService.getActiveCartProducts(userService.getCurrentUser().getUsername()));
+        model.addAttribute("products", cartService.getActiveCartProducts(userService.getCurrentUser().getUsername()));
+
+
 
         return "security/index";
     }
