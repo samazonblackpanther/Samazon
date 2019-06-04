@@ -19,13 +19,11 @@
     <!--                        <h4>Posted By: </h4><input type="text" th:field="*{postedBy}" />-->
     <!--                        <span th:if="${#fields.hasErrors('postedBy')}" th:errors="*{postedBy}"></span><br />-->
 
-    <h4>Posted By: </h4><span th:text="${user.getUsername()}"></span>
-
     <h4>Category: </h4><input type="text" th:field="*{category}" />
     <span th:if="${#fields.hasErrors('category')}" th:errors="*{category}"></span><br />
 
-    <h4>Category: </h4><input type="text" th:field="*{category}" />
-    <span th:if="${#fields.hasErrors('category')}" th:errors="*{category}"></span><br />
+    <h4>Price: </h4><input type="text" th:field="*{price}" />
+    <span th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span><br />
 
     <h4>Description: </h4><textarea rows="5" cols="50" th:field="*{description}" ></textarea>
     <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span> <br />

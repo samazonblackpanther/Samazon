@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
@@ -34,6 +31,14 @@ public class JacobController {
     @Autowired
     CloudinaryConfig cloudc;
 
+
+    @RequestMapping("/homepage")
+    public String homePage(Model model){
+        model.addAttribute("products", productRepository.findAll());
+        model.addAttribute("user", userService.getCurrentUser());
+
+        return "security/index";
+    }
 
 
     @GetMapping("/addproduct")
@@ -64,6 +69,6 @@ public class JacobController {
         }
 
         productRepository.save(product);
-        return "redirect:/";
+        return "redirect:/homepage";
     }
 }
