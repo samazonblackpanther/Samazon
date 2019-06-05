@@ -44,8 +44,21 @@ public class JacobController {
 
     @RequestMapping("/homepage")
     public String homePage(Model model){
+
+        //For Shopping Cart
+        int cartCount = 0;
+
+        if (userService.getCurrentUser().getCarts() != null){
+            cartCount += cartService.countItems(userService.getCurrentUser().getCarts());
+        }
+        model.addAttribute("cart", userService.getCurrentUser().getCarts());
+        model.addAttribute("cartnumber", cartCount);
+
+
         model.addAttribute("products", productRepository.findAll());
         model.addAttribute("user", userService.getCurrentUser());
+        model.addAttribute("cart", userService.getCurrentUser().getCarts());
+        model.addAttribute("cartnumber", cartCount);
 //        model.addAttribute("cart", userService.getCurrentUser().getCarts());
 //        model.addAttribute("products", userService.getCurrentUser().getCarts().getProducts());
 

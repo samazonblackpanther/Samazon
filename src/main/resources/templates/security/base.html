@@ -65,7 +65,7 @@
                         <div class="icon-cart">
                             <div class="cart-line-1" style="background-color: #E5E9EA"></div>
                             <div class="cart-line-2" style="background-color: #E5E9EA"></div>
-                            <div class="cart-line-3" th:text="${}"></div>
+                            <div class="cart-line-3" th:text="${cartitems}"></div>
                             <div class="cart-wheel" style="background-color: #E5E9EA"></div>
                         </div>
                         </a>
@@ -83,7 +83,7 @@
 
                             </li>
                             <li th:if="${user.getCarts() != null}">
-                              <span th:each="product : ${products}" class="item">
+                              <span th:each="product : ${cart.getProducts()}" class="item">
                                 <span class="item-left">
                                     <img th:src="${product.image}" alt="Product Image" />
                                     <span class="item-info">

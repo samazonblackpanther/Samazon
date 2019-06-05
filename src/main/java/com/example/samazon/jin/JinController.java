@@ -38,7 +38,7 @@ public class JinController {
     @Autowired
     UserService userService;
 
-    @RequestMapping("/")
+    @RequestMapping("/detailUser")
     public  String Home(){
         return "detailUser";
     }
