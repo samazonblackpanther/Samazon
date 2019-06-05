@@ -69,7 +69,13 @@ public class JinController {
 //        model.addAttribute("user_id", userService.getCurrentUser().getId());
 //    }
     return "showOrderHistory";
-}
+    }
+
+    RequestMapping("/sendEmail/{id}")
+    public String sendEmail(@PathVariable("id") long id, Model model){
+        model.addAttribute("cart", Ca)
+    }
+
 
 
 }
