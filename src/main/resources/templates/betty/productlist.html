@@ -6,6 +6,19 @@
     <title>Title</title>
 </head>
 <body>
+<div class="container">
+    <div class="row" th:each="product:${products}">
+        <p th:text="${product.name}"></p>
+        <p th:text="${product.category}"></p>
+        <p th:text="${product.price}"></p>
+        <p th:text="${product.description}"></p>
+        <img th:src="${product.image}">
+    </div>
+
+
+
+</div>
+
 
 </body>
 </html>
