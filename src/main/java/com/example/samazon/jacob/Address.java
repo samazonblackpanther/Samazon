@@ -1,5 +1,7 @@
 package com.example.samazon.jacob;
 
+import com.example.samazon.security.User;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -26,6 +28,9 @@ public class Address {
     @NotNull
     @Size(min = 5)
     private String zipcode;
+
+    @OneToOne
+    private User user;
 
     public Address() {
     }
@@ -75,5 +80,13 @@ public class Address {
 
     public void setZipcode(String zipcode) {
         this.zipcode = zipcode;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

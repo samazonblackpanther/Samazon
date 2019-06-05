@@ -32,12 +32,32 @@ public class UserService {
         return user;
     }
 
+    public String getUserFullName(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentusername = authentication.getName();
+        User user = userRepository.findByUsername(currentusername);
+        String userFullName = user.getFirstName() + " " + user.getLastName();
+        return userFullName;
+    }
+
+    public void saveUser(User user, String role) {
+        user.setRoles(Arrays.asList(roleRepository.findByRole(role)));
+        user.setEnabled(true);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userRepository.save(user);
+    }
+
     public void saveUser(User user) {
         user.setRoles(Arrays.asList(roleRepository.findByRole("USER")));
         user.setEnabled(true);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
+
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
+
 
     public void saveAdmin(User user) {
         user.setRoles(Arrays.asList(roleRepository.findByRole("ADMIN")));
