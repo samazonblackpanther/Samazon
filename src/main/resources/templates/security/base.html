@@ -7,6 +7,9 @@
     <!--Bootstrap CSS-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!--Icons-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 
@@ -16,7 +19,7 @@
         <nav class="navbar navbar-expand-sm" style="width: 100%;">
             <ul class="navbar-nav" style="width: 100%;">
                 <li class="nav-item">
-                    <a class="nav-link" href="/">Home</a>
+                    <a class="nav-link" href="/homepage">Home</a>
                 </li>
 
                 <li class="nav-item">
@@ -26,73 +29,6 @@
                     <a class="nav-link" href="/secure">Login</a>
                 </li>
 
-
-                <!--Shopping Cart-->
-                <ul class="nav navbar-nav navbar-right" style="float: right;">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="glyphicon glyphicon-shopping-cart"></span> 7 - Items<span class="caret"></span></a>
-                        <ul class="dropdown-menu dropdown-cart" role="menu">
-                            <li>
-                  <span class="item">
-                    <span class="item-left">
-                        <img src="http://lorempixel.com/50/50/" alt="" />
-                        <span class="item-info">
-                            <span>Item name</span>
-                            <span>23$</span>
-                        </span>
-                    </span>
-                    <span class="item-right">
-                        <button class="btn btn-xs btn-danger pull-right">x</button>
-                    </span>
-                </span>
-                            </li>
-                            <li>
-                  <span class="item">
-                    <span class="item-left">
-                        <img src="http://lorempixel.com/50/50/" alt="" />
-                        <span class="item-info">
-                            <span>Item name</span>
-                            <span>23$</span>
-                        </span>
-                    </span>
-                    <span class="item-right">
-                        <button class="btn btn-xs btn-danger pull-right">x</button>
-                    </span>
-                </span>
-                            </li>
-                            <li>
-                  <span class="item">
-                    <span class="item-left">
-                        <img src="http://lorempixel.com/50/50/" alt="" />
-                        <span class="item-info">
-                            <span>Item name</span>
-                            <span>23$</span>
-                        </span>
-                    </span>
-                    <span class="item-right">
-                        <button class="btn btn-xs btn-danger pull-right">x</button>
-                    </span>
-                </span>
-                            </li>
-                            <li>
-                  <span class="item">
-                    <span class="item-left">
-                        <img src="http://lorempixel.com/50/50/" alt="" />
-                        <span class="item-info">
-                            <span>Item name</span>
-                            <span>23$</span>
-                        </span>
-                    </span>
-                    <span class="item-right">
-                        <button class="btn btn-xs btn-danger pull-right">x</button>
-                    </span>
-                </span>
-                            </li>
-                            <li class="divider"></li>
-                            <li><a class="text-center" href="">View Cart</a></li>
-                        </ul>
-                    </li>
-                </ul>
 
                 <!--Search-->
                 <form class="form-inline my-2 my-lg-0 ml-auto" style="float: right">
@@ -109,7 +45,7 @@
         <nav class="navbar navbar-expand-sm" style="width: 100%;">
             <ul class="navbar-nav" style="width: 100%;">
                 <li class="nav-item">
-                    <a class="nav-link" href="/" th:inline="text">Hello, [[${user.firstName}]]</a>
+                    <a class="nav-link" href="/homepage" th:inline="text">Hello, [[${user.firstName}]]</a>
                 </li>
                 <li>
                     <a class="nav-link" href="/add">Add a Message</a>
@@ -123,19 +59,27 @@
 
 
                 <!--Shopping Cart-->
-                <ul class="nav navbar-nav navbar-right" style="float: right;">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> <span class="glyphicon glyphicon-shopping-cart"></span> 7 - Items<span class="caret"></span></a>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        <!--<span class="caret"></span>-->
+                        <div class="icon-cart">
+                            <div class="cart-line-1" style="background-color: #E5E9EA"></div>
+                            <div class="cart-line-2" style="background-color: #E5E9EA"></div>
+                            <div class="cart-line-3">7</div>
+                            <div class="cart-wheel" style="background-color: #E5E9EA"></div>
+                        </div>
+                        </a>
                         <ul class="dropdown-menu dropdown-cart" role="menu">
                             <li th:if="${cart == null}">
                                 <span class="item" style="text-align: center">
+
                                     <p>
                                         <span style='font-size:50px;'>&#9924;</span>
                                     </p>
                                     <p>Oh No!</p>
                                     <p>Your cart is empty.</p>
                                 </span>
-                              </span>
+
                             </li>
                             <li th:if="${cart != null}">
                               <span th:each="product : ${products}" class="item">
@@ -156,10 +100,10 @@
                             </span>
                             </li>
                             <li class="divider"></li>
-                            <li><a class="text-center" href="">View Cart</a></li>
+                            <li><a class="text-center" style="text-align: center;" href="">View Cart</a></li>
                         </ul>
                     </li>
-                </ul>
+
                 <!--Search-->
                 <form class="form-inline my-2 my-lg-0 ml-auto" style="float: right">
                     <input class="form-control" type="search" placeholder="Search" aria-label="Search">
