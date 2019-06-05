@@ -65,24 +65,24 @@
                         <div class="icon-cart">
                             <div class="cart-line-1" style="background-color: #E5E9EA"></div>
                             <div class="cart-line-2" style="background-color: #E5E9EA"></div>
-                            <div class="cart-line-3">7</div>
+                            <div class="cart-line-3" th:text="${}"></div>
                             <div class="cart-wheel" style="background-color: #E5E9EA"></div>
                         </div>
                         </a>
                         <ul class="dropdown-menu dropdown-cart" role="menu">
 
-                            <li th:if="${cart == null}">
+                            <li th:if="${user.getCarts() == null}">
                                 <span class="item" style="text-align: center">
 
                                     <span>
-                                        <span style='font-size:50px;'>&#9924;</span>
+                                        <span style='font-size:50px;'>&#9924;</span><br />
                                     </span>
-                                    <span>Oh No!</span>
-                                    <span>Your cart is empty.</span>
+                                    <span>Oh No!</span><br />
+                                    <span>Your cart is empty.</span><br />
                                 </span>
 
                             </li>
-                            <li th:if="${cart != null}">
+                            <li th:if="${user.getCarts() != null}">
                               <span th:each="product : ${products}" class="item">
                                 <span class="item-left">
                                     <img th:src="${product.image}" alt="Product Image" />

@@ -18,7 +18,7 @@ public class Cart {
     private String status;
 
     @OneToOne(mappedBy = "carts")
-    private Set<User> users;
+    private User users;
 
     @ManyToMany
     private Set<Product> products;
@@ -45,11 +45,11 @@ public class Cart {
         this.status = status;
     }
 
-    public Set<User> getUsers() {
+    public User getUsers() {
         return users;
     }
 
-    public void setUsers(Set<User> users) {
+    public void setUsers(User users) {
         this.users = users;
     }
 
