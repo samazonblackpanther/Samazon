@@ -40,8 +40,8 @@ public class ChauController {
         for (Product product : cart.getProducts()) {
             model.addAttribute("product", product);
         }
-        double total = cartService.getTotal(cart);
-        String message = "You spent over $50, You got Free Shipping";
+        double total = cartService.totals(cart);
+        String message = "You spent over $50, Yogu got Free Shipping";
         if (total < 50.0) {
             total += 5.0;
             message = "$5 for Shipping";
