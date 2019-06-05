@@ -28,6 +28,9 @@ public class JinController {
     AddressRepository addressRepository;
 
     @Autowired
+    HistoryRepository historyRepository;
+
+    @Autowired
     UserService userService;
 
 
@@ -50,9 +53,9 @@ public class JinController {
 //=================== Order
 
     @RequestMapping("/showOrderHistory/{id}")
-    public String listCarts(Model model) {
+    public String listCarts(@PathVariable("id") long id, Model model){
         model.addAttribute("user", userService.getCurrentUser());
-        model.addAttribute("carts", cartRepository.findAll());
+        model.addAttribute("history", historyRepository.findById(id).get());
 //    if (userService.getCurrentUser() != null) {
 //        model.addAttribute("user_id", userService.getCurrentUser().getId());
 //    }

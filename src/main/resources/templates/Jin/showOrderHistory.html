@@ -14,22 +14,31 @@
         <th>Action</th>
     </tr>
     </thead>
+
     <tbody>
-    <!--<tr th:each="product : ${user.getCarts().products}">-->
+    <tr th:each="product : ${user.history.getProducts()}">
+            <td th:text="${product.name}"></td>
+            <td th:text="${product.quantity}"></td>
+            <td th:text="${product.price}"></td>
+
+    <!-- 1st
+    <tr th:each="product : ${user.getCarts().products}">-->
         <!--<td th:text="${product.name}"></td>-->
         <!--<td th:text="${product.quantity}"></td>-->
         <!--<td th:text="${product.price}"></td>-->
         <!--&lt;!&ndash;<td><a th:href="@{/detailProduct/{id}(id=${product.id})}" class="btn btn-info" role="button">Details</a></td>&ndash;&gt;-->
     <!--</tr>-->
-    <tr th:each="cart : ${user.carts}">
-        <div th:each="product: ${cart.products}">
-            <td th:text="${product.name}"></td>
-            <td th:text="${product.quantity}"></td>
-            <td th:text="${product.price}"></td>
+
+    <!--2nd-->
+    <!--<tr th:each="cart : ${user.carts}">-->
+        <!--<div th:each="product: ${cart.products}">-->
+            <!--<td th:text="${product.name}"></td>-->
+            <!--<td th:text="${product.quantity}"></td>-->
+            <!--<td th:text="${product.price}"></td>-->
 
         <!--<td><a th:href="@{/detailProduct/{id}(id=${product.id})}" class="btn btn-info" role="button">Details</a></td>-->
-            <!--call #2.product detail page-->
-        </div>
+        <!--call #2.product detail page-->
+
     </tr>
     </tbody>
 </table>
