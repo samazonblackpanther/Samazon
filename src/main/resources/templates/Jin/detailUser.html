@@ -10,9 +10,10 @@
         First Name : <span th:text="${user.firstName}"></span><br/>
         Last Name :  <span th:text="${user.lastName}"></span><br/>
         Email :   <span th:text="${user.email}"></span><br/>
-        Address : <span th:text="${user.address.getStreetAddress()}"></span><br/>
-        Address : <span th:text="${user.address.getCity()}"></span><br/>
-        Address : <span th:text="${user.address.getState()}"></span><br/>
+        Address : <span th:text="${user.address.streetAddress}"></span><br/>
+        Address : <span th:text="${user.address.city}"></span><br/>
+        Address : <span th:text="${user.address.state}"></span><br/>
+        Address : <span th:text="${user.address.zipcode}"></span><br/>
 
         <a th:href="@{/updateUser/{id}(id=${user.id})}" class="btn btn-info" role="button">Update</a>
     </div>
