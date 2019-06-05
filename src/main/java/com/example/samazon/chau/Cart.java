@@ -17,7 +17,7 @@ public class Cart {
     @NotNull
     private String status;
 
-    @ManyToMany(mappedBy = "carts")
+    @OneToOne(mappedBy = "carts")
     private Set<User> users;
 
     @ManyToMany
