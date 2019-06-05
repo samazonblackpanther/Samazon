@@ -160,6 +160,14 @@ public class User {
         this.carts = carts;
     }
 
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
     public History getHistory() {
         return history;
     }

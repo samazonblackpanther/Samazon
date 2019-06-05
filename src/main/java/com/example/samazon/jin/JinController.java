@@ -6,11 +6,16 @@ import com.example.samazon.jacob.ProductRepository;
 import com.example.samazon.security.UserRepository;
 import com.example.samazon.security.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.Properties;
 
 @Controller
 public class JinController {
@@ -33,6 +38,10 @@ public class JinController {
     @Autowired
     UserService userService;
 
+    @RequestMapping("/")
+    public  String Home(){
+        return "detailUser";
+    }
 
 //================== user
 
