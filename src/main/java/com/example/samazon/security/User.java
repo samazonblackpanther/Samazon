@@ -42,8 +42,8 @@ public class User {
     @ManyToMany(mappedBy = "customer")
     private Collection<Product> products;
 
-    @ManyToMany
-    private Set<Cart> carts;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Cart carts;
 
     @OneToOne
     private Address address;
@@ -152,13 +152,6 @@ public class User {
         products.add(product);
     }
 
-    public Set<Cart> getCarts() {
-        return carts;
-    }
-
-    public void setCarts(Set<Cart> carts) {
-        this.carts = carts;
-    }
 
 
     public Address getAddress() {
@@ -176,5 +169,13 @@ public class User {
     public void setHistory(History history) {
         this.history = history;
 
+    }
+
+    public Cart getCarts() {
+        return carts;
+    }
+
+    public void setCarts(Cart carts) {
+        this.carts = carts;
     }
 }
