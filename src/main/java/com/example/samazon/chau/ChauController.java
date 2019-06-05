@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Collection;
@@ -28,20 +30,20 @@ public class ChauController {
     public String addCart(@PathVariable("id") long id, Model model) {
         User user = userService.getCurrentUser();
         Product product = productService.getProduct(id);
-        Cart activeCart = cartService.updateCart(product, user);
-        model.addAttribute("cart", activeCart);
+        cartService.updateCart(product, user) ;
+        model.addAttribute("cart", user.getCarts() );
         return "redirect:/cart";
     }
 
-    @RequestMapping("oder/{id}")
+    @RequestMapping("order/{id}")
     public String viewOrder(Model model, @PathVariable("id") long id) {
-        Cart cart = cartService.getOrderDetails(id);
+        Cart cart = userService.getCurrentUser().getCarts();
         model.addAttribute("products", cart.getProducts());
         for (Product product : cart.getProducts()) {
             model.addAttribute("product", product);
         }
         double total = cartService.totals(cart);
-        String message = "You spent over $50, Yogu got Free Shipping";
+        String message = "You spent over $50, You got Free Shipping";
         if (total < 50.0) {
             total += 5.0;
             message = "$5 for Shipping";
@@ -52,16 +54,17 @@ public class ChauController {
         return "detailProduct";
     }
 
-    @RequestMapping("/checkout")
-    public String checkoutCart(Model model) {
+
+    @GetMapping("/checkout")
+    public String checkout(Model model){
         User user = userService.getCurrentUser();
-        Cart myCart = cartService.CheckoutCart(user);
+        Cart myCart = userService.getCurrentUser().getCarts();
         model.addAttribute("cart", myCart);
         Collection<Product> products = myCart.getProducts();
         for (Product product : products) {
             model.addAttribute("product", product);
         }
-        double total = cartService.getTotal(myCart);
+        double total = cartService.totals(myCart);
         String message = "You spent over $50, You got Free Shipping";
         if (total < 50.0) {
             total += 5.0;
@@ -73,12 +76,19 @@ public class ChauController {
         return "confirm";
     }
 
+    @PostMapping("/checkout")
+    public String billing(Model model){
+        Cart cart =userService.getCurrentUser().getCarts();
+        cartService.cartHistory(cart);
+        return "billing";
+    }
+
     @RequestMapping("/cart")
     public String viewCart(Model model) {
         User user = userService.getCurrentUser();
         model.addAttribute("user", user);
         Cart activeCart = user.getCarts();
-        double total = cartService.getTotal(activeCart);
+        double total = cartService.totals(activeCart);
         String message = "You spent over $50, You get Free Shipping!";
         if (total < 50.0) {
             total += 5.0;
@@ -96,9 +106,9 @@ public class ChauController {
     }
     @RequestMapping("/remove/{id}")
     public String removeItem(@PathVariable("id") long id, Authentication auth) {
-        User user = userService.findByUsername(auth.getName());
+        User user = userService.getCurrentUser();
         Product product = productService.getProduct(id);
-        cartService.removeItem(product, user);
+        cartService.removeItem(product,user.getCarts());
         return "redirect:/cart";
     }
 }
