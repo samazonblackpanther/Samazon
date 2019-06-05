@@ -3,6 +3,7 @@ package com.example.samazon.chau;
 import com.example.samazon.security.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 import com.example.samazon.jacob.*;
@@ -14,17 +15,14 @@ public class Cart {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @NotNull
-    private String status;
 
-    @ManyToMany(mappedBy = "carts")
-    private Set<User> users;
+    @OneToOne(mappedBy = "carts")
+    private User user;
 
     @ManyToMany
-    private Set<Product> products;
+    private Collection<Product> products;
 
     public Cart() {
-        this.status = "Active";
         // this.users = new HashSet<>();
         this.products = new HashSet<>();
     }
@@ -37,27 +35,20 @@ public class Cart {
         this.id = id;
     }
 
-    public String getStatus() {
-        return status;
-    }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public Set<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
-
-    public Set<Product> getProducts() {
+    public Collection<Product> getProducts() {
         return products;
     }
 
-    public void setProducts(Set<Product> products) {
-        this.products = products;
+    public void setProducts(Product product) {
+        products.add(product);
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

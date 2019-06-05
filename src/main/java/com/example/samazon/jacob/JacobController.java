@@ -46,8 +46,8 @@ public class JacobController {
     public String homePage(Model model){
         model.addAttribute("products", productRepository.findAll());
         model.addAttribute("user", userService.getCurrentUser());
-        model.addAttribute("cart", cartService.getActiveCartProducts(userService.getCurrentUser().getUsername()));
-        model.addAttribute("products", cartService.getActiveCartProducts(userService.getCurrentUser().getUsername()));
+//        model.addAttribute("cart", userService.getCurrentUser().getCarts());
+//        model.addAttribute("products", userService.getCurrentUser().getCarts().getProducts());
 
 
 

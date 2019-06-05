@@ -2,6 +2,7 @@ package com.example.samazon.security;
 
 import com.example.samazon.jacob.Product;
 import com.example.samazon.jacob.Address;
+import com.example.samazon.jin.History;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
@@ -41,12 +42,14 @@ public class User {
     @ManyToMany(mappedBy = "customer")
     private Collection<Product> products;
 
-    @ManyToMany
-    private Set<Cart> carts;
-
+    @OneToOne(cascade = CascadeType.ALL)
+    private Cart carts;
 
     @OneToOne
     private Address address;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private History history;
 
     public User() {
     }
@@ -149,16 +152,14 @@ public class User {
         products.add(product);
     }
 
-    public void setProducts(Collection<Product> products) {
-        this.products = products;
+
+
+    public Address getAddress() {
+        return address;
     }
 
-    public Set<Cart> getCarts() {
-        return carts;
-    }
-
-    public void setCarts(Set<Cart> carts) {
-        this.carts = carts;
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public Address getAddress() {
@@ -167,5 +168,22 @@ public class User {
 
     public void setAddress(Address address) {
         this.address = address;
+    }
+
+    public History getHistory() {
+        return history;
+    }
+
+    public void setHistory(History history) {
+        this.history = history;
+
+    }
+
+    public Cart getCarts() {
+        return carts;
+    }
+
+    public void setCarts(Cart carts) {
+        this.carts = carts;
     }
 }
