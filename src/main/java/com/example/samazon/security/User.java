@@ -152,13 +152,7 @@ public class User {
         products.add(product);
     }
 
-    public Cart getCarts() {
-        return carts;
-    }
 
-    public void setCarts(Cart carts) {
-        this.carts = carts;
-    }
 
     public Address getAddress() {
         return address;
@@ -175,5 +169,13 @@ public class User {
     public void setHistory(History history) {
         this.history = history;
 
+    }
+
+    public Cart getCarts() {
+        return carts;
+    }
+
+    public void setCarts(Cart carts) {
+        this.carts = carts;
     }
 }
