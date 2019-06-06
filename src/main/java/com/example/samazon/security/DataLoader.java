@@ -64,7 +64,7 @@ public class DataLoader implements CommandLineRunner{
 
         //Sam
         user = new User("sam@smail.com", passwordEncoder.encode("password"), "Sam", "Sammy", true, "sam");
-
+        user.setRoles(Arrays.asList(adminRole));
         Address address = new Address("1234 Sammas St", "Samington", "Washington", "243342");
         addressRepository.save(address);
 
