@@ -126,13 +126,10 @@ public class JacobController {
 
         if (user != null){
             if (user.getHistory() != null){
-                ArrayList<History> history = historyRepository.findAllByProductsContains_NameContainingIgnoreCase(keyword);
 
-                for (History h : history){
-                    if (h.getUser() == userService.getCurrentUser()){
-                        for (Product product : h.getProducts()){
-                            historyList.add(product);
-                        }
+                for (Product product : user.getHistory().getProducts()){
+                    if (productList.contains(product)){
+                        historyList.add(product);
                     }
                 }
                 model.addAttribute("historylist", historyList);

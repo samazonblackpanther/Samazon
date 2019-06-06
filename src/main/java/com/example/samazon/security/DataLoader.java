@@ -1,7 +1,11 @@
 package com.example.samazon.security;
 
+import com.example.samazon.chau.CartRepository;
+import com.example.samazon.jacob.Address;
+import com.example.samazon.jacob.AddressRepository;
 import com.example.samazon.jacob.Product;
 import com.example.samazon.jacob.ProductRepository;
+import com.example.samazon.jin.HistoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -21,6 +25,14 @@ public class DataLoader implements CommandLineRunner{
     @Autowired
     ProductRepository productRepository;
 
+    @Autowired
+    AddressRepository addressRepository;
+
+    @Autowired
+    HistoryRepository historyRepository;
+
+    @Autowired
+    CartRepository cartRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -47,6 +59,16 @@ public class DataLoader implements CommandLineRunner{
         user = new User("admin@adm.com",passwordEncoder.encode("password"),"Admin","User",true,"admin");
         user.setRoles(Arrays.asList(adminRole));
         userRepository.save(user);
+
+        Address address = new Address("1234 Sammas St", "Samington", "Washington", "243342");
+        addressRepository.save(address);
+
+
+        user = new User("sam@smail.com", passwordEncoder.encode("password"), "Sam", "Sammy", true, "sam");
+        user.setAddress(address);
+        userRepository.save(user);
+
+
 
 
         Product product= new Product("Vegetables Unleashed: A Cookbook by Jose Andres", "Books", 29.58, "Vegetables Unleashed is a new cookbook that will transform how we think about—and eat—the vast universe of vegetables. ", "https://res.cloudinary.com/db9bfssj4/image/upload/v1559761161/book.vegetables_zoy3ew.jpg"  );

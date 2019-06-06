@@ -40,8 +40,11 @@ public class JinController {
 
 
     @RequestMapping("/detailUser")
-    public  String Home(){
-        return "detailUser";
+    public  String Home(Model model){
+        model.addAttribute("user", userService.getCurrentUser());
+
+
+        return "jin/detailUser";
     }
 
 //================== user

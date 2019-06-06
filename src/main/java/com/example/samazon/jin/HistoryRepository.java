@@ -7,5 +7,5 @@ import java.util.ArrayList;
 
 public interface HistoryRepository extends CrudRepository<History, Long>{
 
-    ArrayList<History> findAllByProductsContains_NameContainingIgnoreCase(String name);
+//    ArrayList<History> findAllByProductsContains_NameContainingIgnoreCase(String name);
 }
