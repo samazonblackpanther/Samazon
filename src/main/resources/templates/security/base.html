@@ -25,8 +25,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/register">Register</a>
                 </li>
+                <li>
+                    <a class="nav-link" href="/productlist">Product Listing</a>
+                </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/secure">Login</a>
+                    <a class="nav-link" href="/detailUser">Login</a>
                 </li>
 
 
@@ -48,10 +51,13 @@
                     <a class="nav-link" href="/homepage" th:inline="text">Hello, [[${user.firstName}]]</a>
                 </li>
                 <li>
-                    <a class="nav-link" href="/add">Add a Message</a>
+                    <a class="nav-link" href="/productlist">Product Listing</a>
+                </li>
+                <li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
+                    <a class="nav-link" href="/addproduct">Add a Product</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/user">My Messages</a>
+                    <a class="nav-link" href="/detailUser">[[${user.firstName}]]'s Page</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/logout">Log Out</a>

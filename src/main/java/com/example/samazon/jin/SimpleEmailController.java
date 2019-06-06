@@ -1,4 +1,3 @@
-package com.example.samazon.jin;
 
 import javax.mail.internet.MimeMessage;
 import javax.persistence.Id;
