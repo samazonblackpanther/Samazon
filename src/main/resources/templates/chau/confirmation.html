@@ -33,6 +33,14 @@
     </table>
     <div th:inline="text"> Shipping: [[${message}]]</div>
     <div th:inline="text"> Your Cart Total = $[[${total}]]</div>
+    <div>
+    <button type="button" class="btn btn-primary" >Send Email</button>
+    </div>
+
+    <div class="alert alert-primary" role="alert" th:action="@{/simpleemail}">
+        <p>Dear <span th:text="${user}"></span></p>
+        <p>Thank you for shopping with us</p>
+    </div>
 
 </div>
 <div th:replace="base::footer"></div>

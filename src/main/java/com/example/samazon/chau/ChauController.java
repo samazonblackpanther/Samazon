@@ -33,7 +33,7 @@ public class ChauController {
         Product product = productService.getProduct(id);
         cartService.updateCart(product, user) ;
         model.addAttribute("cart", user.getCarts() );
-        return "redirect:/cart";
+        return "redirect:/chau/shoppingcart";
     }
 
     @RequestMapping("order/{id}")
@@ -52,7 +52,7 @@ public class ChauController {
         model.addAttribute("message", message);
         model.addAttribute("total", total);
         model.addAttribute("Order", cart);
-        return "detailProduct";
+        return "jin/detailProduct";
     }
 
 
@@ -74,14 +74,14 @@ public class ChauController {
         model.addAttribute("message", message);
         model.addAttribute("total", total);
         model.addAttribute("products", products);
-        return "confirm";
+        return "chau/confirmation";
     }
 
     @PostMapping("/checkout")
     public String billing(Model model){
         Cart cart =userService.getCurrentUser().getCarts();
         cartService.cartHistory(cart);
-        return "billing";
+        return "chau/confirmation";
     }
 
     @RequestMapping("/cart")
@@ -103,14 +103,14 @@ public class ChauController {
         }
 
         model.addAttribute("products", activeCart.getProducts());
-        return "cart";
+        return "chau/shoppingcart";
     }
     @RequestMapping("/remove/{id}")
     public String removeItem(@PathVariable("id") long id, Authentication auth) {
         User user = userService.getCurrentUser();
         Product product = productService.getProduct(id);
         cartService.removeItem(product,user.getCarts());
-        return "redirect:/cart";
+        return "redirect:/chau/shoppingcart";
     }
 }
 

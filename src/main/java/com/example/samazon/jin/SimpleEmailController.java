@@ -20,6 +20,7 @@ public class SimpleEmailController {
     @Autowired
     CartRepository cartRepository;
 
+
     @RequestMapping("/simpleemail")
     @ResponseBody
     String home() {
@@ -31,15 +32,19 @@ public class SimpleEmailController {
         }
     }
 
-    private void sendEmail() throws Exception (Model model){
+    private void sendEmail() throws Exception(Model model){
         MimeMessage message = sender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
-        model.addAttribute("")
+        model.addAttribute("");
         helper.setTo("jinskwon2@gmail.com");
         helper.setText("How are you?");
         helper.setSubject("Order Confirmation");
 
         sender.send(message);
     }
+
+
+
 }
+
 

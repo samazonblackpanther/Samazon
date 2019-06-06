@@ -74,7 +74,7 @@ public class JinController {
     @RequestMapping("/sendEmail/{id}")
     public String sendEmail(@PathVariable("id") long id, Model model){
         model.addAttribute("cart",cartRepository);
-        return "sendEmail";
+        return "confirmation";
     }
 
 
