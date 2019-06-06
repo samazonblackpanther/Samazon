@@ -3,6 +3,7 @@ package com.example.samazon.chau;
 import com.example.samazon.security.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -19,7 +20,7 @@ public class Cart {
     @OneToOne(mappedBy = "carts")
     private User user;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     private Collection<Product> products;
 
     public Cart() {

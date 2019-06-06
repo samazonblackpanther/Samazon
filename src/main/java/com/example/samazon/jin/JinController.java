@@ -43,7 +43,7 @@ public class JinController {
     @RequestMapping("/detailUser")
     public  String Home(Model model){
         model.addAttribute("user", userService.getCurrentUser());
-        return "detailUser";
+        return "Jin/detailUser";
     }
 
 //================== user
@@ -52,7 +52,7 @@ public class JinController {
     public String showUser(@PathVariable("id") long id, Model model){
 //        model.addAttribute("user", userService.getCurrentUser());
         model.addAttribute("user", userRepository.findById(id).get());
-        return "detailUser";
+        return "Jin/detailUser";
     }
 
     @RequestMapping("/updateUser/{id}")
@@ -71,7 +71,7 @@ public class JinController {
 //    if (userService.getCurrentUser() != null) {
 //        model.addAttribute("user_id", userService.getCurrentUser().getId());
 //    }
-        return "showOrderHistory";
+        return "Jin/showOrderHistory";
     }
 
 //    @RequestMapping("/simpleemail/{id}")

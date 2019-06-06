@@ -83,10 +83,12 @@ public class HomeController {
         return "security/index";
     }
 
-    @RequestMapping("/login")
+    @RequestMapping ("/login")
     public String login() {
+
         return "security/login";
     }
+
 
     @RequestMapping("/secure")
     public String secure(Model model) {

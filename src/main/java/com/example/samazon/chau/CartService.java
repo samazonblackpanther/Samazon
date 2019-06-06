@@ -35,9 +35,18 @@ public class CartService {
         this.cartRepository = cartRepository;
     }
 
-    public void updateCart(Product product, User user){
+    public void genCart(User user){
 
-        Cart carts = user.getCarts();
+        Cart carts = new Cart();
+        carts.setUser(user);
+        user.setCarts(carts);
+        userRepository.save(user);
+        cartRepository.save(carts);
+        System.out.println(user.getFirstName());
+    }
+
+    public void updateCart(Product product, Cart carts){
+
         carts.setProducts(product);
         cartRepository.save(carts);
 
