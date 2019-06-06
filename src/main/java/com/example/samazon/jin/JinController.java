@@ -56,7 +56,7 @@ public class JinController {
     public String updateUser(@PathVariable("id") long id, Model model){
 //        model.addAttribute("user", userService.getCurrentUser());
         model.addAttribute("user", userRepository.findById(id).get());
-        return "/secutiy/registration";
+        return "redirect:/secutiy/registration";
     }
 
 //=================== Order
@@ -69,7 +69,14 @@ public class JinController {
 //        model.addAttribute("user_id", userService.getCurrentUser().getId());
 //    }
     return "showOrderHistory";
-}
+    }
+
+    @RequestMapping("/sendEmail/{id}")
+    public String sendEmail(@PathVariable("id") long id, Model model){
+        model.addAttribute("cart",cartRepository);
+        return "sendEmail";
+    }
+
 
 
 }
