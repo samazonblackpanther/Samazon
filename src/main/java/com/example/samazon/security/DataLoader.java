@@ -66,6 +66,7 @@ public class DataLoader implements CommandLineRunner{
         user = new User("sam@smail.com", passwordEncoder.encode("password"), "Sam", "Sammy", true, "sam");
         user.setRoles(Arrays.asList(adminRole));
         Address address = new Address("1234 Sammas St", "Samington", "Washington", "243342");
+        address.setUser(user);
         addressRepository.save(address);
 
         Product product = new Product("Vegetables Unleashed: A Cookbook by Jose Andres", "Books", 29.58, "Vegetables Unleashed is a new cookbook that will transform how we think about—and eat—the vast universe of vegetables. ", "https://res.cloudinary.com/db9bfssj4/image/upload/v1559761161/book.vegetables_zoy3ew.jpg"  );

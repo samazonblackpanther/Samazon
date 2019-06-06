@@ -41,6 +41,9 @@ public class Product {
     @ManyToMany(mappedBy = "products", fetch = FetchType.LAZY)
     private Set<Cart> carts;
 
+    @ManyToMany(mappedBy = "products", fetch = FetchType.LAZY)
+    private Set<Wishlist> wishlists;
+
     public Product() {
         this.carts=new HashSet<>();
     }
@@ -123,5 +126,13 @@ public class Product {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public Set<Wishlist> getWishlists() {
+        return wishlists;
+    }
+
+    public void setWishlists(Set<Wishlist> wishlists) {
+        this.wishlists = wishlists;
     }
 }

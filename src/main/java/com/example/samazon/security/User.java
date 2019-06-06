@@ -2,6 +2,7 @@ package com.example.samazon.security;
 
 import com.example.samazon.jacob.Product;
 import com.example.samazon.jacob.Address;
+import com.example.samazon.jacob.Wishlist;
 import com.example.samazon.jin.History;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -44,6 +45,9 @@ public class User {
 
     @OneToOne(cascade = CascadeType.ALL)
     private Cart carts;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Wishlist wishlist;
 
     @OneToOne
     private Address address;
@@ -175,5 +179,13 @@ public class User {
 
     public void setCarts(Cart carts) {
         this.carts = carts;
+    }
+
+    public Wishlist getWishlist() {
+        return wishlist;
+    }
+
+    public void setWishlist(Wishlist wishlist) {
+        this.wishlist = wishlist;
     }
 }
