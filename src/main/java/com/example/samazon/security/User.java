@@ -152,8 +152,6 @@ public class User {
         products.add(product);
     }
 
-
-
     public Address getAddress() {
         return address;
     }

@@ -1,6 +1,8 @@
 package com.example.samazon.chau;
 
 
+import com.example.samazon.jin.History;
+import com.example.samazon.jin.HistoryRepository;
 import com.example.samazon.security.UserRepository;
 import com.example.samazon.security.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,9 @@ public class CartService {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    HistoryRepository historyRepository;
 
     public CartService(CartRepository cartRepository){
         this.cartRepository = cartRepository;
@@ -55,5 +60,14 @@ public class CartService {
 
         }
         return total;
+    }
+
+    public void cartHistory(Cart cart){
+        for(Product product: cart.getProducts()){
+            History history = new History();
+            historyRepository.save(history);
+            cart.getProducts().remove(product);
+        }
+
     }
 }

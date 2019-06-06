@@ -40,7 +40,9 @@ public class JinController {
     UserService userService;
 
     @RequestMapping("/detailUser")
-    public  String Home(){
+    public  String Home(Model model){
+        model.addAttribute("user", userService.getCurrentUser());
+
         return "detailUser";
     }
 
@@ -72,11 +74,11 @@ public class JinController {
     return "showOrderHistory";
     }
 
-    @RequestMapping("/sendEmail/{id}")
-    public String sendEmail(@PathVariable("id") long id, Model model){
-        model.addAttribute("cart",cartRepository);
-        return "sendEmail";
-    }
+//    @RequestMapping("/simpleemail/{id}")
+//    public String sendEmail(@PathVariable("id") long id, Model model){
+//        model.addAttribute("cart",cartRepository);
+//        return "sendEmail";
+//    }
 
 
 
