@@ -51,7 +51,7 @@ public class DataLoader implements CommandLineRunner{
         Product product= new Product("Vegetables Unleashed: A Cookbook by Jose Andres", "Books", 29.58, "A NEW YORK TIMES BESTSELLER. From the endlessly inventive imaginations of star Spanish-American chef José Andrés.", "https://res.cloudinary.com/db9bfssj4/image/upload/v1559761161/book.vegetables_zoy3ew.jpg"  );
         productRepository.save(product);
 
-        product= new Product("2.\tSiege: Trump under Fire", "Books", 17.99, "•\tMichael Wolff, author of the bombshell bestseller Fire and Fury, once again takes us inside the Trump presidency to reveal a White House under siege.", "https://res.cloudinary.com/db9bfssj4/image/upload/v1559761323/book.siege_eeglsd.jpg"  );
+        product= new Product("Siege: Trump under Fire", "Books", 17.99, "•\tMichael Wolff, author of the bombshell bestseller Fire and Fury, once again takes us inside the Trump presidency to reveal a White House under siege.", "https://res.cloudinary.com/db9bfssj4/image/upload/v1559761323/book.siege_eeglsd.jpg"  );
         productRepository.save(product);
 
 //        name;
