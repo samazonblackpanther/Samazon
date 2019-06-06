@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Properties;
@@ -42,9 +43,7 @@ public class JinController {
     @RequestMapping("/detailUser")
     public  String Home(Model model){
         model.addAttribute("user", userService.getCurrentUser());
-
-
-        return "jin/detailUser";
+        return "detailUser";
     }
 
 //================== user
@@ -63,7 +62,7 @@ public class JinController {
         return "redirect:/secutiy/registration";
     }
 
-//=================== Order
+    //=================== Order
 
     @RequestMapping("/showOrderHistory/{id}")
     public String listCarts(@PathVariable("id") long id, Model model){
@@ -75,11 +74,11 @@ public class JinController {
     return "showOrderHistory";
     }
 
-    @RequestMapping("/sendEmail/{id}")
-    public String sendEmail(@PathVariable("id") long id, Model model){
-        model.addAttribute("cart",cartRepository);
-        return "sendEmail";
-    }
+//    @RequestMapping("/simpleemail/{id}")
+//    public String sendEmail(@PathVariable("id") long id, Model model){
+//        model.addAttribute("cart",cartRepository);
+//        return "sendEmail";
+//    }
 
 
 

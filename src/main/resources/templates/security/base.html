@@ -59,11 +59,15 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/detailUser">[[${user.firstName}]]'s Page</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/logout">Log Out</a>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="/jin/detailUser">Your Account</a>
+                        <a class="dropdown-item" href="/jin/showOrderHistory">Order History</a>
+                        <a class="dropdown-item" href="#">Anything</a>
+                    </div>
+                    </a>
                 </li>
-
-
                 <!--Shopping Cart-->
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -111,6 +115,9 @@
                         </ul>
                     </li>
 
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Log Out</a>
+                </li>
                 <!--Search-->
                 <form action="#" th:action="@{/search}"class="form-inline my-2 my-lg-0 ml-auto" style="float: right">
                     <input class="form-control" type="search" placeholder="Search" aria-label="Search" name="keyword">
