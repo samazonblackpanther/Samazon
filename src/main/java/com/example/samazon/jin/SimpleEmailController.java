@@ -56,4 +56,3 @@ public class SimpleEmailController {
         sender.send(message);
     }
 }
-

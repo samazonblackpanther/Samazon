@@ -4,6 +4,8 @@ import com.cloudinary.utils.ObjectUtils;
 import com.example.samazon.chau.Cart;
 import com.example.samazon.chau.CartRepository;
 import com.example.samazon.chau.CartService;
+import com.example.samazon.jin.History;
+import com.example.samazon.jin.HistoryRepository;
 import com.example.samazon.security.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,8 +16,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ForkJoinPool;
 
 @Controller
 public class JacobController {
@@ -28,6 +32,9 @@ public class JacobController {
 
     @Autowired
     ProductRepository productRepository;
+
+    @Autowired
+    HistoryRepository historyRepository;
 
     @Autowired
     UserService userService;
@@ -44,8 +51,23 @@ public class JacobController {
 
     @RequestMapping("/homepage")
     public String homePage(Model model){
+
+        // Shopping Cart
+        if (userService.getCurrentUser() != null){
+            //For Shopping Cart
+            int cartCount = 0;
+
+            if (userService.getCurrentUser().getCarts() != null){
+                cartCount += cartService.countItems(userService.getCurrentUser().getCarts());
+            }
+            model.addAttribute("cart", userService.getCurrentUser().getCarts());
+            model.addAttribute("cartnumber", cartCount);
+        }
+
+
         model.addAttribute("products", productRepository.findAll());
         model.addAttribute("user", userService.getCurrentUser());
+
 //        model.addAttribute("cart", userService.getCurrentUser().getCarts());
 //        model.addAttribute("products", userService.getCurrentUser().getCarts().getProducts());
 
@@ -84,5 +106,57 @@ public class JacobController {
 
         productRepository.save(product);
         return "redirect:/homepage";
+    }
+
+    //Search Function
+    @RequestMapping("/search")
+    public String searchProduct(@RequestParam("keyword") String keyword, Model model){
+
+        User user = userService.getCurrentUser();
+
+        ArrayList<Product> productList = new ArrayList<>();
+        productList.clear();
+        productList = productRepository.findAllByNameContainingIgnoreCase(keyword);
+        if(productList != null){
+            model.addAttribute("productlist", productList);
+        }
+
+        ArrayList<Product> historyList = new ArrayList<>();
+        historyList.clear();
+
+        if (user != null){
+            if (user.getHistory() != null){
+
+                for (Product product : user.getHistory().getProducts()){
+                    if (productList.contains(product)){
+                        historyList.add(product);
+                    }
+                }
+                model.addAttribute("historylist", historyList);
+            }
+        }
+
+        model.addAttribute("user", userService.getCurrentUser());
+        model.addAttribute("keyword", keyword);
+
+        // Shopping Cart
+        if (userService.getCurrentUser() != null){
+            //For Shopping Cart
+            int cartCount = 0;
+
+            if (userService.getCurrentUser().getCarts() != null){
+                cartCount += cartService.countItems(userService.getCurrentUser().getCarts());
+            }
+            model.addAttribute("cart", userService.getCurrentUser().getCarts());
+            model.addAttribute("cartnumber", cartCount);
+        }
+
+
+        model.addAttribute("products", productRepository.findAll());
+        model.addAttribute("user", userService.getCurrentUser());
+
+
+
+        return "jacob/searchlist";
     }
 }

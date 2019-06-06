@@ -25,14 +25,17 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/register">Register</a>
                 </li>
+                <li>
+                    <a class="nav-link" href="/productlist">Product Listing</a>
+                </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/secure">Login</a>
+                    <a class="nav-link" href="/detailUser">Login</a>
                 </li>
 
 
                 <!--Search-->
-                <form class="form-inline my-2 my-lg-0 ml-auto" style="float: right">
-                    <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                <form action="#" th:action="@{/search}"class="form-inline my-2 my-lg-0 ml-auto" style="float: right">
+                    <input class="form-control" type="search" placeholder="Search" aria-label="Search" name="keyword">
                     <button class="btn btn-outline-white btn-md my-2 my-sm-0 ml-3" type="submit">Search</button>
                 </form>
 
@@ -48,9 +51,23 @@
                     <a class="nav-link" href="/homepage" th:inline="text">Hello, [[${user.firstName}]]</a>
                 </li>
                 <li>
-                    <a class="nav-link" href="/add">Add a Message</a>
+                    <a class="nav-link" href="/productlist">Product Listing</a>
                 </li>
-
+                <li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
+                    <a class="nav-link" href="/addproduct">Add a Product</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/detailUser">[[${user.firstName}]]'s Page</a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="/jin/detailUser">Your Account</a>
+                        <a class="dropdown-item" href="/jin/showOrderHistory">Order History</a>
+                        <a class="dropdown-item" href="#">Anything</a>
+                    </div>
+                    </a>
+                </li>
                 <!--Shopping Cart-->
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -58,7 +75,7 @@
                         <div class="icon-cart">
                             <div class="cart-line-1" style="background-color: #E5E9EA"></div>
                             <div class="cart-line-2" style="background-color: #E5E9EA"></div>
-                            <div class="cart-line-3" th:text="${}"></div>
+                            <div class="cart-line-3" th:text="${cartitems}"></div>
                             <div class="cart-wheel" style="background-color: #E5E9EA"></div>
                         </div>
                         </a>
@@ -76,7 +93,7 @@
 
                             </li>
                             <li th:if="${user.getCarts() != null}">
-                              <span th:each="product : ${products}" class="item">
+                              <span th:each="product : ${cart.getProducts()}" class="item">
                                 <span class="item-left">
                                     <img th:src="${product.image}" alt="Product Image" />
                                     <span class="item-info">
@@ -102,8 +119,8 @@
                     <a class="nav-link" href="/logout">Log Out</a>
                 </li>
                 <!--Search-->
-                <form class="form-inline my-2 my-lg-0 ml-auto" style="float: right">
-                    <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                <form action="#" th:action="@{/search}"class="form-inline my-2 my-lg-0 ml-auto" style="float: right">
+                    <input class="form-control" type="search" placeholder="Search" aria-label="Search" name="keyword">
                     <button class="btn btn-outline-white btn-md my-2 my-sm-0 ml-3" type="submit">Search</button>
                 </form>
 

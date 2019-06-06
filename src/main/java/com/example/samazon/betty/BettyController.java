@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class BettyController {
@@ -19,7 +21,7 @@ public class BettyController {
     private UserService userService;
 
 
-    @RequestMapping("/home")
+    @GetMapping("/home")
     public String homePage(Model model){
         model.addAttribute("products", productRepository.findAll());
         model.addAttribute("user", userService.getCurrentUser());
@@ -27,6 +29,15 @@ public class BettyController {
 //        model.addAttribute("products", userService.getCurrentUser().getCarts().getProducts());
 
 
+
+        return "security/index";
+    }
+
+    @PostMapping("/home")
+    public String postHomepage(@RequestParam("cat") String cat, Model model){
+
+        model.addAttribute("products", productRepository.findByName(cat));
+        model.addAttribute("allproducts", productRepository.findAll());
 
         return "security/index";
     }

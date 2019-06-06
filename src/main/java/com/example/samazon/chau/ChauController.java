@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> ff7da71148a6f2ed6f0c81d182dc9145ff773889
 package com.example.samazon.chau;
 
 import com.example.samazon.jacob.Product;
@@ -112,3 +116,8 @@ public class ChauController {
         return "redirect:/cart";
     }
 }
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> ff7da71148a6f2ed6f0c81d182dc9145ff773889
