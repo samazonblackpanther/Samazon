@@ -23,9 +23,17 @@ public class Cart {
     private Collection<Product> products;
 
     public Cart() {
-        // this.users = new HashSet<>();
-        this.products = new HashSet<>();
     }
+
+    public Cart(User user, Product product) {
+        this.user = user;
+        products.add(product);
+    }
+
+    //    public Cart() {
+//        // this.users = new HashSet<>();
+//        this.products = new HashSet<>();
+//    }
 
     public long getId() {
         return id;

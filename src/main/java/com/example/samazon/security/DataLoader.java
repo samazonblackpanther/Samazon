@@ -1,10 +1,12 @@
 package com.example.samazon.security;
 
+import com.example.samazon.chau.Cart;
 import com.example.samazon.chau.CartRepository;
 import com.example.samazon.jacob.Address;
 import com.example.samazon.jacob.AddressRepository;
 import com.example.samazon.jacob.Product;
 import com.example.samazon.jacob.ProductRepository;
+import com.example.samazon.jin.History;
 import com.example.samazon.jin.HistoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -60,19 +62,31 @@ public class DataLoader implements CommandLineRunner{
         user.setRoles(Arrays.asList(adminRole));
         userRepository.save(user);
 
+        //Sam
+        user = new User("sam@smail.com", passwordEncoder.encode("password"), "Sam", "Sammy", true, "sam");
+
         Address address = new Address("1234 Sammas St", "Samington", "Washington", "243342");
         addressRepository.save(address);
 
+        Product product = new Product("Vegetables Unleashed: A Cookbook by Jose Andres", "Books", 29.58, "Vegetables Unleashed is a new cookbook that will transform how we think about—and eat—the vast universe of vegetables. ", "https://res.cloudinary.com/db9bfssj4/image/upload/v1559761161/book.vegetables_zoy3ew.jpg"  );
+        productRepository.save(product);
 
-        user = new User("sam@smail.com", passwordEncoder.encode("password"), "Sam", "Sammy", true, "sam");
+//        Cart cart = new Cart(user, product);
+//        cartRepository.save(cart);
+
+//        History history = new History();
+//        history.setUser(user);
+//        history.setProducts(product);
+
         user.setAddress(address);
+//        user.setCarts(cart);
+//        user.setHistory(history);
         userRepository.save(user);
 
 
 
 
-        Product product= new Product("Vegetables Unleashed: A Cookbook by Jose Andres", "Books", 29.58, "Vegetables Unleashed is a new cookbook that will transform how we think about—and eat—the vast universe of vegetables. ", "https://res.cloudinary.com/db9bfssj4/image/upload/v1559761161/book.vegetables_zoy3ew.jpg"  );
-        productRepository.save(product);
+
 
         product= new Product("Siege: Trump under Fire", "Books", 17.99, "Michael Wolff, author of the bombshell bestseller Fire and Fury, once again takes us inside the Trump presidency to reveal a White House under siege.", "https://res.cloudinary.com/db9bfssj4/image/upload/v1559761323/book.siege_eeglsd.jpg"  );
         productRepository.save(product);
