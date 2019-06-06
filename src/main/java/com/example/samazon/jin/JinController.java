@@ -7,8 +7,8 @@ import com.example.samazon.security.UserRepository;
 import com.example.samazon.security.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
+//import org.springframework.mail.javamail.JavaMailSender;
+//import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,6 +37,7 @@ public class JinController {
 
     @Autowired
     UserService userService;
+
 
     @RequestMapping("/detailUser")
     public  String Home(){
