@@ -1,5 +1,6 @@
 package com.example.samazon.betty;
 
+import com.example.samazon.chau.CartRepository;
 import com.example.samazon.chau.CartService;
 import com.example.samazon.jacob.Product;
 import com.example.samazon.jacob.ProductRepository;
@@ -25,15 +26,15 @@ public class BettyController {
    @Autowired
    private CartService cartService;
 
+   @Autowired
+   private CartRepository cartRepository;
+
 
     @GetMapping("/home")
     public String homePage(Model model){
         model.addAttribute("products", productRepository.findAll());
         model.addAttribute("user", userService.getCurrentUser());
-//        model.addAttribute("cart", userService.getCurrentUser().getCarts());
-//        model.addAttribute("products", userService.getCurrentUser().getCarts().getProducts());
-
-
+//
 
         return "security/index";
     }
@@ -55,16 +56,14 @@ public class BettyController {
 
         model.addAttribute("products", productRepository.findAll());
         model.addAttribute("user", userService.getCurrentUser());
+        model.addAttribute("carts", user.getCarts());
 
         if (user != null){
             if (user.getCarts() == null){
                 cartService.genCart(userService.getCurrentUser());
             }
         }
-//        model.addAttribute("cart", userService.getCurrentUser().getCarts());
-//        model.addAttribute("products", userService.getCurrentUser().getCarts().getProducts());
-
-
+//
 
         return "betty/productlist";
     }

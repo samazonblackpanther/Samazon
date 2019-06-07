@@ -16,7 +16,8 @@
 <div th:fragment="navlinks" id="navlinks">
 
     <div sec:authorize="isAnonymous()">
-        <nav class="navbar navbar-expand-sm" style="width: 100%;">
+        <nav class="navbar navbar-expand-sm">
+
             <ul class="navbar-nav" style="width: 100%;">
                 <li class="nav-item">
                     <a class="nav-link" href="/homepage">Home</a>
@@ -92,8 +93,8 @@
                                 </span>
 
                             </li>
-                            <li th:if="${user.getCarts() != null}">
-                              <span th:each="product : ${cart.getProducts()}" class="item">
+                            <li th:if="${carts != null}">
+                              <span th:each="product : ${carts.getProducts()}" class="item">
                                 <span class="item-left">
                                     <img th:src="${product.image}" alt="Product Image" />
                                     <span class="item-info">

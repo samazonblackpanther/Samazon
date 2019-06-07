@@ -1,9 +1,12 @@
 body {
-    background-color: pink;
+    background-color: white;
 }
+nav {
+    background-color:coral;
+    background-image: none;
+    background-repeat: no-repeat;
+    width: 100%;
 
-.dropdown a:hover {
-    color: transparent;
 }
 
 ul.dropdown-cart{
@@ -13,9 +16,11 @@ ul.dropdown-cart li .item{
     display:block;
     padding:3px 10px;
     margin: 3px 0;
+    color: antiquewhite;
 }
 ul.dropdown-cart li .item:hover{
-    background-color:#f3f3f3;
+    background-color:sandybrown;
+
 }
 ul.dropdown-cart li .item:after{
     -webkit-appearance: none;
