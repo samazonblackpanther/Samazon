@@ -17,12 +17,13 @@
 
 </head>
 <body>
-
-
 <div th:replace="security/base :: navlinks"></div>
-
-<h2>New User Registration</h2>
-
+<div sec:authorize="isAnonymous()">
+    <h2>New User Registration</h2>
+</div>
+<div sec:authorize="isAuthenticated()">
+    <h2>User Update</h2>
+</div>
 <form autocomplete="off" action="#" th:action="@{/register}" th:object="${user}" method="post" enctype="multipart/form-data">
     First Name
     <mark>
@@ -95,7 +96,7 @@
     <input type="hidden" name="role" value="USER"><br>
     <!--input type="radio" name="role" value="ADMIN">I am a Admin<br>-->
 
-    <button type="submit" class="btn btn-default">Submit</button>
+    <button type="submit" class="btn btn-info">Submit</button>
 </form>
 
 

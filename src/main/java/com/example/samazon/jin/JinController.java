@@ -82,4 +82,5 @@ public class JinController {
         model.addAttribute("history", userService.getCurrentUser().getHistory());
         return "Jin/showOrderHistory";
     }
+
 }
