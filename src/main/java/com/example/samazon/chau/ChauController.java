@@ -119,7 +119,7 @@ public class ChauController {
     public String billing(Model model){
         Cart cart =userService.getCurrentUser().getCarts();
         historyService.cartHistory(cart);
-        return "chau/confirmation";
+        return "redirect:/homepage";
     }
 
     @RequestMapping("/cart")
