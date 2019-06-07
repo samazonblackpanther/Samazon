@@ -59,7 +59,7 @@ public class JinController {
     public String updateUser(@PathVariable("id") long id, Model model){
 //        model.addAttribute("user", userService.getCurrentUser());
         model.addAttribute("user", userRepository.findById(id).get());
-        return "redirect:/secutiy/registration";
+        return "security/registration";
     }
 
     //=================== Order

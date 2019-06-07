@@ -14,7 +14,7 @@ public class Address {
     private long id;
 
     @NotNull
-    @Size(min = 5)
+
     private String streetAddress;
 
     @NotNull
@@ -35,7 +35,7 @@ public class Address {
     public Address() {
     }
 
-    public Address(@NotNull @Size(min = 5) String streetAddress, @NotNull @Size(min = 2) String city, @NotNull @Size(min = 2) String state, @NotNull @Size(min = 5) String zipcode) {
+    public Address(@NotNull String streetAddress, @NotNull @Size(min = 2) String city, @NotNull @Size(min = 2) String state, @NotNull @Size(min = 5) String zipcode) {
         this.streetAddress = streetAddress;
         this.city = city;
         this.state = state;
