@@ -2,6 +2,8 @@ package com.example.samazon.chau;
 
 import com.example.samazon.jacob.Product;
 import com.example.samazon.jacob.ProductRepository;
+import com.example.samazon.jin.HistoryRepository;
+import com.example.samazon.jin.HistoryService;
 import com.example.samazon.security.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -29,6 +31,12 @@ public class ChauController {
 
     @Autowired
     private CartRepository cartRepository;
+
+    @Autowired
+    private HistoryRepository historyRepository;
+
+    @Autowired
+    private HistoryService historyService;
 
     @PostMapping("/addcart")
     public String addCart(@RequestParam("product_id") long product_id, Model model) {
@@ -84,13 +92,15 @@ public class ChauController {
         model.addAttribute("message", message);
         model.addAttribute("total", total);
         model.addAttribute("products", products);
+
+        historyService.genHistory(user);
         return "chau/confirmation";
     }
 
     @PostMapping("/checkout")
     public String billing(Model model){
         Cart cart =userService.getCurrentUser().getCarts();
-        cartService.cartHistory(cart);
+        historyService.cartHistory(cart);
         return "chau/confirmation";
     }
 
