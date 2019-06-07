@@ -50,36 +50,36 @@ public class JinController {
 
     @RequestMapping("/detailUser/{id}")
     public String showUser(@PathVariable("id") long id, Model model){
-//        model.addAttribute("user", userService.getCurrentUser());
         model.addAttribute("user", userRepository.findById(id).get());
         return "Jin/detailUser";
     }
 
     @RequestMapping("/updateUser/{id}")
     public String updateUser(@PathVariable("id") long id, Model model){
-//        model.addAttribute("user", userService.getCurrentUser());
         model.addAttribute("user", userRepository.findById(id).get());
         return "security/registration";
     }
 
-    //=================== Order
+//================= manage product for admin
 
-    @RequestMapping("/showOrderHistory")
-    public String listCarts(@PathVariable("id") long id, Model model){
-        model.addAttribute("user", userService.getCurrentUser());
-        model.addAttribute("history", userService.getCurrentUser().getHistory());
-//    if (userService.getCurrentUser() != null) {
-//        model.addAttribute("user_id", userService.getCurrentUser().getId());
-//    }
-        return "Jin/showOrderHistory";
+    @RequestMapping("/editProduct/{id}")
+    public String addProduct(@PathVariable("id") long id, Model model) {
+        model.addAttribute("product", productRepository.findById(id).get());
+        return "jacob/addproduct";
     }
 
-//    @RequestMapping("/simpleemail/{id}")
-//    public String sendEmail(@PathVariable("id") long id, Model model){
-//        model.addAttribute("cart",cartRepository);
-//        return "sendEmail";
-//    }
+    @RequestMapping("/changePrice/{id}")
+    public String changePrice(@PathVariable("id") long id, Model model) {
+        model.addAttribute("product", productRepository.findById(id).get());
+        return "jacob/addproduct";
+    }
 
+//==================== order for user
 
-
+    @RequestMapping("/showOrderHistory")
+    public String listCarts(Model model){
+        model.addAttribute("user", userService.getCurrentUser());
+        model.addAttribute("history", userService.getCurrentUser().getHistory());
+        return "Jin/showOrderHistory";
+    }
 }
