@@ -43,6 +43,22 @@ public class BettyController {
         model.addAttribute("user", userService.getCurrentUser());
 //
 
+        // Shopping Cart
+        if (userService.getCurrentUser() != null){
+            //For Shopping Cart
+            int cartCount = 0;
+
+            if (userService.getCurrentUser().getCarts() != null){
+                cartCount += cartService.countItems(userService.getCurrentUser().getCarts());
+            }
+            model.addAttribute("cart", userService.getCurrentUser().getCarts());
+            model.addAttribute("cartnumber", cartCount);
+        }
+
+
+        model.addAttribute("products", productRepository.findAll());
+        model.addAttribute("user", userService.getCurrentUser());
+
         return "security/index";
     }
 
@@ -60,9 +76,22 @@ public class BettyController {
 
         User user = userService.getCurrentUser();
 
+        // Shopping Cart
+        if (userService.getCurrentUser() != null){
+            //For Shopping Cart
+            int cartCount = 0;
+
+            if (userService.getCurrentUser().getCarts() != null){
+                cartCount += cartService.countItems(userService.getCurrentUser().getCarts());
+            }
+            model.addAttribute("cart", userService.getCurrentUser().getCarts());
+            model.addAttribute("cartnumber", cartCount);
+        }
+
 
         model.addAttribute("products", productRepository.findAll());
         model.addAttribute("user", userService.getCurrentUser());
+
         model.addAttribute("carts", user.getCarts());
 
         if (user != null){
@@ -89,6 +118,19 @@ public class BettyController {
     public String productDetails(Model model){
 
         User user = userService.getCurrentUser();
+
+
+        // Shopping Cart
+        if (userService.getCurrentUser() != null){
+            //For Shopping Cart
+            int cartCount = 0;
+
+            if (userService.getCurrentUser().getCarts() != null){
+                cartCount += cartService.countItems(userService.getCurrentUser().getCarts());
+            }
+            model.addAttribute("cart", userService.getCurrentUser().getCarts());
+            model.addAttribute("cartnumber", cartCount);
+        }
 
 
         model.addAttribute("products", productRepository.findAll());

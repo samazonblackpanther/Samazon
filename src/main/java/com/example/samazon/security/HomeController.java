@@ -38,6 +38,23 @@ public class HomeController {
     @GetMapping("/register")
     public String showRegistrationPage(Model model) {
         model.addAttribute("user", new User());
+
+        // Shopping Cart
+        if (userService.getCurrentUser() != null){
+            //For Shopping Cart
+            int cartCount = 0;
+
+            if (userService.getCurrentUser().getCarts() != null){
+                cartCount += cartService.countItems(userService.getCurrentUser().getCarts());
+            }
+            model.addAttribute("cart", userService.getCurrentUser().getCarts());
+            model.addAttribute("cartnumber", cartCount);
+        }
+
+
+        model.addAttribute("products", productRepository.findAll());
+        model.addAttribute("user", userService.getCurrentUser());
+
         return "security/registration";
     }
 
@@ -57,6 +74,21 @@ public class HomeController {
                 userService.saveUser(user, role);
             }
         }
+
+        // Shopping Cart
+        if (userService.getCurrentUser() != null) {
+            //For Shopping Cart
+            int cartCount = 0;
+
+            if (userService.getCurrentUser().getCarts() != null) {
+                cartCount += cartService.countItems(userService.getCurrentUser().getCarts());
+            }
+            model.addAttribute("cart", userService.getCurrentUser().getCarts());
+            model.addAttribute("cartnumber", cartCount);
+        }
+        model.addAttribute("products", productRepository.findAll());
+        model.addAttribute("user", userService.getCurrentUser());
+
         return "security/index";
     }
 
@@ -93,6 +125,22 @@ public class HomeController {
     public String secure(Model model) {
         // Gets the currently logged in user and maps it to "user" in the Thymeleaf template
         model.addAttribute("user", userService.getCurrentUser());
+
+        // Shopping Cart
+        if (userService.getCurrentUser() != null){
+            //For Shopping Cart
+            int cartCount = 0;
+
+            if (userService.getCurrentUser().getCarts() != null){
+                cartCount += cartService.countItems(userService.getCurrentUser().getCarts());
+            }
+            model.addAttribute("cart", userService.getCurrentUser().getCarts());
+            model.addAttribute("cartnumber", cartCount);
+        }
+
+
+        model.addAttribute("user", userService.getCurrentUser());
+
         return "security/secure";
     }
 

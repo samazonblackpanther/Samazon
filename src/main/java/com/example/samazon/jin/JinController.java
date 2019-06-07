@@ -52,12 +52,40 @@ public class JinController {
     @RequestMapping("/detailUser")
     public  String Home(Model model){
         model.addAttribute("user", userService.getCurrentUser());
+
+
+        // Shopping Cart
+        if (userService.getCurrentUser() != null){
+            //For Shopping Cart
+            int cartCount = 0;
+
+            if (userService.getCurrentUser().getCarts() != null){
+                cartCount += cartService.countItems(userService.getCurrentUser().getCarts());
+            }
+            model.addAttribute("cart", userService.getCurrentUser().getCarts());
+            model.addAttribute("cartnumber", cartCount);
+        }
+
         return "Jin/detailUser";
 }
 
     @RequestMapping("/updateUser/{id}")
     public String updateUser(@PathVariable("id") long id, Model model){
         model.addAttribute("user", userRepository.findById(id).get());
+
+        // Shopping Cart
+        if (userService.getCurrentUser() != null){
+            //For Shopping Cart
+            int cartCount = 0;
+
+            if (userService.getCurrentUser().getCarts() != null){
+                cartCount += cartService.countItems(userService.getCurrentUser().getCarts());
+            }
+            model.addAttribute("cart", userService.getCurrentUser().getCarts());
+            model.addAttribute("cartnumber", cartCount);
+        }
+
+
         return "security/registration";
     }
 
@@ -83,6 +111,21 @@ public class JinController {
         model.addAttribute("user", userService.getCurrentUser());
         model.addAttribute("products", userService.getCurrentUser().getHistory().getProducts());
         model.addAttribute("cart", userService.getCurrentUser().getCarts());
+
+
+        // Shopping Cart
+        if (userService.getCurrentUser() != null){
+            //For Shopping Cart
+            int cartCount = 0;
+
+            if (userService.getCurrentUser().getCarts() != null){
+                cartCount += cartService.countItems(userService.getCurrentUser().getCarts());
+            }
+            model.addAttribute("cart", userService.getCurrentUser().getCarts());
+            model.addAttribute("cartnumber", cartCount);
+        }
+
+
         return "Jin/showOrderHistory";
     }
 

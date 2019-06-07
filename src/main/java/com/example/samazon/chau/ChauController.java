@@ -81,6 +81,21 @@ public class ChauController {
         model.addAttribute("products", user.getCarts().getProducts());
         model.addAttribute("user", user);
 
+
+
+        // Shopping Cart
+        if (userService.getCurrentUser() != null){
+            //For Shopping Cart
+            int cartCount = 0;
+
+            if (userService.getCurrentUser().getCarts() != null){
+                cartCount += cartService.countItems(userService.getCurrentUser().getCarts());
+            }
+            model.addAttribute("cart", userService.getCurrentUser().getCarts());
+            model.addAttribute("cartnumber", cartCount);
+        }
+
+
         return "chau/wishlist";
 
     }
@@ -95,6 +110,21 @@ public class ChauController {
         model.addAttribute("cart", user.getCarts() );
         model.addAttribute("products", user.getCarts().getProducts());
         model.addAttribute("user", user);
+
+
+
+        // Shopping Cart
+        if (userService.getCurrentUser() != null){
+            //For Shopping Cart
+            int cartCount = 0;
+
+            if (userService.getCurrentUser().getCarts() != null){
+                cartCount += cartService.countItems(userService.getCurrentUser().getCarts());
+            }
+            model.addAttribute("cart", userService.getCurrentUser().getCarts());
+            model.addAttribute("cartnumber", cartCount);
+        }
+
 
         return "chau/wishlist";
 
@@ -116,6 +146,24 @@ public class ChauController {
         model.addAttribute("message", message);
         model.addAttribute("total", total);
         model.addAttribute("Order", cart);
+
+
+
+
+        // Shopping Cart
+        if (userService.getCurrentUser() != null){
+            //For Shopping Cart
+            int cartCount = 0;
+
+            if (userService.getCurrentUser().getCarts() != null){
+                cartCount += cartService.countItems(userService.getCurrentUser().getCarts());
+            }
+            model.addAttribute("cart", userService.getCurrentUser().getCarts());
+            model.addAttribute("cartnumber", cartCount);
+        }
+
+        model.addAttribute("user", userService.getCurrentUser());
+
         return "jin/detailProduct";
     }
 
@@ -142,6 +190,19 @@ public class ChauController {
 
         historyService.genHistory(user);
 
+        // Shopping Cart
+        if (userService.getCurrentUser() != null){
+            //For Shopping Cart
+            int cartCount = 0;
+
+            if (userService.getCurrentUser().getCarts() != null){
+                cartCount += cartService.countItems(userService.getCurrentUser().getCarts());
+            }
+            model.addAttribute("cart", userService.getCurrentUser().getCarts());
+            model.addAttribute("cartnumber", cartCount);
+        }
+        model.addAttribute("user", userService.getCurrentUser());
+
         try {
             sendEmail();
             System.out.println("email");
@@ -156,6 +217,7 @@ public class ChauController {
     public String billing(Model model){
         Cart cart =userService.getCurrentUser().getCarts();
         historyService.cartHistory(cart);
+
         return "redirect:/homepage";
     }
 
@@ -179,6 +241,20 @@ public class ChauController {
 
         model.addAttribute("cart", cart);
         model.addAttribute("products", cart.getProducts());
+
+        // Shopping Cart
+        if (userService.getCurrentUser() != null){
+            //For Shopping Cart
+            int cartCount = 0;
+
+            if (userService.getCurrentUser().getCarts() != null){
+                cartCount += cartService.countItems(userService.getCurrentUser().getCarts());
+            }
+            model.addAttribute("cart", userService.getCurrentUser().getCarts());
+            model.addAttribute("cartnumber", cartCount);
+        }
+        model.addAttribute("user", userService.getCurrentUser());
+
         return "chau/shoppingcart";
     }
     @RequestMapping("/remove/{id}")
@@ -212,6 +288,20 @@ public class ChauController {
         model.addAttribute("product", productRepository.findById(id).get());
         model.addAttribute("user", userService.getCurrentUser());
         model.addAttribute("cart", userService.getCurrentUser().getCarts());
+
+        // Shopping Cart
+        if (userService.getCurrentUser() != null){
+            //For Shopping Cart
+            int cartCount = 0;
+
+            if (userService.getCurrentUser().getCarts() != null){
+                cartCount += cartService.countItems(userService.getCurrentUser().getCarts());
+            }
+            model.addAttribute("cart", userService.getCurrentUser().getCarts());
+            model.addAttribute("cartnumber", cartCount);
+        }
+
+
         return "jacob/addproduct";
     }
 
