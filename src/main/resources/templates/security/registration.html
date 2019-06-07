@@ -18,7 +18,7 @@
 </head>
 <body>
 <div th:replace="security/base :: navlinks"></div>
-
+<div class="container">
 <div sec:authorize="isAnonymous()">
     <h2>New User Registration</h2>
 </div>
@@ -105,7 +105,7 @@
     </div>
 
 </form>
-
+</div>
 
 <!--Bootstrap JS-->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
