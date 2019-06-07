@@ -72,6 +72,19 @@ public class ChauController {
         return "redirect:/cart";
     }
 
+    @GetMapping("/wishlist")
+    public String addWish( Model model) {
+        User user = userService.getCurrentUser();
+
+        model.addAttribute("wishlist", user.getWishlist());
+        model.addAttribute("cart", user.getCarts() );
+        model.addAttribute("products", user.getCarts().getProducts());
+        model.addAttribute("user", user);
+
+        return "chau/wishlist";
+
+    }
+
     @PostMapping("/wishlist")
     public String addWish(@RequestParam("product_id") long product_id, Model model) {
         User user = userService.getCurrentUser();
@@ -80,6 +93,7 @@ public class ChauController {
         wishlistService.updateWish(product, user.getWishlist());
         model.addAttribute("wishlist", user.getWishlist());
         model.addAttribute("cart", user.getCarts() );
+        model.addAttribute("products", user.getCarts().getProducts());
         model.addAttribute("user", user);
 
         return "chau/wishlist";
@@ -191,4 +205,14 @@ public class ChauController {
 
         sender.send(message);
     }
+
+    @RequestMapping("/updateProduct/{id}")
+    public String updateProduct(@PathVariable("id") long id, Model model){
+        User user  = userService.getCurrentUser();
+        model.addAttribute("product", productRepository.findById(id).get());
+        model.addAttribute("user", userService.getCurrentUser());
+        model.addAttribute("cart", userService.getCurrentUser().getCarts());
+        return "jacob/addproduct";
+    }
+
 }
