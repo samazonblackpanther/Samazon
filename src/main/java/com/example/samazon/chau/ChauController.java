@@ -66,6 +66,21 @@ public class ChauController {
 
     }
 
+    @PostMapping("/addwish")
+    public String addWish(@RequestParam("product_id") long product_id, Model model) {
+        User user = userService.getCurrentUser();
+        Product product = productRepository.findById(product_id).get();
+
+
+        System.out.println(product.getName());
+        cartService.updateCart(product, user.getCarts()) ;
+        model.addAttribute("cart", user.getCarts() );
+        model.addAttribute("user", user);
+        return "chau/shoppingcart";
+//            return "redirect:/homepage";
+
+    }
+
     @RequestMapping("order/{id}")
     public String viewOrder(Model model, @PathVariable("id") long id) {
         Cart cart = userService.getCurrentUser().getCarts();

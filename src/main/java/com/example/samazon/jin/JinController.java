@@ -48,12 +48,6 @@ public class JinController {
 
 //================== user
 
-    @RequestMapping("/detailUser/{id}")
-    public String showUser(@PathVariable("id") long id, Model model){
-        model.addAttribute("user", userRepository.findById(id).get());
-        return "Jin/detailUser";
-    }
-
     @RequestMapping("/updateUser/{id}")
     public String updateUser(@PathVariable("id") long id, Model model){
         model.addAttribute("user", userRepository.findById(id).get());

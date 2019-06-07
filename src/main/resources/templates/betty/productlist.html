@@ -74,7 +74,7 @@
             <div class="col-lg-4">
 
 
-                <h3 style="color:#483d8b;" th:text="${product.name}"></h3>
+                <a th:href="@{/productD}"><h3 style="color:#483d8b;" th:text="${product.name}"></h3></a>
                 <h4>By: Micheal Wolff</h4>
                 <p style="color:#483d8b;" th:text="${product.description}"></p>
             </div>
@@ -84,6 +84,12 @@
                     <input type="hidden" name="product_id" th:value="${product.id}" />
                     <button type="submit"> Add to Cart</button>
                 </form>
+
+                <formaction="#" th:action="@{/addwish}" th:object="${product}" method="post">
+                    <input type="hidden" name="product_id" th:value="${product.id}" />
+                    <button type="submit"> Add to Wishlist</button>
+                </form>
+
 
                 <!--<a th:href="@{/addcart}" class="btn btn-warning btn-lg active" role="button" aria-pressed="true">-->
                     <!--<div name="id" value="3" >-->

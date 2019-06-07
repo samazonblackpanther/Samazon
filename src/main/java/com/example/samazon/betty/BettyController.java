@@ -26,7 +26,7 @@ public class BettyController {
    private CartService cartService;
 
 
-    @GetMapping("/home")
+    @RequestMapping("/home")
     public String homePage(Model model){
         model.addAttribute("products", productRepository.findAll());
         model.addAttribute("user", userService.getCurrentUser());
@@ -38,14 +38,14 @@ public class BettyController {
         return "security/index";
     }
 
-    @PostMapping("/home")
-    public String postHomepage(@RequestParam("cat") String cat, Model model){
-
-        model.addAttribute("products", productRepository.findByName(cat));
-        model.addAttribute("allproducts", productRepository.findAll());
-
-        return "security/index";
-    }
+//    @PostMapping("/home")
+//    public String postHomepage(@RequestParam("cat") String cat, Model model){
+//
+//        model.addAttribute("products", productRepository.findByName(cat));
+//        model.addAttribute("allproducts", productRepository.findAll());
+//
+//        return "security/index";
+//    }
 
     @RequestMapping("/productlist")
     public String home(Model model){
@@ -67,5 +67,23 @@ public class BettyController {
 
 
         return "betty/productlist";
+    }
+
+    @RequestMapping("/productdetails")
+    public String productDetails(Model model){
+
+        User user = userService.getCurrentUser();
+
+
+        model.addAttribute("products", productRepository.findAll());
+        model.addAttribute("user", userService.getCurrentUser());
+
+        //For shopping cart
+        model.addAttribute("cart", userService.getCurrentUser().getCarts());
+        model.addAttribute("products", userService.getCurrentUser().getCarts().getProducts());
+
+
+
+        return "betty/productdetails";
     }
 }
