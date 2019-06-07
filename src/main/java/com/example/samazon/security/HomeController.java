@@ -133,16 +133,22 @@ public class HomeController {
 
         User user = new User("bob@bob.com",passwordEncoder.encode("password"),"Bob","Bobberson",true,"bob");
         user.setRoles(Arrays.asList(userRole));
+        Address address = new Address("432 bob St", "Bobington", "Maine", "246342");
+        addressRepository.save(address);
+        user.setAddress(address);
         userRepository.save(user);
 
         user = new User("admin@adm.com",passwordEncoder.encode("password"),"Admin","User",true,"admin");
         user.setRoles(Arrays.asList(adminRole));
+        address = new Address("1234 Amind St", "Aton", "Maryland", "635896");
+        addressRepository.save(address);
+        user.setAddress(address);
         userRepository.save(user);
 
         //Sam
         user = new User("sam@smail.com", passwordEncoder.encode("password"), "Sam", "Sammy", true, "sam");
         user.setRoles(Arrays.asList(adminRole));
-        Address address = new Address("1234 Sammas St", "Samington", "Washington", "243342");
+        address = new Address("1234 Sammas St", "Samington", "Washington", "243342");
         addressRepository.save(address);
 
         Product product = new Product("Vegetables Unleashed: A Cookbook by Jose Andres", "Books", 29.58, "Vegetables Unleashed is a new cookbook that will transform how we think about—and eat—the vast universe of vegetables. ", "https://res.cloudinary.com/db9bfssj4/image/upload/v1559761161/book.vegetables_zoy3ew.jpg"  );
