@@ -71,30 +71,16 @@
 
                     <button type="submit"> Add to Cart</button>
                 </form>
-
-
-            </div>
-            <div class="col-lg-4" >
-
-
-
+                <br>
                 <form action="#" th:action="@{/wishlist}" th:object="${product}" method="post">
                     <input type="hidden" name="product_id" th:value="${product.id}" />
                     <button type="submit"> Add to Wishlist</button>
                 </form>
-
-
-                <br>
-                <form sec:authorize="isAuthenticated()" action="#" th:action="@{/updateproduct}" th:object="${product}" method="post">
+                <br/>
+                <form sec:authorize="hasAnyAuthority('ADMIN')"  action="#" th:action="@{/updateproduct}" th:object="${product}" method="post">
                     <input type="hidden" name="product_id" th:value="${product.id}" />
                     <a th:href="@{/updateProduct/{id}(id=${product.id})}" class="btn btn-info" role="button">Update</a>
                 </form>
-
-                <form action="#" th:action="@{/addwish}" th:object="${product}" method="post">
-                    <input type="hidden" name="product_id" th:value="${product.id}" />
-                    <button type="submit" class="btn btn-info"> Add to Wishlist</button>
-                </form>
-
 
             </div>
 
