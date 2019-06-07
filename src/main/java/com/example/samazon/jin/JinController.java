@@ -1,6 +1,7 @@
 package com.example.samazon.jin;
 
 import com.example.samazon.chau.CartRepository;
+import com.example.samazon.chau.CartService;
 import com.example.samazon.jacob.AddressRepository;
 import com.example.samazon.jacob.ProductRepository;
 import com.example.samazon.security.UserRepository;
@@ -39,20 +40,19 @@ public class JinController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    HistoryService historyService;
+
+    @Autowired
+    CartService cartService;
+
+//================== user
 
     @RequestMapping("/detailUser")
     public  String Home(Model model){
         model.addAttribute("user", userService.getCurrentUser());
-        return "Jin/detailUser";
-    }
-
-//================== user
-
-    @RequestMapping("/detailUser/{id}")
-    public String showUser(@PathVariable("id") long id, Model model){
-        model.addAttribute("user", userRepository.findById(id).get());
-        return "Jin/detailUser";
-    }
+        return "detailUser";
+}
 
     @RequestMapping("/updateUser/{id}")
     public String updateUser(@PathVariable("id") long id, Model model){
@@ -78,8 +78,10 @@ public class JinController {
 
     @RequestMapping("/showOrderHistory")
     public String listCarts(Model model){
+
         model.addAttribute("user", userService.getCurrentUser());
-        model.addAttribute("history", userService.getCurrentUser().getHistory());
+        model.addAttribute("products", userService.getCurrentUser().getHistory().getProducts());
+        model.addAttribute("cart", userService.getCurrentUser().getCarts());
         return "Jin/showOrderHistory";
     }
 
