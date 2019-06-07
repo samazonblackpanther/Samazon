@@ -71,8 +71,7 @@
 
                     <button type="submit"> Add to Cart</button>
                 </form>
-
-<<<<<<< HEAD
+\
             </div>
             <div class="col-lg-4" >
                 <br>
@@ -81,19 +80,13 @@
                     <a th:href="@{/updateProduct/{id}(id=${product.id})}" class="btn btn-info" role="button">Update</a>
                 </form>
 
-=======
+
                 <form action="#" th:action="@{/addwish}" th:object="${product}" method="post">
                     <input type="hidden" name="product_id" th:value="${product.id}" />
-                    <button type="submit"> Add to Wishlist</button>
+                    <button type="submit" class="btn btn-info"> Add to Wishlist</button>
                 </form>
 
 
-                <!--<a th:href="@{/addcart}" class="btn btn-warning btn-lg active" role="button" aria-pressed="true">-->
-                    <!--<div name="id" value="3" >-->
-                        <!--Add to Cart-->
-                    <!--</div>-->
-                <!--</a>-->
->>>>>>> 356ba4a9a7df7138b83d413e5ee301aa7b713da8
             </div>
 
         </div>
