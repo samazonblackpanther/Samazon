@@ -107,7 +107,7 @@ public class JinController {
 
     @RequestMapping("/showOrderHistory")
     public String listCarts(Model model){
-
+        model.addAttribute("history", userService.getCurrentUser().getHistory());
         model.addAttribute("user", userService.getCurrentUser());
         model.addAttribute("products", userService.getCurrentUser().getHistory().getProducts());
         model.addAttribute("cart", userService.getCurrentUser().getCarts());
