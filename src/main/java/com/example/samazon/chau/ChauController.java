@@ -9,6 +9,7 @@ import com.example.samazon.jin.HistoryRepository;
 import com.example.samazon.jin.HistoryService;
 import com.example.samazon.jin.SendEmail;
 import com.example.samazon.security.*;
+//import org.graalvm.compiler.lir.LIRInstruction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -39,6 +40,7 @@ public class ChauController {
     @Autowired
     private CartRepository cartRepository;
 
+
     @Autowired
     private HistoryRepository historyRepository;
 
@@ -47,6 +49,7 @@ public class ChauController {
 
     @Autowired
     private JavaMailSender sender;
+
 
     @PostMapping("/addcart")
     public String addCart(@RequestParam("product_id") long product_id, Model model) {
@@ -136,9 +139,9 @@ public class ChauController {
         model.addAttribute("total", total);
         model.addAttribute("message", message);
 
-        for (Product product : activeCart.getProducts()) {
-            model.addAttribute("product", product);
-        }
+//        for (Product product : activeCart.getProducts()) {
+//            model.addAttribute("product", product);
+//        }
 
         model.addAttribute("products", activeCart.getProducts());
         return "chau/shoppingcart";
