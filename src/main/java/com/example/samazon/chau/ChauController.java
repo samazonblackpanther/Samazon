@@ -170,4 +170,14 @@ public class ChauController {
 
         sender.send(message);
     }
+
+    @RequestMapping("/updateProduct/{id}")
+    public String updateProduct(@PathVariable("id") long id, Model model){
+        User user  = userService.getCurrentUser();
+        model.addAttribute("product", productRepository.findById(id).get());
+        model.addAttribute("user", userService.getCurrentUser());
+        model.addAttribute("cart", userService.getCurrentUser().getCarts());
+        return "jacob/addproduct";
+    }
+
 }

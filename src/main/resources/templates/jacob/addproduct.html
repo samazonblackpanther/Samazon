@@ -16,8 +16,8 @@
 
 </head>
 <body>
-
-<h1>Hello</h1>
+<div th:replace="security/base::navlinks"></div>
+<h1>Adding Products</h1>
 
 <form action="#" th:action="@{/postproduct}" th:object="${product}" method="post" enctype="multipart/form-data">
     <input type="hidden" th:field="*{id}" />
