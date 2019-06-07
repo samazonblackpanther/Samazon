@@ -3,15 +3,19 @@ package com.example.samazon.jacob;
 import com.example.samazon.security.User;
 import com.example.samazon.security.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class WishlistService {
 
     @Autowired
     WishlistRepository wishlistRepository;
 
     @Autowired
-    UserRepository userRepository
+    UserRepository userRepository;
 
+    public WishlistService() {
+    }
 
     public void genWish(User user){
 
@@ -30,7 +34,7 @@ public class WishlistService {
 
     public void deleteWish(Product product, Wishlist wishlist){
 
-        wishlist.setProducts(product);
+        wishlist.getProducts().remove(product);
         wishlistRepository.save(wishlist);
 
     }

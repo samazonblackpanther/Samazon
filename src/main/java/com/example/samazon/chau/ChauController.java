@@ -5,6 +5,8 @@ import com.example.samazon.chau.CartService;
 import com.example.samazon.chau.ProductService;
 import com.example.samazon.jacob.Product;
 import com.example.samazon.jacob.ProductRepository;
+import com.example.samazon.jacob.WishlistRepository;
+import com.example.samazon.jacob.WishlistService;
 import com.example.samazon.jin.HistoryRepository;
 import com.example.samazon.jin.HistoryService;
 import com.example.samazon.jin.SendEmail;
@@ -48,6 +50,12 @@ public class ChauController {
     private HistoryService historyService;
 
     @Autowired
+    private WishlistRepository wishlistRepository;
+
+    @Autowired
+    private WishlistService wishlistService;
+
+    @Autowired
     private JavaMailSender sender;
 
 
@@ -55,29 +63,26 @@ public class ChauController {
     public String addCart(@RequestParam("product_id") long product_id, Model model) {
         User user = userService.getCurrentUser();
         Product product = productRepository.findById(product_id).get();
+        Cart cart = user.getCarts();
 
-
-        System.out.println(product.getName());
         cartService.updateCart(product, user.getCarts()) ;
         model.addAttribute("cart", user.getCarts() );
+        model.addAttribute("products", user.getCarts().getProducts());
         model.addAttribute("user", user);
-        return "chau/shoppingcart";
-//            return "redirect:/homepage";
-
+        return "redirect:/cart";
     }
 
-    @PostMapping("/addwish")
+    @PostMapping("/wishlist")
     public String addWish(@RequestParam("product_id") long product_id, Model model) {
         User user = userService.getCurrentUser();
         Product product = productRepository.findById(product_id).get();
 
-
-        System.out.println(product.getName());
-        cartService.updateCart(product, user.getCarts()) ;
+        wishlistService.updateWish(product, user.getWishlist());
+        model.addAttribute("wishlist", user.getWishlist());
         model.addAttribute("cart", user.getCarts() );
         model.addAttribute("user", user);
-        return "chau/shoppingcart";
-//            return "redirect:/homepage";
+
+        return "chau/wishlist";
 
     }
 
@@ -144,8 +149,8 @@ public class ChauController {
     public String viewCart(Model model) {
         User user = userService.getCurrentUser();
         model.addAttribute("user", user);
-        Cart activeCart = user.getCarts();
-        double total = cartService.totals(activeCart);
+        Cart cart = user.getCarts();
+        double total = cartService.totals(cart);
         String message = "You spent over $50, You get Free Shipping!";
         if (total < 50.0) {
             total += 5.0;
@@ -158,15 +163,16 @@ public class ChauController {
 //            model.addAttribute("product", product);
 //        }
 
-        model.addAttribute("products", activeCart.getProducts());
+        model.addAttribute("cart", cart);
+        model.addAttribute("products", cart.getProducts());
         return "chau/shoppingcart";
     }
     @RequestMapping("/remove/{id}")
-    public String removeItem(@PathVariable("id") long id, Authentication auth) {
+    public String removeItem(@PathVariable("id") long id) {
         User user = userService.getCurrentUser();
         Product product = productService.getProduct(id);
         cartService.removeItem(product,user.getCarts());
-        return "redirect:/chau/shoppingcart";
+        return "redirect:/cart";
     }
 
 

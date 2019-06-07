@@ -3,6 +3,8 @@ package com.example.samazon.betty;
 import com.example.samazon.chau.CartService;
 import com.example.samazon.jacob.Product;
 import com.example.samazon.jacob.ProductRepository;
+import com.example.samazon.jacob.WishlistRepository;
+import com.example.samazon.jacob.WishlistService;
 import com.example.samazon.security.CloudinaryConfig;
 import com.example.samazon.security.User;
 import com.example.samazon.security.UserService;
@@ -24,6 +26,12 @@ public class BettyController {
 
    @Autowired
    private CartService cartService;
+
+   @Autowired
+   private WishlistRepository wishlistRepository;
+
+   @Autowired
+   private WishlistService wishlistService;
 
 
     @RequestMapping("/home")
@@ -59,6 +67,12 @@ public class BettyController {
         if (user != null){
             if (user.getCarts() == null){
                 cartService.genCart(userService.getCurrentUser());
+            }
+        }
+
+        if (user != null){
+            if (user.getWishlist() == null){
+                wishlistService.genWish(userService.getCurrentUser());
             }
         }
 //        model.addAttribute("cart", userService.getCurrentUser().getCarts());
