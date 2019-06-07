@@ -22,12 +22,14 @@
                     <a class="nav-link" href="/homepage">Home</a>
                 </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" href="/register">Register</a>
-                </li>
                 <li>
                     <a class="nav-link" href="/productlist">Product Listing</a>
                 </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/register">Register</a>
+                </li>
+
                 <li class="nav-item">
                     <a class="nav-link" href="/detailUser">Login</a>
                 </li>
@@ -53,17 +55,15 @@
                 <li>
                     <a class="nav-link" href="/productlist">Product Listing</a>
                 </li>
-                <li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
-                    <a class="nav-link" href="/addproduct">Add a Product</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/detailUser">[[${user.firstName}]]'s Page</a>
-                </li>
+
                 <li class="dropdown">
+
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="/jin/detailUser">Your Account</a>
-                        <a class="dropdown-item" href="/jin/showOrderHistory">Order History</a>
+                        <div th:inline="text">[[${user.firstName}]]'s</div>
+                        <div class="dropdown-menu">
+                        <a class="dropdown-item" href="/detailUser">Your Account</a>
+                        <a class="dropdown-item" href="/showOrderHistory">Order History</a>
+                        <a class="dropdown-item" href="/addproduct" sec:authorize="hasAuthority('ADMIN')">Add a Product</a>
                         <a class="dropdown-item" href="#">Anything</a>
                     </div>
                     </a>
@@ -71,7 +71,7 @@
                 <!--Shopping Cart-->
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                        <!--<span class="caret"></span>-->
+                        Cart
                         <div class="icon-cart">
                             <div class="cart-line-1" style="background-color: #E5E9EA"></div>
                             <div class="cart-line-2" style="background-color: #E5E9EA"></div>

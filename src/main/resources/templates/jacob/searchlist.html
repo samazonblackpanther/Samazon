@@ -22,7 +22,7 @@
 <div class="container">
     <!--Products-->
     <div class="row">
-        <h3>Products Found</h3>
+        <h3>Products Found</h3><br />
         <p th:inline="text">with keyword: [[${keyword}]]</p>
     </div>
     <div class="row" th:each="product : ${productlist}">
@@ -37,7 +37,7 @@
     <div th:if="${user != null}">
         <div th:if="${user.getHistory() != null}">
             <div class="row">
-                <h3>Products Found in History</h3>
+                <h3>Products Found in History</h3><br />
                 <p th:inline="text">with keyword: [[${keyword}]]</p>
             </div>
             <div class="row" th:each="product : ${historylist}">

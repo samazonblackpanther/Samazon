@@ -74,7 +74,7 @@ public class JinController {
         return "redirect:/jacob/addproduct";
     }
 
-//=================== Order
+//==================== order
 
     @RequestMapping("/showOrderHistory")
     public String listCarts(Model model){

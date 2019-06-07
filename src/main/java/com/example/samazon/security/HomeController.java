@@ -1,7 +1,10 @@
 package com.example.samazon.security;
 
+import com.example.samazon.chau.CartRepository;
+import com.example.samazon.chau.CartService;
 import com.example.samazon.jacob.Address;
 import com.example.samazon.jacob.AddressRepository;
+import com.example.samazon.jacob.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +20,15 @@ public class HomeController {
 
     @Autowired
     private AddressRepository addressRepository;
+
+    @Autowired
+    private CartRepository cartRepository;
+
+    @Autowired
+    private CartService cartService;
+
+    @Autowired
+    private ProductRepository productRepository;
 
     @GetMapping("/register")
     public String showRegistrationPage(Model model) {
@@ -50,7 +62,24 @@ public class HomeController {
     }
 
     @RequestMapping("/")
-    public String index() {
+    public String index(Model model) {
+
+
+        // Shopping Cart
+        if (userService.getCurrentUser() != null){
+            //For Shopping Cart
+            int cartCount = 0;
+
+            if (userService.getCurrentUser().getCarts() != null){
+                cartCount += cartService.countItems(userService.getCurrentUser().getCarts());
+            }
+            model.addAttribute("cart", userService.getCurrentUser().getCarts());
+            model.addAttribute("cartnumber", cartCount);
+        }
+
+
+        model.addAttribute("products", productRepository.findAll());
+        model.addAttribute("user", userService.getCurrentUser());
         return "security/index";
     }
 
