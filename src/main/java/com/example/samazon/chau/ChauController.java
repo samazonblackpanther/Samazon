@@ -4,15 +4,13 @@ package com.example.samazon.chau;
 import com.example.samazon.chau.CartService;
 import com.example.samazon.chau.ProductService;
 import com.example.samazon.jacob.Product;
+import com.example.samazon.jacob.ProductRepository;
 import com.example.samazon.security.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -29,13 +27,25 @@ public class ChauController {
     @Autowired
     private ProductService productService;
 
-    @RequestMapping("/addcart{id}")
-    public String addCart(@PathVariable("id") long id, Model model) {
+    @Autowired
+    private ProductRepository productRepository;
+
+    @Autowired
+    private CartRepository cartRepository;
+
+    @PostMapping("/addcart")
+    public String addCart(@RequestParam("product_id") long product_id, Model model) {
         User user = userService.getCurrentUser();
-        Product product = productService.getProduct(id);
-        cartService.updateCart(product, user) ;
+        Product product = productRepository.findById(product_id).get();
+
+
+        System.out.println(product.getName());
+        cartService.updateCart(product, user.getCarts()) ;
         model.addAttribute("cart", user.getCarts() );
-        return "redirect:/chau/shoppingcart";
+        model.addAttribute("user", user);
+        return "chau/shoppingcart";
+//            return "redirect:/homepage";
+
     }
 
     @RequestMapping("order/{id}")
@@ -73,6 +83,7 @@ public class ChauController {
             total += 5.0;
             message = "$5 charged for Shipping";
         }
+        model.addAttribute("user", user);
         model.addAttribute("message", message);
         model.addAttribute("total", total);
         model.addAttribute("products", products);

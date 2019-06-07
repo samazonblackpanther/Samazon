@@ -43,7 +43,7 @@ public class JinController {
     @RequestMapping("/detailUser")
     public  String Home(Model model){
         model.addAttribute("user", userService.getCurrentUser());
-        return "detailUser";
+        return "Jin/detailUser";
     }
 
 //================== user
@@ -51,35 +51,35 @@ public class JinController {
     @RequestMapping("/detailUser/{id}")
     public String showUser(@PathVariable("id") long id, Model model){
         model.addAttribute("user", userRepository.findById(id).get());
-        return "detailUser";
+        return "Jin/detailUser";
     }
 
     @RequestMapping("/updateUser/{id}")
     public String updateUser(@PathVariable("id") long id, Model model){
         model.addAttribute("user", userRepository.findById(id).get());
-        return "redirect:/secutiy/registration";
+        return "security/registration";
     }
 
-//================= product
+//================= manage product for admin
 
     @RequestMapping("/editProduct/{id}")
     public String addProduct(@PathVariable("id") long id, Model model) {
         model.addAttribute("product", productRepository.findById(id).get());
-        return "redirect:/jacob/addproduct";
+        return "jacob/addproduct";
     }
 
     @RequestMapping("/changePrice/{id}")
     public String changePrice(@PathVariable("id") long id, Model model) {
         model.addAttribute("product", productRepository.findById(id).get());
-        return "redirect:/jacob/addproduct";
+        return "jacob/addproduct";
     }
 
-//==================== order
+//==================== order for user
 
     @RequestMapping("/showOrderHistory")
     public String listCarts(Model model){
         model.addAttribute("user", userService.getCurrentUser());
-        model.addAttribute("history", userService.getCurrentUser());
-    return "showOrderHistory";
+        model.addAttribute("history", userService.getCurrentUser().getHistory());
+        return "Jin/showOrderHistory";
     }
 }

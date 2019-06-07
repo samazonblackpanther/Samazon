@@ -61,16 +61,36 @@
     <input type="text" id="password" placeholder="Password" th:field="*{password}"/><br/>
 
     Street Address:
-    <input type="text" name="streetAddress"/><br/>
+    <mark>
+        <strong>
+            <span th:if="${#fields.hasErrors('streetAddress')}" th:errors="*{streetAddress}">Street Address Error</span>
+        </strong>
+    </mark>
+    <input type="text" id="streetAddress" placeholder="streetAddress" th:field="*{streetAddress}"/><br/>
 
     City:
-    <input type="text" name="city"/><br/>
+    <mark>
+        <strong>
+            <span th:if="${#fields.hasErrors('city')}" th:errors="*{city}">City Error</span>
+        </strong>
+    </mark>
+    <input type="text" id="city" placeholder="city" th:field="*{city}"/><br/>
 
     State:
-    <input type="text" name="state"/><br/>
+    <mark>
+        <strong>
+            <span th:if="${#fields.hasErrors('state')}" th:errors="*{state}">State Error</span>
+        </strong>
+    </mark>
+    <input type="text" id="state" placeholder="state" th:field="*{state}"/><br/>
 
     Zipcode:
-    <input type="text" name="zipcode"/><br/>
+    <mark>
+        <strong>
+            <span th:if="${#fields.hasErrors('zipcode')}" th:errors="*{zipcode}">Zipcode Error</span>
+        </strong>
+    </mark>
+    <input type="text" id="zipcode" placeholder="zipcode" th:field="*{zipcode}"/><br/>
 
     <input type="hidden" name="role" value="USER"><br>
     <!--input type="radio" name="role" value="ADMIN">I am a Admin<br>-->

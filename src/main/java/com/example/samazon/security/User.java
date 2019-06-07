@@ -2,10 +2,13 @@ package com.example.samazon.security;
 
 import com.example.samazon.jacob.Product;
 import com.example.samazon.jacob.Address;
+import com.example.samazon.jacob.Wishlist;
 import com.example.samazon.jin.History;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.Set;
 import com.example.samazon.chau.*;
@@ -45,11 +48,29 @@ public class User {
     @OneToOne(cascade = CascadeType.ALL)
     private Cart carts;
 
-    @OneToOne
-    private Address address;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Wishlist wishlist;
+//
+//    @OneToOne
+//    private Address address;
 
     @OneToOne(cascade = CascadeType.ALL)
     private History history;
+
+    @NotNull
+    private String streetAddress;
+
+    @NotNull
+    @Size(min = 2)
+    private String city;
+
+    @NotNull
+    @Size(min = 2)
+    private String state;
+
+    @NotNull
+    @Size(min = 5)
+    private String zipcode;
 
     public User() {
     }
@@ -71,6 +92,20 @@ public class User {
         this.lastName = lastName;
         this.enabled = enabled;
         this.username = username;
+    }
+
+    public User(String email, String password, String firstName, String lastName, boolean enabled, String username, @NotNull String streetAddress, @NotNull @Size(min = 2) String city, @NotNull @Size(min = 2) String state, @NotNull @Size(min = 5) String zipcode) {
+        this.email = email;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.enabled = enabled;
+        this.username = username;
+        this.history = history;
+        this.streetAddress = streetAddress;
+        this.city = city;
+        this.state = state;
+        this.zipcode = zipcode;
     }
 
     public long getId() {
@@ -152,13 +187,13 @@ public class User {
         products.add(product);
     }
 
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
-    }
+//    public Address getAddress() {
+//        return address;
+//    }
+//
+//    public void setAddress(Address address) {
+//        this.address = address;
+//    }
 
     public History getHistory() {
         return history;
@@ -175,5 +210,45 @@ public class User {
 
     public void setCarts(Cart carts) {
         this.carts = carts;
+    }
+
+    public Wishlist getWishlist() {
+        return wishlist;
+    }
+
+    public void setWishlist(Wishlist wishlist) {
+        this.wishlist = wishlist;
+    }
+
+    public String getStreetAddress() {
+        return streetAddress;
+    }
+
+    public void setStreetAddress(String streetAddress) {
+        this.streetAddress = streetAddress;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getZipcode() {
+        return zipcode;
+    }
+
+    public void setZipcode(String zipcode) {
+        this.zipcode = zipcode;
     }
 }
