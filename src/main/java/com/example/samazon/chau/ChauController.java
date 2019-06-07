@@ -6,6 +6,7 @@ import com.example.samazon.chau.ProductService;
 import com.example.samazon.jacob.Product;
 import com.example.samazon.jacob.ProductRepository;
 import com.example.samazon.security.*;
+//import org.graalvm.compiler.lir.LIRInstruction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -33,6 +34,14 @@ public class ChauController {
     @Autowired
     private CartRepository cartRepository;
 
+//    @RequestMapping("/shoppingcart")
+//    public String viewCart(Model model){
+//        User user = userService.getCurrentUser();
+//        model.addAttribute("user", user);
+//        model.addAttribute("cart", user.getCarts());
+//
+//        return "chau/shoppingcart";
+//    }
     @PostMapping("/addcart")
     public String addCart(@RequestParam("product_id") long product_id, Model model) {
         User user = userService.getCurrentUser();
@@ -111,9 +120,9 @@ public class ChauController {
         model.addAttribute("total", total);
         model.addAttribute("message", message);
 
-        for (Product product : activeCart.getProducts()) {
-            model.addAttribute("product", product);
-        }
+//        for (Product product : activeCart.getProducts()) {
+//            model.addAttribute("product", product);
+//        }
 
         model.addAttribute("products", activeCart.getProducts());
         return "chau/shoppingcart";

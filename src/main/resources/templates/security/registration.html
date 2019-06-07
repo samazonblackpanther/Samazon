@@ -21,81 +21,85 @@
 
 <div th:replace="security/base :: navlinks"></div>
 
-<h2>New User Registration</h2>
+<div class="container" style="text-align: center; font-family: cursive"><h2>New User Registration</h2></div>
 
 <form autocomplete="off" action="#" th:action="@{/register}" th:object="${user}" method="post" enctype="multipart/form-data">
-    First Name
-    <mark>
-        <strong>
-            <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First Name Error</span>
-        </strong>
-    </mark>
-    <input type="text" id="firstName" placeholder="First Name" th:field="*{firstName}"/><br/>
-    Last Name
-    <mark>
+   <div class="container">
+       <h5>First Name: </h5><input type="text" id="firstName" placeholder="First Name" th:field="*{firstName}"/><br/>
+       <strong>
+           <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First Name Error</span>
+       </strong>
+   </div>
+    <div class="container">
+        <h5>Last Name: </h5>
+    <input type="text" id="lastName" placeholder="Last Name" th:field="*{lastName}"/><br/>
         <strong>
             <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last Name Error</span>
         </strong>
-    </mark>
-    <input type="text" id="lastName" placeholder="Last Name" th:field="*{lastName}"/><br/>
-    Email
-    <mark>
+    </div>
+    <div class="container">
+        <h5>Email: </h5>
+    <input type="text" id="email" placeholder="Email" th:field="*{email}"/><br/>
         <strong>
             <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</span>
         </strong>
-    </mark>
-    <input type="text" id="email" placeholder="Email" th:field="*{email}"/><br/>
-    Username
-    <mark>
+    </div>
+    <div class="container">
+        <h5>Username: </h5>
+    <input type="text" id="username" placeholder="Username" th:field="*{username}"/><br/>
         <strong>
             <span th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username Error</span>
         </strong>
-    </mark>
-    <input type="text" id="username" placeholder="Username" th:field="*{username}"/><br/>
-    Password
-    <mark>
+    </div>
+    <div class="container">
+        <h5>Password: </h5>
+
         <strong>
             <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</span>
         </strong>
-    </mark>
     <input type="text" id="password" placeholder="Password" th:field="*{password}"/><br/>
+    </div>
+    <div class="container">
+        <h5>Street Address: </h5>
 
-    Street Address:
-    <mark>
         <strong>
             <span th:if="${#fields.hasErrors('streetAddress')}" th:errors="*{streetAddress}">Street Address Error</span>
         </strong>
-    </mark>
-    <input type="text" id="streetAddress" placeholder="streetAddress" th:field="*{streetAddress}"/><br/>
 
-    City:
-    <mark>
+    <input type="text" id="streetAddress" placeholder="streetAddress" th:field="*{streetAddress}"/><br/>
+    </div>
+    <div class="container">
+    <h5>City:</h5>
+
         <strong>
             <span th:if="${#fields.hasErrors('city')}" th:errors="*{city}">City Error</span>
         </strong>
-    </mark>
-    <input type="text" id="city" placeholder="city" th:field="*{city}"/><br/>
 
-    State:
-    <mark>
+    <input type="text" id="city" placeholder="city" th:field="*{city}"/><br/>
+    </div>
+    <div class="container">
+    <h5>State:</h5>
+
         <strong>
             <span th:if="${#fields.hasErrors('state')}" th:errors="*{state}">State Error</span>
         </strong>
-    </mark>
-    <input type="text" id="state" placeholder="state" th:field="*{state}"/><br/>
 
-    Zipcode:
-    <mark>
+    <input type="text" id="state" placeholder="state" th:field="*{state}"/><br/>
+    </div>
+    <div class="container">
+    <h5>Zipcode:</h5>
         <strong>
             <span th:if="${#fields.hasErrors('zipcode')}" th:errors="*{zipcode}">Zipcode Error</span>
         </strong>
-    </mark>
+
     <input type="text" id="zipcode" placeholder="zipcode" th:field="*{zipcode}"/><br/>
+    </div>
 
     <input type="hidden" name="role" value="USER"><br>
     <!--input type="radio" name="role" value="ADMIN">I am a Admin<br>-->
-
+    <div class="container">
     <button type="submit" class="btn btn-default">Submit</button>
+    </div>
 </form>
 
 
