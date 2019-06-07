@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>User Details</title>
-    <meta charset="UTF-8">
-    <title>Confirm</title>
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -16,6 +15,7 @@
 
 </head>
 <body>
+
 <div th:replace="security/base::navlinks"></div>
 <div class="container">
     <div class="container">First Name : <span th:text="${user.firstName}"></span></div><br/>
@@ -29,9 +29,7 @@
 
     <a th:href="@{/updateUser/{id}(id=${user.id})}" class="btn btn-info" role="button">Update</a>
 
-
 </div>
-
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -42,5 +40,6 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
+
 </body>
 </html>

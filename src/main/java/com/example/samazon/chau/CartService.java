@@ -71,12 +71,5 @@ public class CartService {
         return total;
     }
 
-    public void cartHistory(Cart cart){
-        for(Product product: cart.getProducts()){
-            History history = new History();
-            historyRepository.save(history);
-            cart.getProducts().remove(product);
-        }
 
-    }
 }

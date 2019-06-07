@@ -32,12 +32,16 @@ public class SimpleEmailController {
     @Autowired
     UserService userService;
 
+
+    SendEmail sendEmail;
+
     @RequestMapping("/simpleemail")
     @ResponseBody
-    String home() {
+    public String home() {
         try {
             sendEmail();
-            return "Email Sent!";
+            System.out.println("email");
+            return "redirect:/homepage";
         } catch (Exception ex) {
             return "Error in sending email: " + ex;
         }
@@ -49,6 +53,7 @@ public class SimpleEmailController {
         MimeMessageHelper helper = new MimeMessageHelper(message);
 
         String strEmail=userService.getCurrentUser().getEmail();
+
         helper.setTo(strEmail);
 
         helper.setText("Your order is completed.");
@@ -56,4 +61,5 @@ public class SimpleEmailController {
 
         sender.send(message);
     }
+
 }

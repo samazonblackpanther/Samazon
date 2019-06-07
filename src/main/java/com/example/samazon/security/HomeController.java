@@ -125,7 +125,7 @@ public class HomeController {
         Role userRole = roleRepository.findByRole("USER");
         Role adminRole = roleRepository.findByRole("ADMIN");
 
-        User user = new User("bob@bob.com",passwordEncoder.encode("password"),"Bob","Bobberson",true,"bob", "432 bob St", "Bobington", "Maine", "246342");
+        User user = new User("samazonpanther@gmail.com",passwordEncoder.encode("password"),"Bob","Bobberson",true,"bob", "432 bob St", "Bobington", "Maine", "246342");
         user.setRoles(Arrays.asList(userRole));
 //        Address address = new Address("432 bob St", "Bobington", "Maine", "246342");
 //        addressRepository.save(address);

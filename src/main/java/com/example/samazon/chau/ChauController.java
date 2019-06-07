@@ -5,14 +5,20 @@ import com.example.samazon.chau.CartService;
 import com.example.samazon.chau.ProductService;
 import com.example.samazon.jacob.Product;
 import com.example.samazon.jacob.ProductRepository;
+import com.example.samazon.jin.HistoryRepository;
+import com.example.samazon.jin.HistoryService;
+import com.example.samazon.jin.SendEmail;
 import com.example.samazon.security.*;
 //import org.graalvm.compiler.lir.LIRInstruction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.internet.MimeMessage;
 import java.util.Collection;
 import java.util.HashSet;
 
@@ -34,14 +40,17 @@ public class ChauController {
     @Autowired
     private CartRepository cartRepository;
 
-//    @RequestMapping("/shoppingcart")
-//    public String viewCart(Model model){
-//        User user = userService.getCurrentUser();
-//        model.addAttribute("user", user);
-//        model.addAttribute("cart", user.getCarts());
-//
-//        return "chau/shoppingcart";
-//    }
+
+    @Autowired
+    private HistoryRepository historyRepository;
+
+    @Autowired
+    private HistoryService historyService;
+
+    @Autowired
+    private JavaMailSender sender;
+
+
     @PostMapping("/addcart")
     public String addCart(@RequestParam("product_id") long product_id, Model model) {
         User user = userService.getCurrentUser();
@@ -96,13 +105,23 @@ public class ChauController {
         model.addAttribute("message", message);
         model.addAttribute("total", total);
         model.addAttribute("products", products);
-        return "chau/confirmation";
+
+        historyService.genHistory(user);
+
+        try {
+            sendEmail();
+            System.out.println("email");
+            return "chau/confirmation";
+        } catch (Exception ex) {
+            return "Error in sending email: " + ex;
+        }
+
     }
 
     @PostMapping("/checkout")
     public String billing(Model model){
         Cart cart =userService.getCurrentUser().getCarts();
-        cartService.cartHistory(cart);
+        historyService.cartHistory(cart);
         return "chau/confirmation";
     }
 
@@ -133,5 +152,22 @@ public class ChauController {
         Product product = productService.getProduct(id);
         cartService.removeItem(product,user.getCarts());
         return "redirect:/chau/shoppingcart";
+    }
+
+
+
+    private void sendEmail()throws Exception{
+
+        MimeMessage message = sender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message);
+
+        String strEmail=userService.getCurrentUser().getEmail();
+
+        helper.setTo(strEmail);
+
+        helper.setText("Your order is completed.");
+        helper.setSubject("Order Confirmation");
+
+        sender.send(message);
     }
 }
