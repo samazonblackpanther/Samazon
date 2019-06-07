@@ -20,19 +20,19 @@
 
             <ul class="navbar-nav" style="width: 100%;">
                 <li class="nav-item">
-                    <a class="nav-link" href="/homepage">Home</a>
+                    <a style="font-size: 1.5em; padding-right: 2em;" class="nav-link" href="/homepage">Home</a>
                 </li>
 
                 <li>
-                    <a class="nav-link" href="/productlist">Product Listing</a>
+                    <a style="font-size: 1.5em; padding-right: 2em; padding-left: 2em" class="nav-link" href="/productlist">Product Listing</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="/register">Register</a>
+                    <a style="font-size: 1.5em; padding-right: 2em; padding-left: 2em"  class="nav-link" href="/register">Register</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="/login">Login</a>
+                    <a style="font-size: 1.5em; padding-left: 2em"  class="nav-link" href="/login">Login</a>
                 </li>
 
 
@@ -51,16 +51,16 @@
         <nav class="navbar navbar-expand-sm" style="width: 100%;">
             <ul class="navbar-nav" style="width: 100%;">
                 <li class="nav-item">
-                    <a class="nav-link" href="/homepage" th:inline="text">Hello, [[${user.firstName}]]</a>
+                    <a style="font-size: 1.5em; padding-right: 2.5em;" class="nav-link" href="/homepage" th:inline="text">Hello, [[${user.firstName}]]</a>
                 </li>
                 <li>
-                    <a class="nav-link" href="/productlist">Product Listing</a>
+                    <a style="font-size: 1.5em; padding-right: 2.5em;"  class="nav-link" href="/productlist">Product Listing</a>
                 </li>
 
                 <li class="dropdown">
 
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                        <div th:inline="text">[[${user.firstName}]]'s</div>
+                        <div th:inline="text" style="font-size: 1.5em; padding-top: .35em; margin-right: 2.5em;">[[${user.firstName}]]'s</div>
                         <div class="dropdown-menu">
                         <a class="dropdown-item" href="/detailUser">Your Account</a>
                         <a class="dropdown-item" href="/showOrderHistory">Order History</a>
@@ -72,7 +72,6 @@
                 <!--Shopping Cart-->
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                        Cart
                         <div class="icon-cart">
                             <div class="cart-line-1" style="background-color: #E5E9EA"></div>
                             <div class="cart-line-2" style="background-color: #E5E9EA"></div>
@@ -117,7 +116,7 @@
                     </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="/logout">Log Out</a>
+                    <a style="font-size: 1.5em; padding-left: 2.5em"  class="nav-link" href="/logout">Log Out</a>
                 </li>
                 <!--Search-->
                 <form action="#" th:action="@{/search}"class="form-inline my-2 my-lg-0 ml-auto" style="float: right">

@@ -9,6 +9,9 @@ nav {
 
 }
 
+
+
+
 ul.dropdown-cart{
     min-width:250px;
 }
@@ -34,6 +37,8 @@ ul.dropdown-cart li .item:after{
 .dropdown-toggle::after {
     display: inline-block;
     color: transparent;
+    border-top: 0;
+    margin-left: 0;
 }
 
 ul.dropdown-cart li .item-left{
