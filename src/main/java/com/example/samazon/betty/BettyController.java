@@ -1,8 +1,11 @@
 package com.example.samazon.betty;
 
+import com.example.samazon.chau.CartRepository;
 import com.example.samazon.chau.CartService;
 import com.example.samazon.jacob.Product;
 import com.example.samazon.jacob.ProductRepository;
+import com.example.samazon.jacob.WishlistRepository;
+import com.example.samazon.jacob.WishlistService;
 import com.example.samazon.security.CloudinaryConfig;
 import com.example.samazon.security.User;
 import com.example.samazon.security.UserService;
@@ -25,27 +28,32 @@ public class BettyController {
    @Autowired
    private CartService cartService;
 
+   @Autowired
 
-    @GetMapping("/home")
+   private WishlistRepository wishlistRepository;
+
+   @Autowired
+   private WishlistService wishlistService;
+
+
+
+    @RequestMapping("/home")
     public String homePage(Model model){
         model.addAttribute("products", productRepository.findAll());
         model.addAttribute("user", userService.getCurrentUser());
-//        model.addAttribute("cart", userService.getCurrentUser().getCarts());
-//        model.addAttribute("products", userService.getCurrentUser().getCarts().getProducts());
-
-
+//
 
         return "security/index";
     }
 
-    @PostMapping("/home")
-    public String postHomepage(@RequestParam("cat") String cat, Model model){
-
-        model.addAttribute("products", productRepository.findByName(cat));
-        model.addAttribute("allproducts", productRepository.findAll());
-
-        return "security/index";
-    }
+//    @PostMapping("/home")
+//    public String postHomepage(@RequestParam("cat") String cat, Model model){
+//
+//        model.addAttribute("products", productRepository.findByName(cat));
+//        model.addAttribute("allproducts", productRepository.findAll());
+//
+//        return "security/index";
+//    }
 
     @RequestMapping("/productlist")
     public String home(Model model){
@@ -55,10 +63,18 @@ public class BettyController {
 
         model.addAttribute("products", productRepository.findAll());
         model.addAttribute("user", userService.getCurrentUser());
+        model.addAttribute("carts", user.getCarts());
 
         if (user != null){
             if (user.getCarts() == null){
                 cartService.genCart(userService.getCurrentUser());
+            }
+        }
+
+
+        if (user != null){
+            if (user.getWishlist() == null){
+                wishlistService.genWish(userService.getCurrentUser());
             }
         }
 //        model.addAttribute("cart", userService.getCurrentUser().getCarts());
@@ -67,5 +83,23 @@ public class BettyController {
 
 
         return "betty/productlist";
+    }
+
+    @RequestMapping("/productdetails")
+    public String productDetails(Model model){
+
+        User user = userService.getCurrentUser();
+
+
+        model.addAttribute("products", productRepository.findAll());
+        model.addAttribute("user", userService.getCurrentUser());
+
+        //For shopping cart
+        model.addAttribute("cart", userService.getCurrentUser().getCarts());
+        model.addAttribute("products", userService.getCurrentUser().getCarts().getProducts());
+
+
+
+        return "betty/productdetails";
     }
 }
