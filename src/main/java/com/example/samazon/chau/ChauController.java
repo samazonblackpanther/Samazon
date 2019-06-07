@@ -7,13 +7,17 @@ import com.example.samazon.jacob.Product;
 import com.example.samazon.jacob.ProductRepository;
 import com.example.samazon.jin.HistoryRepository;
 import com.example.samazon.jin.HistoryService;
+import com.example.samazon.jin.SendEmail;
 import com.example.samazon.security.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.internet.MimeMessage;
 import java.util.Collection;
 import java.util.HashSet;
 
@@ -40,6 +44,9 @@ public class ChauController {
 
     @Autowired
     private HistoryService historyService;
+
+    @Autowired
+    private JavaMailSender sender;
 
     @PostMapping("/addcart")
     public String addCart(@RequestParam("product_id") long product_id, Model model) {
@@ -97,7 +104,15 @@ public class ChauController {
         model.addAttribute("products", products);
 
         historyService.genHistory(user);
-        return "chau/confirmation";
+
+        try {
+            sendEmail();
+            System.out.println("email");
+            return "chau/confirmation";
+        } catch (Exception ex) {
+            return "Error in sending email: " + ex;
+        }
+
     }
 
     @PostMapping("/checkout")
@@ -134,5 +149,22 @@ public class ChauController {
         Product product = productService.getProduct(id);
         cartService.removeItem(product,user.getCarts());
         return "redirect:/chau/shoppingcart";
+    }
+
+
+
+    private void sendEmail()throws Exception{
+
+        MimeMessage message = sender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message);
+
+        String strEmail=userService.getCurrentUser().getEmail();
+
+        helper.setTo(strEmail);
+
+        helper.setText("Your order is completed.");
+        helper.setSubject("Order Confirmation");
+
+        sender.send(message);
     }
 }
