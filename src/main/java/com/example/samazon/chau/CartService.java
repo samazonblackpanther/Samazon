@@ -59,6 +59,7 @@ public class CartService {
 
     public void removeItem(Product product, Cart cart){
         cart.getProducts().remove(product);
+        cartRepository.save(cart);
     }
 
     public double totals(Cart cart){

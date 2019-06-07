@@ -147,11 +147,11 @@ public class ChauController {
         return "chau/shoppingcart";
     }
     @RequestMapping("/remove/{id}")
-    public String removeItem(@PathVariable("id") long id, Authentication auth) {
+    public String removeItem(@PathVariable("id") long id) {
         User user = userService.getCurrentUser();
         Product product = productService.getProduct(id);
         cartService.removeItem(product,user.getCarts());
-        return "redirect:/chau/shoppingcart";
+        return "chau/shoppingcart";
     }
 
 
