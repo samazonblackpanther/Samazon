@@ -25,7 +25,7 @@
     <br/>
     <div class="row">
         <div th:if="user!=null">
-            <div th:if="${user.getHistory() !=null}">
+            <div th:if="${history!=null}">
                 <table class="table table-borderless">
                     <thead>
                     <tr>
@@ -37,7 +37,7 @@
                     <tbody>
                     <tr th:each="product : ${products}">
                         <td>
-                            <img th:src="${product.image}" width="40" height="40" />
+                            <img th:src="${product.image}" width="70" height="70"/>
                         </td>
                         <td th:text="${product.name}"></td>
                         <td th:text="${product.price}"></td>
@@ -46,10 +46,9 @@
                     </tbody>
                 </table>
             </div>
-            <div>
-                <!--<div th:if="${user.getHistory()!=null}">-->
-                     <!--There's no history.-->
-                <!--</div>-->
+            <div th:if="${history==null}">
+                There's no history.
+            </div>
         </div>
     </div>
     <!--<button type="button" class="btn btn-primary" >Previous</button>-->
