@@ -81,7 +81,7 @@
             <div class="col-lg-4" >
                 <br><br><br>
                 <form sec:authorize="isAuthenticated()" action="#" th:action="@{/addcart}" th:object="${product}" method="post">
-                    <input type="hidden" name="product_id" value="6" />
+                    <input type="hidden" name="product_id" th:value="${product.id}" />
                     <button type="submit"> Add to Cart</button>
                 </form>
 

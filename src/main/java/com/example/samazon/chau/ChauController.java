@@ -39,8 +39,9 @@ public class ChauController {
         System.out.println(product.getName());
         cartService.updateCart(product, user.getCarts()) ;
         model.addAttribute("cart", user.getCarts() );
-//        return "redirect:/chau/shoppingcart";
-            return "redirect:/homepage";
+        model.addAttribute("user", user);
+        return "chau/shoppingcart";
+//            return "redirect:/homepage";
 
     }
 
@@ -79,6 +80,7 @@ public class ChauController {
             total += 5.0;
             message = "$5 charged for Shipping";
         }
+        model.addAttribute("user", user);
         model.addAttribute("message", message);
         model.addAttribute("total", total);
         model.addAttribute("products", products);

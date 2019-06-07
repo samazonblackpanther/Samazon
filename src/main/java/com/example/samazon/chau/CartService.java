@@ -41,7 +41,7 @@ public class CartService {
         carts.setUser(user);
         user.setCarts(carts);
         userRepository.save(user);
-        cartRepository.save(carts);
+//        cartRepository.save(carts);
         System.out.println(user.getFirstName());
     }
 

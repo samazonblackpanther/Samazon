@@ -64,10 +64,10 @@ public class JinController {
 
     //=================== Order
 
-    @RequestMapping("/showOrderHistory/{id}")
+    @RequestMapping("/showOrderHistory")
     public String listCarts(@PathVariable("id") long id, Model model){
         model.addAttribute("user", userService.getCurrentUser());
-        model.addAttribute("history", historyRepository.findById(id).get());
+        model.addAttribute("history", userService.getCurrentUser().getHistory());
 //    if (userService.getCurrentUser() != null) {
 //        model.addAttribute("user_id", userService.getCurrentUser().getId());
 //    }
