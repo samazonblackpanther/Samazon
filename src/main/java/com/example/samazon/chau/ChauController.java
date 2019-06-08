@@ -86,7 +86,7 @@ public class ChauController {
 
 
 
-        shoppingCartService.shoppingCartLoader(user, model);
+        shoppingCartService.shoppingCartLoader(model);
 
         return "chau/wishlist";
 
@@ -105,7 +105,7 @@ public class ChauController {
 
 
 
-        shoppingCartService.shoppingCartLoader(user, model);
+        shoppingCartService.shoppingCartLoader(model);
 
 
         return "chau/wishlist";
@@ -133,7 +133,7 @@ public class ChauController {
 
 
         User user = userService.getCurrentUser();
-        shoppingCartService.shoppingCartLoader(user, model);
+        shoppingCartService.shoppingCartLoader(model);
         model.addAttribute("user", userService.getCurrentUser());
 
         return "jin/detailProduct";
@@ -157,12 +157,13 @@ public class ChauController {
         }
         model.addAttribute("user", user);
         model.addAttribute("message", message);
+        model.addAttribute("email", user.getEmail());
         model.addAttribute("total", total);
         model.addAttribute("products", products);
 
         historyService.genHistory(user);
 
-        shoppingCartService.shoppingCartLoader(user, model);
+        shoppingCartService.shoppingCartLoader(model);
 
         try {
             sendEmail();
@@ -196,14 +197,11 @@ public class ChauController {
         model.addAttribute("total", total);
         model.addAttribute("message", message);
 
-//        for (Product product : activeCart.getProducts()) {
-//            model.addAttribute("product", product);
-//        }
 
         model.addAttribute("cart", cart);
         model.addAttribute("products", cart.getProducts());
 
-        shoppingCartService.shoppingCartLoader(user, model);
+        shoppingCartService.shoppingCartLoader(model);
 
 
         return "chau/shoppingcart";
@@ -241,7 +239,7 @@ public class ChauController {
         model.addAttribute("user", userService.getCurrentUser());
         model.addAttribute("cart", userService.getCurrentUser().getCarts());
 
-        shoppingCartService.shoppingCartLoader(user, model);
+        shoppingCartService.shoppingCartLoader(model);
 
 
         return "jacob/addproduct";

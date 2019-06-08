@@ -39,7 +39,7 @@ public class BettyController {
 //
 
         User user = userService.getCurrentUser();
-        shoppingCartService.shoppingCartLoader(user, model);
+        shoppingCartService.shoppingCartLoader(model);
 
         return "security/index";
     }
@@ -58,7 +58,7 @@ public class BettyController {
 
         User user = userService.getCurrentUser();
 
-        shoppingCartService.shoppingCartLoader(user, model);
+        shoppingCartService.shoppingCartLoader(model);
 
         model.addAttribute("products", productRepository.findAll());
         model.addAttribute("user", userService.getCurrentUser());
@@ -90,16 +90,26 @@ public class BettyController {
     public String productDetails(@PathVariable("id") long id, Model model){
 
         User user = userService.getCurrentUser();
+        if (user != null){
+            if (user.getCarts() == null){
+                model.addAttribute("carts", user.getCarts());
+                cartService.genCart(userService.getCurrentUser());
+            }
+        }
 
 
-        shoppingCartService.shoppingCartLoader(user, model);
+        if (user != null){
+            if (user.getWishlist() == null){
+                wishlistService.genWish(userService.getCurrentUser());
+            }
+        }
+
+        shoppingCartService.shoppingCartLoader(model);
 
         model.addAttribute("product", productRepository.findById(id).get());
         model.addAttribute("user", user);
 
-        //For shopping cart
-        model.addAttribute("cart", userService.getCurrentUser().getCarts());
-        model.addAttribute("products", userService.getCurrentUser().getCarts().getProducts());
+
 
 
 

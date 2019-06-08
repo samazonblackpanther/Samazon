@@ -38,16 +38,14 @@ public class HomeController {
     @GetMapping("/register")
     public String showRegistrationPage(Model model) {
         model.addAttribute("user", new User());
-        User user = userService.getCurrentUser();
-        shoppingCartService.shoppingCartLoader(user, model);
+
 
         return "security/registration";
     }
 
     @PostMapping("/register")
     public String processRegistrationPage(@Valid @ModelAttribute("user") User user, BindingResult result,  Model model, @RequestParam("role") String role){
-//                                          @RequestParam("streetAddress") String streetAddress, @RequestParam("city") String city,
-//                                          @RequestParam("state") String state, @RequestParam("zipcode") String zipcode) {
+
         model.addAttribute("user",user);
         if(result.hasErrors()) {
             return "/security/registration";
@@ -62,7 +60,7 @@ public class HomeController {
         }
 
         // Shopping Cart
-        shoppingCartService.shoppingCartLoader(user, model);
+        shoppingCartService.shoppingCartLoader(model);
 
         return "security/index";
     }
@@ -72,7 +70,7 @@ public class HomeController {
 
 
         User user = userService.getCurrentUser();
-        shoppingCartService.shoppingCartLoader(user, model);
+        shoppingCartService.shoppingCartLoader(model);
 
         return "security/index";
     }
@@ -90,7 +88,7 @@ public class HomeController {
         model.addAttribute("user", userService.getCurrentUser());
 
         User user = userService.getCurrentUser();
-        shoppingCartService.shoppingCartLoader(user, model);
+        shoppingCartService.shoppingCartLoader(model);
         if (userService.getCurrentUser() != null){
             model.addAttribute("history", userService.getCurrentUser().getHistory());
         }

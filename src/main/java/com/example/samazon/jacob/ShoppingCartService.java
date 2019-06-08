@@ -1,5 +1,6 @@
 package com.example.samazon.jacob;
 
+import com.example.samazon.chau.Cart;
 import com.example.samazon.chau.CartService;
 import com.example.samazon.security.User;
 import com.example.samazon.security.UserService;
@@ -16,20 +17,25 @@ public class ShoppingCartService {
     UserService userService;
     CartService cartService;
 
-    public void shoppingCartLoader(User user, Model model){
+    public void shoppingCartLoader(Model model){
         // Shopping Cart
         if (userService.getCurrentUser() != null){
+
+            User user = userService.getCurrentUser();
             //For Shopping Cart
             int cartCount = 0;
-//            Collection<Product> cartProduct = user.getCarts().getProducts();
-//            if (cartProduct != null){
-//                cartCount += cartService.countItems(userService.getCurrentUser().getCarts());
-//            }
-            model.addAttribute("cart", userService.getCurrentUser().getCarts());
+            if (user.getCarts() != null) {
+                System.out.println(user.getCarts().getId());
+                int cartProduct = user.getCarts().getProducts().size();
+                if (cartProduct >= 1){
+                    cartCount = cartCount + cartProduct;
+                }
+            }
+            model.addAttribute("cart", user.getCarts());
             model.addAttribute("cartnumber", cartCount);
-        }
-        model.addAttribute("user", userService.getCurrentUser());
-        if (userService.getCurrentUser() != null){
+
+            model.addAttribute("user", userService.getCurrentUser());
+
             model.addAttribute("history", userService.getCurrentUser().getHistory());
         }
     }

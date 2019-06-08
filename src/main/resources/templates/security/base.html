@@ -92,10 +92,9 @@
                                     <span>Oh No!</span><br />
                                     <span>Your cart is empty.</span><br />
                                 </span>
-
                             </li>
-                            <li th:if="${carts != null}">
-                              <span th:each="product : ${carts.getProducts()}" class="item">
+                            <li th:if="${cart != null}">
+                                <span th:each="product : ${cart.getProducts()}" class="item">
                                 <span class="item-left">
                                     <img th:src="${product.image}" alt="Product Image" />
                                     <span class="item-info">
@@ -113,7 +112,7 @@
                             </span>
                             </li>
                             <li class="divider"></li>
-                            <li th:if="${carts != null}"><a class="text-center" style="text-align: center;" th:href="@{/cart}">View Cart</a></li>
+                            <li th:if="${cart != null}"><a class="text-center" style="text-align: center;" th:href="@{/cart}">View Cart</a></li>
                         </ul>
                     </li>
 

@@ -60,7 +60,7 @@ public class JinController {
 
 
         User user = userService.getCurrentUser();
-        shoppingCartService.shoppingCartLoader(user, model);
+        shoppingCartService.shoppingCartLoader(model);
 
 
         return "Jin/detailUser";
@@ -71,7 +71,7 @@ public class JinController {
         model.addAttribute("user", userRepository.findById(id).get());
 
         User user = userService.getCurrentUser();
-        shoppingCartService.shoppingCartLoader(user, model);
+        shoppingCartService.shoppingCartLoader(model);
 
 
         return "security/registration";
@@ -102,7 +102,7 @@ public class JinController {
 
 
         User user = userService.getCurrentUser();
-        shoppingCartService.shoppingCartLoader(user, model);
+        shoppingCartService.shoppingCartLoader(model);
 
 
         return "Jin/showOrderHistory";
