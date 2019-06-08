@@ -63,7 +63,9 @@
                         <div th:inline="text" style="font-size: 1.5em; padding-top: .35em; margin-right: 2.5em;">[[${user.firstName}]]'s</div>
                         <div class="dropdown-menu">
                         <a class="dropdown-item" href="/detailUser">Your Account</a>
-                        <a class="dropdown-item" href="/showOrderHistory">Order History</a>
+                            <div th:if="${history != null}">
+                                <a class="dropdown-item" href="/showOrderHistory">Order History</a>
+                            </div>
                         <a class="dropdown-item" href="/wishlist">View Wishlist</a>
                         <a class="dropdown-item" href="/addproduct" sec:authorize="hasAuthority('ADMIN')">Add a Product</a>
                     </div>

@@ -2,10 +2,7 @@ package com.example.samazon.security;
 
 import com.example.samazon.chau.CartRepository;
 import com.example.samazon.chau.CartService;
-import com.example.samazon.jacob.Address;
-import com.example.samazon.jacob.AddressRepository;
-import com.example.samazon.jacob.Product;
-import com.example.samazon.jacob.ProductRepository;
+import com.example.samazon.jacob.*;
 import com.example.samazon.jin.HistoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -35,25 +32,14 @@ public class HomeController {
     @Autowired
     private ProductRepository productRepository;
 
+    @Autowired
+    private ShoppingCartService shoppingCartService;
+
     @GetMapping("/register")
     public String showRegistrationPage(Model model) {
         model.addAttribute("user", new User());
-
-        // Shopping Cart
-        if (userService.getCurrentUser() != null){
-            //For Shopping Cart
-            int cartCount = 0;
-
-            if (userService.getCurrentUser().getCarts() != null){
-                cartCount += cartService.countItems(userService.getCurrentUser().getCarts());
-            }
-            model.addAttribute("cart", userService.getCurrentUser().getCarts());
-            model.addAttribute("cartnumber", cartCount);
-        }
-
-
-        model.addAttribute("products", productRepository.findAll());
-        model.addAttribute("user", userService.getCurrentUser());
+        User user = userService.getCurrentUser();
+        shoppingCartService.shoppingCartLoader(user, model);
 
         return "security/registration";
     }
@@ -76,18 +62,7 @@ public class HomeController {
         }
 
         // Shopping Cart
-        if (userService.getCurrentUser() != null) {
-            //For Shopping Cart
-            int cartCount = 0;
-
-            if (userService.getCurrentUser().getCarts() != null) {
-                cartCount += cartService.countItems(userService.getCurrentUser().getCarts());
-            }
-            model.addAttribute("cart", userService.getCurrentUser().getCarts());
-            model.addAttribute("cartnumber", cartCount);
-        }
-        model.addAttribute("products", productRepository.findAll());
-        model.addAttribute("user", userService.getCurrentUser());
+        shoppingCartService.shoppingCartLoader(user, model);
 
         return "security/index";
     }
@@ -96,21 +71,9 @@ public class HomeController {
     public String index(Model model) {
 
 
-        // Shopping Cart
-        if (userService.getCurrentUser() != null){
-            //For Shopping Cart
-            int cartCount = 0;
+        User user = userService.getCurrentUser();
+        shoppingCartService.shoppingCartLoader(user, model);
 
-            if (userService.getCurrentUser().getCarts() != null){
-                cartCount += cartService.countItems(userService.getCurrentUser().getCarts());
-            }
-            model.addAttribute("cart", userService.getCurrentUser().getCarts());
-            model.addAttribute("cartnumber", cartCount);
-        }
-
-
-        model.addAttribute("products", productRepository.findAll());
-        model.addAttribute("user", userService.getCurrentUser());
         return "security/index";
     }
 
@@ -126,20 +89,11 @@ public class HomeController {
         // Gets the currently logged in user and maps it to "user" in the Thymeleaf template
         model.addAttribute("user", userService.getCurrentUser());
 
-        // Shopping Cart
+        User user = userService.getCurrentUser();
+        shoppingCartService.shoppingCartLoader(user, model);
         if (userService.getCurrentUser() != null){
-            //For Shopping Cart
-            int cartCount = 0;
-
-            if (userService.getCurrentUser().getCarts() != null){
-                cartCount += cartService.countItems(userService.getCurrentUser().getCarts());
-            }
-            model.addAttribute("cart", userService.getCurrentUser().getCarts());
-            model.addAttribute("cartnumber", cartCount);
+            model.addAttribute("history", userService.getCurrentUser().getHistory());
         }
-
-
-        model.addAttribute("user", userService.getCurrentUser());
 
         return "security/secure";
     }

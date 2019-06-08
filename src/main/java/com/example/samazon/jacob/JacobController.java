@@ -67,6 +67,8 @@ public class JacobController {
 
         model.addAttribute("products", productRepository.findAll());
         model.addAttribute("user", userService.getCurrentUser());
+        model.addAttribute("history", userService.getCurrentUser().getHistory());
+
 
 //        model.addAttribute("cart", userService.getCurrentUser().getCarts());
 //        model.addAttribute("products", userService.getCurrentUser().getCarts().getProducts());
@@ -98,7 +100,7 @@ public class JacobController {
         }
 
 
-        model.addAttribute("products", productRepository.findAll());
+        model.addAttribute("history", userService.getCurrentUser().getHistory());
         model.addAttribute("user", userService.getCurrentUser());
 
         return "jacob/addproduct";
@@ -137,7 +139,7 @@ public class JacobController {
         }
 
 
-        model.addAttribute("products", productRepository.findAll());
+        model.addAttribute("history", userService.getCurrentUser().getHistory());
         model.addAttribute("user", userService.getCurrentUser());
 
         productRepository.save(product);
@@ -186,9 +188,8 @@ public class JacobController {
             model.addAttribute("cart", userService.getCurrentUser().getCarts());
             model.addAttribute("cartnumber", cartCount);
         }
-
-
         model.addAttribute("products", productRepository.findAll());
+        model.addAttribute("history", userService.getCurrentUser().getHistory());
         model.addAttribute("user", userService.getCurrentUser());
 
 
