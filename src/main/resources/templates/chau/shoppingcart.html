@@ -42,6 +42,7 @@
 
 
     <br/>
+    <div th:text="${message}"></div>
     <div th:inline="text"> Your Cart Total = $[[${total}]]</div>
 
     <a th:href="@{/checkout}">Checkout</a>

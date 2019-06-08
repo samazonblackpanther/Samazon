@@ -40,18 +40,14 @@
     <div th:inline="text"> Shipping: [[${message}]]</div>
     <div th:inline="text"> Your Cart Total = $[[${total}]]</div>
     <div>
+        <p >Thank you for your purchase.</p>
+        <p th:inline="text">We have sent a confirmation email to: [[${email}]]</p>
 
     <form th:href="@{/checkout}" method="post">
         <input type="submit" value="Add to History"/>
     </form>
-    <!--<a class="btn btn-primary" th:href="@{/simpleemail}">Send Email</a>-->
-    <!--</div>-->
 
-    <!--<div class="alert alert-primary" role="alert" th:action="@{/simpleemail}">-->
-        <!--<p>Dear <span th:text="${user.firstName}"></span>,</p>-->
-        <!--<p>Thank you for shopping with us</p>-->
-    <!--</div>-->
-
+    </div>
 </div>
 <!--<div th:replace="base::footer"></div>-->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

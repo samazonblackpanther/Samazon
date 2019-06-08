@@ -22,9 +22,11 @@
                 <li class="nav-item">
                     <a style="font-size: 1.5em; padding-right: 2em;" class="nav-link" href="/homepage">Home</a>
                 </li>
+                    <form>
 
-                <li>
-                    <a style="font-size: 1.5em; padding-right: 2em; padding-left: 2em" class="nav-link" href="/productlist">Product Listing</a>
+                    </form>
+
+                    <a style="font-size: 1.5em; padding-right: 2em; padding-left: 2em" class="nav-link" href="/productlistnav">Product Listing</a>
                 </li>
 
                 <li class="nav-item">
@@ -54,7 +56,7 @@
                     <a style="font-size: 1.5em; padding-right: 2.5em;" class="nav-link" href="/homepage" th:inline="text">Hello, [[${user.firstName}]]</a>
                 </li>
                 <li>
-                    <a style="font-size: 1.5em; padding-right: 2.5em;"  class="nav-link" href="/productlist">Product Listing</a>
+                    <a style="font-size: 1.5em; padding-right: 2.5em;"  class="nav-link" href="/productlistnav">Product Listing</a>
                 </li>
 
                 <li class="dropdown">
@@ -63,7 +65,9 @@
                         <div th:inline="text" style="font-size: 1.5em; padding-top: .35em; margin-right: 2.5em;">[[${user.firstName}]]'s</div>
                         <div class="dropdown-menu">
                         <a class="dropdown-item" href="/detailUser">Your Account</a>
-                        <a class="dropdown-item" href="/showOrderHistory">Order History</a>
+                            <div th:if="${history != null}">
+                                <a class="dropdown-item" href="/showOrderHistory">Order History</a>
+                            </div>
                         <a class="dropdown-item" href="/wishlist">View Wishlist</a>
                         <a class="dropdown-item" href="/addproduct" sec:authorize="hasAuthority('ADMIN')">Add a Product</a>
                     </div>
@@ -90,10 +94,9 @@
                                     <span>Oh No!</span><br />
                                     <span>Your cart is empty.</span><br />
                                 </span>
-
                             </li>
-                            <li th:if="${carts != null}">
-                              <span th:each="product : ${carts.getProducts()}" class="item">
+                            <li th:if="${cart != null}">
+                                <span th:each="product : ${cart.getProducts()}" class="item">
                                 <span class="item-left">
                                     <img th:src="${product.image}" alt="Product Image" />
                                     <span class="item-info">
@@ -111,7 +114,7 @@
                             </span>
                             </li>
                             <li class="divider"></li>
-                            <li th:if="${carts != null}"><a class="text-center" style="text-align: center;" th:href="@{/cart}">View Cart</a></li>
+                            <li th:if="${cart != null}"><a class="text-center" style="text-align: center;" th:href="@{/cart}">View Cart</a></li>
                         </ul>
                     </li>
 

@@ -33,10 +33,10 @@
         <div class="col-lg-6">
             <h2>Account Details</h2>
             Email :   <span th:text="${user.email}"></span><br/>
-            Address : <span th:text="${user.streetAddress}"></span><br/>
-            Address : <span th:text="${user.city}"></span><br/>
-            Address : <span th:text="${user.state}"></span><br/>
-            Address : <span th:text="${user.zipcode}"></span><br/>
+            Street Address : <span th:text="${user.streetAddress}"></span><br/>
+            City : <span th:text="${user.city}"></span><br/>
+            State : <span th:text="${user.state}"></span><br/>
+            Zipcode : <span th:text="${user.zipcode}"></span><br/>
 
             <a  class="btn btn-info" th:href="@{/updateUser/{id}(id=${user.id})}" role="button">Update</a>
         </div><!-- /.col-lg-6 -->
