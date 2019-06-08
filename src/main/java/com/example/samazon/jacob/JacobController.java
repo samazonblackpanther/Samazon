@@ -48,26 +48,16 @@ public class JacobController {
     @Autowired
     CloudinaryConfig cloudc;
 
+    @Autowired
+    ShoppingCartService shoppingCartService;
+
 
     @RequestMapping("/homepage")
     public String homePage(Model model){
 
-        // Shopping Cart
-        if (userService.getCurrentUser() != null){
-            //For Shopping Cart
-            int cartCount = 0;
+        User user = userService.getCurrentUser();
+        shoppingCartService.shoppingCartLoader(model);
 
-            if (userService.getCurrentUser().getCarts() != null){
-                cartCount += cartService.countItems(userService.getCurrentUser().getCarts());
-            }
-            model.addAttribute("cart", userService.getCurrentUser().getCarts());
-            model.addAttribute("cartnumber", cartCount);
-        }
-
-
-        model.addAttribute("products", productRepository.findAll());
-        model.addAttribute("user", userService.getCurrentUser());
-        model.addAttribute("history", userService.getCurrentUser().getHistory());
 
 
 //        model.addAttribute("cart", userService.getCurrentUser().getCarts());

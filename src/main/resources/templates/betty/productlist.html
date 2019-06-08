@@ -22,7 +22,7 @@
 <div th:replace="security/base :: navlinks"></div>
 <!-- Books Catagories -->
 <div class="container">
-    <h2><b>Good Reads!</b></h2>
+    <h2><b th:inline="text">[[${message}]]!</b></h2>
     <br>
 
     <div th:each="product : ${products}">
@@ -66,12 +66,12 @@
                 <form sec:authorize="isAuthenticated()" action="#" th:action="@{/addcart}" th:object="${product}" method="post">
                     <input type="hidden" name="product_id" th:value="${product.id}" />
 
-                    <button type="submit"> Add to Cart</button>
+                    <button type="submit" class="btn btn-warning"> Add to Cart</button>
                 </form>
                 <br>
                 <form sec:authorize="isAuthenticated()" action="#" th:action="@{/wishlist}" th:object="${product}" method="post">
                     <input type="hidden" name="product_id" th:value="${product.id}" />
-                    <button type="submit"> Add to Wishlist</button>
+                    <button type="submit"  class="btn btn-success"> Add to Wishlist</button>
                 </form>
                 <br/>
                 <form sec:authorize="hasAnyAuthority('ADMIN')"  action="#" th:action="@{/updateproduct}" th:object="${product}" method="post">
