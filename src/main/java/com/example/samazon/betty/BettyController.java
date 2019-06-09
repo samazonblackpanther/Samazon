@@ -72,7 +72,7 @@ public class BettyController {
                 break;
             case 5:
                 model.addAttribute("message", "Health & Wellness Products");
-                model.addAttribute("products", productRepository.findAllByCategory("Health & Wellness"));
+                model.addAttribute("products", productRepository.findAllByCategory("Health"));
                 break;
             case 6:
                 model.addAttribute("message", "All Products");
