@@ -35,7 +35,12 @@
             <td><img height="150" th:src="${product.image}" width="150"/></td>
             <td th:text="${product.name}"></td>
             <td th:text="${product.price}"></td>
-            <td><a th:href="@{/remove/{id} (id=${product.id})}">Remove Item</a></td>
+            <td>
+                <form action="#" th:action="@{/remove/{id} (id=${product.id})}" method="post">
+                    <button type="submit" class="btn btn-danger">Remove Item</button>
+                </form>
+
+            </td>
         </tr>
         </tbody>
     </table>
@@ -45,7 +50,10 @@
     <div th:text="${message}"></div>
     <div th:inline="text"> Your Cart Total = $[[${total}]]</div>
 
-    <a th:href="@{/checkout}">Checkout</a>
+    <form action="#" th:action="@{/checkout}" method="get">
+        <button type="submit" class="btn btn-success">Checkout</button>
+    </form>
+
 
 </div>
 
