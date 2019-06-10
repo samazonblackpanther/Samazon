@@ -213,7 +213,7 @@ public class HomeController {
 //
 //
 //
-//        Product product= new Product ("AICOOK Compact Juice Fountain 700-Watt Juice Extractor ", "Kitchen", 99.95, "Heavy-duty compact juice fountain with centered knife blade assembly 700-watt motor operates at 14,000 RPM for maximum extraction.", "https://res.cloudinary.com/db9bfssj4/image/upload/v1560107261/aaaa__umeta4.jpg");
+//        product= new Product ("AICOOK Compact Juice Fountain 700-Watt Juice Extractor ", "Kitchen", 99.95, "Heavy-duty compact juice fountain with centered knife blade assembly 700-watt motor operates at 14,000 RPM for maximum extraction.", "https://res.cloudinary.com/db9bfssj4/image/upload/v1560107261/aaaa__umeta4.jpg");
 //        productRepository.save(product);
 //
 //        product= new Product ("Weber 45030001 Spirit II E-310 Red LP Outdoor Gas Grill  ", "Kitchen", 389.00, "Boasts the Gs4 grilling system with improved infinity ignition, burners, porcelain-enameled Flavorizer Bars, grease Management system, and 529 Square inches of cooking space over three burners." , "https://res.cloudinary.com/db9bfssj4/image/upload/v1560108253/grill__qtxciu.jpg");
