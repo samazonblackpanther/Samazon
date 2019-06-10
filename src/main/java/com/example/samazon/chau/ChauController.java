@@ -3,10 +3,7 @@ package com.example.samazon.chau;
 
 import com.example.samazon.chau.CartService;
 import com.example.samazon.chau.ProductService;
-import com.example.samazon.jacob.Product;
-import com.example.samazon.jacob.ProductRepository;
-import com.example.samazon.jacob.WishlistRepository;
-import com.example.samazon.jacob.WishlistService;
+import com.example.samazon.jacob.*;
 import com.example.samazon.jin.HistoryRepository;
 import com.example.samazon.jin.HistoryService;
 import com.example.samazon.jin.SendEmail;
@@ -58,6 +55,9 @@ public class ChauController {
     @Autowired
     private JavaMailSender sender;
 
+    @Autowired
+    private ShoppingCartService shoppingCartService;
+
 
     @PostMapping("/addcart")
     public String addCart(@RequestParam("product_id") long product_id, Model model) {
@@ -69,6 +69,9 @@ public class ChauController {
         model.addAttribute("cart", user.getCarts() );
         model.addAttribute("products", user.getCarts().getProducts());
         model.addAttribute("user", user);
+        model.addAttribute("history", userService.getCurrentUser().getHistory());
+
+
         return "redirect:/cart";
     }
 
@@ -83,18 +86,7 @@ public class ChauController {
 
 
 
-        // Shopping Cart
-        if (userService.getCurrentUser() != null){
-            //For Shopping Cart
-            int cartCount = 0;
-
-            if (userService.getCurrentUser().getCarts() != null){
-                cartCount += cartService.countItems(userService.getCurrentUser().getCarts());
-            }
-            model.addAttribute("cart", userService.getCurrentUser().getCarts());
-            model.addAttribute("cartnumber", cartCount);
-        }
-
+        shoppingCartService.shoppingCartLoader(model);
 
         return "chau/wishlist";
 
@@ -113,17 +105,7 @@ public class ChauController {
 
 
 
-        // Shopping Cart
-        if (userService.getCurrentUser() != null){
-            //For Shopping Cart
-            int cartCount = 0;
-
-            if (userService.getCurrentUser().getCarts() != null){
-                cartCount += cartService.countItems(userService.getCurrentUser().getCarts());
-            }
-            model.addAttribute("cart", userService.getCurrentUser().getCarts());
-            model.addAttribute("cartnumber", cartCount);
-        }
+        shoppingCartService.shoppingCartLoader(model);
 
 
         return "chau/wishlist";
@@ -150,18 +132,8 @@ public class ChauController {
 
 
 
-        // Shopping Cart
-        if (userService.getCurrentUser() != null){
-            //For Shopping Cart
-            int cartCount = 0;
-
-            if (userService.getCurrentUser().getCarts() != null){
-                cartCount += cartService.countItems(userService.getCurrentUser().getCarts());
-            }
-            model.addAttribute("cart", userService.getCurrentUser().getCarts());
-            model.addAttribute("cartnumber", cartCount);
-        }
-
+        User user = userService.getCurrentUser();
+        shoppingCartService.shoppingCartLoader(model);
         model.addAttribute("user", userService.getCurrentUser());
 
         return "jin/detailProduct";
@@ -185,23 +157,13 @@ public class ChauController {
         }
         model.addAttribute("user", user);
         model.addAttribute("message", message);
+        model.addAttribute("email", user.getEmail());
         model.addAttribute("total", total);
         model.addAttribute("products", products);
 
         historyService.genHistory(user);
 
-        // Shopping Cart
-        if (userService.getCurrentUser() != null){
-            //For Shopping Cart
-            int cartCount = 0;
-
-            if (userService.getCurrentUser().getCarts() != null){
-                cartCount += cartService.countItems(userService.getCurrentUser().getCarts());
-            }
-            model.addAttribute("cart", userService.getCurrentUser().getCarts());
-            model.addAttribute("cartnumber", cartCount);
-        }
-        model.addAttribute("user", userService.getCurrentUser());
+        shoppingCartService.shoppingCartLoader(model);
 
         try {
             sendEmail();
@@ -235,28 +197,16 @@ public class ChauController {
         model.addAttribute("total", total);
         model.addAttribute("message", message);
 
-//        for (Product product : activeCart.getProducts()) {
-//            model.addAttribute("product", product);
-//        }
 
         model.addAttribute("cart", cart);
         model.addAttribute("products", cart.getProducts());
 
-        // Shopping Cart
-        if (userService.getCurrentUser() != null){
-            //For Shopping Cart
-            int cartCount = 0;
+        shoppingCartService.shoppingCartLoader(model);
 
-            if (userService.getCurrentUser().getCarts() != null){
-                cartCount += cartService.countItems(userService.getCurrentUser().getCarts());
-            }
-            model.addAttribute("cart", userService.getCurrentUser().getCarts());
-            model.addAttribute("cartnumber", cartCount);
-        }
-        model.addAttribute("user", userService.getCurrentUser());
 
         return "chau/shoppingcart";
     }
+
     @RequestMapping("/remove/{id}")
     public String removeItem(@PathVariable("id") long id) {
         User user = userService.getCurrentUser();
@@ -289,17 +239,7 @@ public class ChauController {
         model.addAttribute("user", userService.getCurrentUser());
         model.addAttribute("cart", userService.getCurrentUser().getCarts());
 
-        // Shopping Cart
-        if (userService.getCurrentUser() != null){
-            //For Shopping Cart
-            int cartCount = 0;
-
-            if (userService.getCurrentUser().getCarts() != null){
-                cartCount += cartService.countItems(userService.getCurrentUser().getCarts());
-            }
-            model.addAttribute("cart", userService.getCurrentUser().getCarts());
-            model.addAttribute("cartnumber", cartCount);
-        }
+        shoppingCartService.shoppingCartLoader(model);
 
 
         return "jacob/addproduct";

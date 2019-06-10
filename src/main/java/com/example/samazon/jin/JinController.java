@@ -4,6 +4,8 @@ import com.example.samazon.chau.CartRepository;
 import com.example.samazon.chau.CartService;
 import com.example.samazon.jacob.AddressRepository;
 import com.example.samazon.jacob.ProductRepository;
+import com.example.samazon.jacob.ShoppingCartService;
+import com.example.samazon.security.User;
 import com.example.samazon.security.UserRepository;
 import com.example.samazon.security.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +48,9 @@ public class JinController {
     @Autowired
     CartService cartService;
 
+    @Autowired
+    ShoppingCartService shoppingCartService;
+
 //================== user
 
 
@@ -54,17 +59,9 @@ public class JinController {
         model.addAttribute("user", userService.getCurrentUser());
 
 
-        // Shopping Cart
-        if (userService.getCurrentUser() != null){
-            //For Shopping Cart
-            int cartCount = 0;
+        User user = userService.getCurrentUser();
+        shoppingCartService.shoppingCartLoader(model);
 
-            if (userService.getCurrentUser().getCarts() != null){
-                cartCount += cartService.countItems(userService.getCurrentUser().getCarts());
-            }
-            model.addAttribute("cart", userService.getCurrentUser().getCarts());
-            model.addAttribute("cartnumber", cartCount);
-        }
 
         return "Jin/detailUser";
 }
@@ -73,17 +70,8 @@ public class JinController {
     public String updateUser(@PathVariable("id") long id, Model model){
         model.addAttribute("user", userRepository.findById(id).get());
 
-        // Shopping Cart
-        if (userService.getCurrentUser() != null){
-            //For Shopping Cart
-            int cartCount = 0;
-
-            if (userService.getCurrentUser().getCarts() != null){
-                cartCount += cartService.countItems(userService.getCurrentUser().getCarts());
-            }
-            model.addAttribute("cart", userService.getCurrentUser().getCarts());
-            model.addAttribute("cartnumber", cartCount);
-        }
+        User user = userService.getCurrentUser();
+        shoppingCartService.shoppingCartLoader(model);
 
 
         return "security/registration";
@@ -113,17 +101,8 @@ public class JinController {
         model.addAttribute("cart", userService.getCurrentUser().getCarts());
 
 
-        // Shopping Cart
-        if (userService.getCurrentUser() != null){
-            //For Shopping Cart
-            int cartCount = 0;
-
-            if (userService.getCurrentUser().getCarts() != null){
-                cartCount += cartService.countItems(userService.getCurrentUser().getCarts());
-            }
-            model.addAttribute("cart", userService.getCurrentUser().getCarts());
-            model.addAttribute("cartnumber", cartCount);
-        }
+        User user = userService.getCurrentUser();
+        shoppingCartService.shoppingCartLoader(model);
 
 
         return "Jin/showOrderHistory";

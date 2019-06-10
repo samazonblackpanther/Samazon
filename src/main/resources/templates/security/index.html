@@ -29,6 +29,7 @@
 <div class="container">
 
     <div class="row">
+<!--Books-->
         <div class="col-md-4">
             <div class="card mb-4 box-shadow">
                 <img class="card-img-top" src="https://res.cloudinary.com/db9bfssj4/image/upload/v1559937065/library_20books_f6ermr.jpg" alt="Product image cap">
@@ -36,7 +37,11 @@
                     <p class="card-text">Books</p>
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                            <form action="#" th:action="@{/productlist}" method="post">
+                                <input type="hidden" name="category" th:value="${1}" />
+
+                                <button type="submit" class="btn btn-sm btn-outline-secondary">View</button>
+                            </form>
                         </div>
                         <small class="text-muted">9 mins</small>
                     </div>
@@ -44,6 +49,7 @@
             </div>
         </div>
         <br>
+<!--Electronics-->
         <div class="col-md-4">
             <div class="card mb-4 box-shadow">
                 <img class="card-img-top" src="https://res.cloudinary.com/db9bfssj4/image/upload/v1559767116/51mo908e-4L._SL500_AC_SS350__pvbsy6.jpg" alt="Card image cap">
@@ -51,7 +57,11 @@
                     <p class="card-text">Electronics</p>
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                            <form action="#" th:action="@{/productlist}" method="post">
+                                <input type="hidden" name="category" th:value="${2}" />
+
+                                <button type="submit" class="btn btn-sm btn-outline-secondary">View</button>
+                            </form>
                         </div>
                         <small class="text-muted">9 mins</small>
                     </div>
@@ -59,6 +69,7 @@
             </div>
         </div>
         <br>
+<!--Men's Fashion-->
         <div class="col-md-4">
             <div class="card mb-4 box-shadow">
                 <img class="card-img-top" src="https://res.cloudinary.com/db9bfssj4/image/upload/v1559938475/a0c57f92d4abcc2f0e590030340f3116_zamjbj-Original_zvjwla.jpg" alt="Card image cap">
@@ -66,7 +77,11 @@
                     <p class="card-text">Men's Fashion</p>
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                            <form action="#" th:action="@{/productlist}" method="post">
+                                <input type="hidden" name="category" th:value="${3}" />
+
+                                <button type="submit" class="btn btn-sm btn-outline-secondary">View</button>
+                            </form>
                         </div>
 
                         <small class="text-muted">9 mins</small>
@@ -75,6 +90,7 @@
             </div>
         </div>
         <br>
+<!--Kitchen-->
         <div class="col-md-4">
             <div class="card mb-4 box-shadow">
                 <img class="card-img-top" src="https://res.cloudinary.com/db9bfssj4/image/upload/v1559935414/kitchen.image_fm9cj4.jpg" alt="Kitchen">
@@ -82,7 +98,11 @@
                     <p class="card-text">Kitchen</p>
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                            <form action="#" th:action="@{/productlist}" method="post">
+                                <input type="hidden" name="category" th:value="${4}" />
+
+                                <button type="submit" class="btn btn-sm btn-outline-secondary">View</button>
+                            </form>
                         </div>
                         <small class="text-muted">9 mins</small>
                     </div>
@@ -90,6 +110,7 @@
             </div>
         </div>
         <br>
+<!--Health & Wellness-->
         <div class="col-md-4">
             <div class="card mb-4 box-shadow">
                 <img class="card-img-top" src="https://res.cloudinary.com/db9bfssj4/image/upload/v1559935829/81Wbjnc5DhL._AC_UL320__dafald.jpg" alt="Card image cap">
@@ -97,21 +118,29 @@
                     <p class="card-text">Health & Wellness</p>
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                        </div>
+                            <form action="#" th:action="@{/productlist}" method="post">
+                                <input type="hidden" name="category" th:value="${5}" />
+
+                                <button type="submit" class="btn btn-sm btn-outline-secondary">View</button>
+                            </form>                        </div>
                         <small class="text-muted">9 mins</small>
                     </div>
                 </div>
             </div>
         </div>
+
         <div class="col-md-4">
             <div class="card mb-4 box-shadow">
                 <img class="card-img-top" src="https://res.cloudinary.com/db9bfssj4/image/upload/v1559939535/all-products-s_ahbpig.png" alt="Card image cap">
                 <div class="card-body">
-                    <p class="card-text"></p>
+                    <p class="card-text">All</p>
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                            <form action="#" th:action="@{/productlist}" method="post">
+                                <input type="hidden" name="category" th:value="${6}" />
+
+                                <button type="submit" class="btn btn-sm btn-outline-secondary">View</button>
+                            </form>
                         </div>
                         <small class="text-muted">9 mins</small>
                     </div>

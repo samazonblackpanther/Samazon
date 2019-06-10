@@ -20,26 +20,28 @@
 
             <ul class="navbar-nav" style="width: 100%;">
                 <li class="nav-item">
-                    <a style="font-size: 1.5em; padding-right: 2em;" class="nav-link" href="/homepage">Home</a>
+                    <a style="font-size: 1.5em; padding-right: 2em; color: black;" class="nav-link" href="/homepage">Home</a>
                 </li>
+                    <form>
 
-                <li>
-                    <a style="font-size: 1.5em; padding-right: 2em; padding-left: 2em" class="nav-link" href="/productlist">Product Listing</a>
+                    </form>
+
+                    <a style="font-size: 1.5em; padding-right: 2em; padding-left: 2em; color: black;" class="nav-link" href="/productlistnav">Product Listing</a>
                 </li>
 
                 <li class="nav-item">
-                    <a style="font-size: 1.5em; padding-right: 2em; padding-left: 2em"  class="nav-link" href="/register">Register</a>
+                    <a style="font-size: 1.5em; padding-right: 2em; padding-left: 2em; color: black;"  class="nav-link" href="/register">Register</a>
                 </li>
 
                 <li class="nav-item">
-                    <a style="font-size: 1.5em; padding-left: 2em"  class="nav-link" href="/login">Login</a>
+                    <a style="font-size: 1.5em; padding-left: 2em; color: black;"  class="nav-link" href="/login">Login</a>
                 </li>
 
 
                 <!--Search-->
                 <form action="#" th:action="@{/search}"class="form-inline my-2 my-lg-0 ml-auto" style="float: right">
                     <input class="form-control" type="search" placeholder="Search" aria-label="Search" name="keyword">
-                    <button class="btn btn-outline-white btn-md my-2 my-sm-0 ml-3" type="submit">Search</button>
+                    <button style="color: black;" class="btn btn-outline-white btn-md my-2 my-sm-0 ml-3" type="submit">Search</button>
                 </form>
 
                 
@@ -51,21 +53,25 @@
         <nav class="navbar navbar-expand-sm" style="width: 100%;">
             <ul class="navbar-nav" style="width: 100%;">
                 <li class="nav-item">
-                    <a style="font-size: 1.5em; padding-right: 2.5em;" class="nav-link" href="/homepage" th:inline="text">Hello, [[${user.firstName}]]</a>
+                    <a style="font-size: 1.5em; padding-right: 2.5em; color: black;" class="nav-link" href="/homepage" th:inline="text">Hello, [[${user.firstName}]]</a>
                 </li>
                 <li>
-                    <a style="font-size: 1.5em; padding-right: 2.5em;"  class="nav-link" href="/productlist">Product Listing</a>
+                    <a style="font-size: 1.5em; padding-right: 2.5em; color: black;"  class="nav-link" href="/productlistnav">Product Listing</a>
                 </li>
 
                 <li class="dropdown">
 
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                        <div th:inline="text" style="font-size: 1.5em; padding-top: .35em; margin-right: 2.5em;">[[${user.firstName}]]'s</div>
+                        <div th:inline="text" style="font-size: 1.5em; padding-top: .35em; margin-right: 2.5em; color: black;">[[${user.firstName}]]'s</div>
                         <div class="dropdown-menu">
-                        <a class="dropdown-item" href="/detailUser">Your Account</a>
-                        <a class="dropdown-item" href="/showOrderHistory">Order History</a>
-                        <a class="dropdown-item" href="/wishlist">View Wishlist</a>
-                        <a class="dropdown-item" href="/addproduct" sec:authorize="hasAuthority('ADMIN')">Add a Product</a>
+                        <a style="color: black;" class="dropdown-item" href="/detailUser">Your Account</a>
+                            <div th:if="${history != null}">
+                                <a style="color: black;" class="dropdown-item" href="/showOrderHistory">Order History</a>
+                            </div>
+                            <div th:if="${history != null}">
+                                <a style="color: black;" class="dropdown-item" href="/wishlist">View Wishlist</a>
+                            </div>
+                        <a style="color: black;" class="dropdown-item" href="/addproduct" sec:authorize="hasAuthority('ADMIN')">Add a Product</a>
                     </div>
                     </a>
                 </li>
@@ -87,18 +93,17 @@
                                     <span>
                                         <span style='font-size:50px;'>&#9924;</span><br />
                                     </span>
-                                    <span>Oh No!</span><br />
-                                    <span>Your cart is empty.</span><br />
+                                    <span style="color: black;">Oh No!</span><br />
+                                    <span style="color: black;">Your cart is empty.</span><br />
                                 </span>
-
                             </li>
-                            <li th:if="${carts != null}">
-                              <span th:each="product : ${carts.getProducts()}" class="item">
+                            <li th:if="${cart != null}">
+                                <span th:each="product : ${cart.getProducts()}" class="item">
                                 <span class="item-left">
                                     <img th:src="${product.image}" alt="Product Image" />
                                     <span class="item-info">
-                                        <span th:text="${product.name}"></span>
-                                        <span th:text="${product.price}"></span>
+                                        <span style="color: black;" th:text="${product.name}"></span>
+                                        <span style="color: black;" th:text="${product.price}"></span>
                                     </span>
                                 </span>
                                 <span class="item-right">
@@ -111,17 +116,17 @@
                             </span>
                             </li>
                             <li class="divider"></li>
-                            <li th:if="${carts != null}"><a class="text-center" style="text-align: center;" th:href="@{/cart}">View Cart</a></li>
+                            <li th:if="${cart != null}"><a class="text-center" style="text-align: center; color: black;" th:href="@{/cart}">View Cart</a></li>
                         </ul>
                     </li>
 
                 <li class="nav-item">
-                    <a style="font-size: 1.5em; padding-left: 2.5em"  class="nav-link" href="/logout">Log Out</a>
+                    <a style="font-size: 1.5em; padding-left: 2.5em; color: black;"  class="nav-link" href="/logout">Log Out</a>
                 </li>
                 <!--Search-->
                 <form action="#" th:action="@{/search}"class="form-inline my-2 my-lg-0 ml-auto" style="float: right">
                     <input class="form-control" type="search" placeholder="Search" aria-label="Search" name="keyword">
-                    <button class="btn btn-outline-white btn-md my-2 my-sm-0 ml-3" type="submit">Search</button>
+                    <button style="color: black;" class="btn btn-outline-white btn-md my-2 my-sm-0 ml-3" type="submit">Search</button>
                 </form>
 
             </ul>

@@ -2,10 +2,7 @@ package com.example.samazon.security;
 
 import com.example.samazon.chau.CartRepository;
 import com.example.samazon.chau.CartService;
-import com.example.samazon.jacob.Address;
-import com.example.samazon.jacob.AddressRepository;
-import com.example.samazon.jacob.Product;
-import com.example.samazon.jacob.ProductRepository;
+import com.example.samazon.jacob.*;
 import com.example.samazon.jin.HistoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -35,33 +32,20 @@ public class HomeController {
     @Autowired
     private ProductRepository productRepository;
 
+    @Autowired
+    private ShoppingCartService shoppingCartService;
+
     @GetMapping("/register")
     public String showRegistrationPage(Model model) {
         model.addAttribute("user", new User());
 
-        // Shopping Cart
-        if (userService.getCurrentUser() != null){
-            //For Shopping Cart
-            int cartCount = 0;
-
-            if (userService.getCurrentUser().getCarts() != null){
-                cartCount += cartService.countItems(userService.getCurrentUser().getCarts());
-            }
-            model.addAttribute("cart", userService.getCurrentUser().getCarts());
-            model.addAttribute("cartnumber", cartCount);
-        }
-
-
-        model.addAttribute("products", productRepository.findAll());
-        model.addAttribute("user", userService.getCurrentUser());
 
         return "security/registration";
     }
 
     @PostMapping("/register")
     public String processRegistrationPage(@Valid @ModelAttribute("user") User user, BindingResult result,  Model model, @RequestParam("role") String role){
-//                                          @RequestParam("streetAddress") String streetAddress, @RequestParam("city") String city,
-//                                          @RequestParam("state") String state, @RequestParam("zipcode") String zipcode) {
+
         model.addAttribute("user",user);
         if(result.hasErrors()) {
             return "/security/registration";
@@ -76,18 +60,7 @@ public class HomeController {
         }
 
         // Shopping Cart
-        if (userService.getCurrentUser() != null) {
-            //For Shopping Cart
-            int cartCount = 0;
-
-            if (userService.getCurrentUser().getCarts() != null) {
-                cartCount += cartService.countItems(userService.getCurrentUser().getCarts());
-            }
-            model.addAttribute("cart", userService.getCurrentUser().getCarts());
-            model.addAttribute("cartnumber", cartCount);
-        }
-        model.addAttribute("products", productRepository.findAll());
-        model.addAttribute("user", userService.getCurrentUser());
+        shoppingCartService.shoppingCartLoader(model);
 
         return "security/index";
     }
@@ -96,21 +69,9 @@ public class HomeController {
     public String index(Model model) {
 
 
-        // Shopping Cart
-        if (userService.getCurrentUser() != null){
-            //For Shopping Cart
-            int cartCount = 0;
+        User user = userService.getCurrentUser();
+        shoppingCartService.shoppingCartLoader(model);
 
-            if (userService.getCurrentUser().getCarts() != null){
-                cartCount += cartService.countItems(userService.getCurrentUser().getCarts());
-            }
-            model.addAttribute("cart", userService.getCurrentUser().getCarts());
-            model.addAttribute("cartnumber", cartCount);
-        }
-
-
-        model.addAttribute("products", productRepository.findAll());
-        model.addAttribute("user", userService.getCurrentUser());
         return "security/index";
     }
 
@@ -126,20 +87,11 @@ public class HomeController {
         // Gets the currently logged in user and maps it to "user" in the Thymeleaf template
         model.addAttribute("user", userService.getCurrentUser());
 
-        // Shopping Cart
+        User user = userService.getCurrentUser();
+        shoppingCartService.shoppingCartLoader(model);
         if (userService.getCurrentUser() != null){
-            //For Shopping Cart
-            int cartCount = 0;
-
-            if (userService.getCurrentUser().getCarts() != null){
-                cartCount += cartService.countItems(userService.getCurrentUser().getCarts());
-            }
-            model.addAttribute("cart", userService.getCurrentUser().getCarts());
-            model.addAttribute("cartnumber", cartCount);
+            model.addAttribute("history", userService.getCurrentUser().getHistory());
         }
-
-
-        model.addAttribute("user", userService.getCurrentUser());
 
         return "security/secure";
     }
@@ -259,6 +211,31 @@ public class HomeController {
         productRepository.save(product);
 
 
+
+
+        Product product= new Product ("AICOOK Compact Juice Fountain 700-Watt Juice Extractor ", "Kitchen", 99.95, "Heavy-duty compact juice fountain with centered knife blade assembly 700-watt motor operates at 14,000 RPM for maximum extraction.", "https://res.cloudinary.com/db9bfssj4/image/upload/v1560107261/aaaa__umeta4.jpg");
+        productRepository.save(product);
+
+        product= new Product ("Weber 45030001 Spirit II E-310 Red LP Outdoor Gas Grill  ", "Kitchen", 389.00, "Boasts the Gs4 grilling system with improved infinity ignition, burners, porcelain-enameled Flavorizer Bars, grease Management system, and 529 Square inches of cooking space over three burners." , "https://res.cloudinary.com/db9bfssj4/image/upload/v1560108253/grill__qtxciu.jpg");
+        productRepository.save(product);
+
+        product= new Product ("Cuisinart CPT-180 Metal Classic 4-Slice toaster, Brushed Stainless ", "Kitchen", 57.00, "Dual control panels make this two toasters in one with smooth brushed stainless housing.", "https://res.cloudinary.com/db9bfssj4/image/upload/v1560108470/toaster_rhr021.jpg");
+        productRepository.save(product);
+
+        product= new Product ("Nespresso Vertuo Coffee and Espresso Machine Bundle with Aeroccino Milk Frother ", "Kitchen", 57.00, "AUTOMATIC COFFEE/ESPRESSO MACHINE: Have the ability to create barista grade brewed single serve coffee or espresso cups at the touch of a single button.", "https://res.cloudinary.com/db9bfssj4/image/upload/v1560109101/esspreso_vkk0uf.png");
+        productRepository.save(product);
+
+        product= new Product ("Bluetooth Body Fat Smart Scale USB Rechargeable Digital Bathroom Weight Scale Body Fat Monitor with Smartphone App ", "Health", 57.00, "The RENPHO app measures weight, Body Fat%, BMI, Muscle Mass, Bone Mass, and more. It display graphs that track progress in these various metrics.", "https://res.cloudinary.com/db9bfssj4/image/upload/v1560112462/golf_beurq6.jpg");
+        productRepository.save(product);
+
+        product= new Product ("Neoprene Dumbbell Pairs and Sets with Stands  ", "Health", 88.99, "Set of six cast iron dumbbells in three weight categories with storage stand. Neoprene-coated for durability, safety, and a non-slip grip. Color-coded for weight: green (5 lb), navy blue (10 lb), and dark grey (15 lb).", "https://res.cloudinary.com/db9bfssj4/image/upload/v1560112941/dumbell__ekn3ya.jpg");
+        productRepository.save(product);
+
+        product= new Product ("Orgain Organic Plant Based Protein Powder  ", "Health", 19.90, "21 grams of organic plant based protein (pea, brown rice, chia seeds), 7 grams of organic dietary fiber, 3 grams of net carbs, 0 grams of sugar, 150 calories per serving.", "https://res.cloudinary.com/db9bfssj4/image/upload/v1560114351/protien__da9eku.jpg");
+        productRepository.save(product);
+
+        product= new Product ("BlenderBottle Classic Loop Top Shaker Bottle,  ", "Health", 15.49, "Pack of two, 28-ounce capacity (note: measurements only go to 20 ounces) shaker cups for mixing protein shakes, smoothies, and supplements.", "https://res.cloudinary.com/db9bfssj4/image/upload/v1560114485/shaker__zsftuf.jpg");
+        productRepository.save(product);
 
 
     }

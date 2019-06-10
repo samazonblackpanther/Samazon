@@ -48,25 +48,17 @@ public class JacobController {
     @Autowired
     CloudinaryConfig cloudc;
 
+    @Autowired
+    ShoppingCartService shoppingCartService;
+
 
     @RequestMapping("/homepage")
     public String homePage(Model model){
 
-        // Shopping Cart
-        if (userService.getCurrentUser() != null){
-            //For Shopping Cart
-            int cartCount = 0;
-
-            if (userService.getCurrentUser().getCarts() != null){
-                cartCount += cartService.countItems(userService.getCurrentUser().getCarts());
-            }
-            model.addAttribute("cart", userService.getCurrentUser().getCarts());
-            model.addAttribute("cartnumber", cartCount);
-        }
+        User user = userService.getCurrentUser();
+        shoppingCartService.shoppingCartLoader(model);
 
 
-        model.addAttribute("products", productRepository.findAll());
-        model.addAttribute("user", userService.getCurrentUser());
 
 //        model.addAttribute("cart", userService.getCurrentUser().getCarts());
 //        model.addAttribute("products", userService.getCurrentUser().getCarts().getProducts());
@@ -98,7 +90,7 @@ public class JacobController {
         }
 
 
-        model.addAttribute("products", productRepository.findAll());
+        model.addAttribute("history", userService.getCurrentUser().getHistory());
         model.addAttribute("user", userService.getCurrentUser());
 
         return "jacob/addproduct";
@@ -137,7 +129,7 @@ public class JacobController {
         }
 
 
-        model.addAttribute("products", productRepository.findAll());
+        model.addAttribute("history", userService.getCurrentUser().getHistory());
         model.addAttribute("user", userService.getCurrentUser());
 
         productRepository.save(product);
@@ -186,9 +178,8 @@ public class JacobController {
             model.addAttribute("cart", userService.getCurrentUser().getCarts());
             model.addAttribute("cartnumber", cartCount);
         }
-
-
         model.addAttribute("products", productRepository.findAll());
+        model.addAttribute("history", userService.getCurrentUser().getHistory());
         model.addAttribute("user", userService.getCurrentUser());
 
 
