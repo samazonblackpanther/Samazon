@@ -60,7 +60,7 @@
 
 
                 <a th:href="@{/productdetails/{id}(id=${product.id})}"><h3 style="color:#483d8b;" th:text="${product.name}"></h3></a>
-                <p style="color:#483d8b;" th:text="${product.price}"></p>
+                <p style="color:#483d8b;" th:inline="text"><strong>$[[${product.price}]]</strong></p>
                 <p style="color:#483d8b;" th:text="${product.description}"></p>
             </div>
             <div class="col-lg-4" >
