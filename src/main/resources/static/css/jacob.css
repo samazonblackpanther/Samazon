@@ -71,7 +71,15 @@ ul.dropdown-cart li .item-right{
 ul.dropdown-cart li .item-right button{
     margin-top:14px;
 }
-
+.footer {
+    /*position: fixed;*/
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: darkslategrey;
+    color: white;
+    text-align: center;
+}
 
 
 .icon-cart {
