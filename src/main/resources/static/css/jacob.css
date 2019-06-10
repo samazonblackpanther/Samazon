@@ -8,6 +8,9 @@ nav {
     width: 100%;
 
 }
+.rounded_img{
+    border-radius: 50%;
+}
 .col-md-4 {
     height: 500px;
 

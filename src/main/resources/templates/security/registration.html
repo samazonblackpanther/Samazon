@@ -59,7 +59,7 @@
         <strong>
             <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</span>
         </strong>
-    <input type="text" id="password" placeholder="Password" th:field="*{password}"/><br/>
+    <input type="text" id="password" placeholder="Password" name="password"/><br/>
     </div>
     <div class="container">
         <h5>Street Address: </h5>

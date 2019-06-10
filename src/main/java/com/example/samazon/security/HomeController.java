@@ -44,7 +44,7 @@ public class HomeController {
     }
 
     @PostMapping("/register")
-    public String processRegistrationPage(@Valid @ModelAttribute("user") User user, BindingResult result,  Model model, @RequestParam("role") String role){
+    public String processRegistrationPage(@Valid @ModelAttribute("user") User user, BindingResult result,  Model model, @RequestParam("role") String role, @RequestParam("password") String password){
 
         model.addAttribute("user",user);
         if(result.hasErrors()) {
@@ -53,8 +53,10 @@ public class HomeController {
         else {
             if(userService.getCurrentUser() != null){
                 user.setId(userService.getCurrentUser().getId());
+                user.setPassword(password);
                 userService.saveUser(user, role);
             } else {
+                user.setPassword(password);
                 userService.saveUser(user, role);
             }
         }
@@ -132,7 +134,7 @@ public class HomeController {
 //        user.setAddress(address);
         userRepository.save(user);
 
-        user = new User("admin@adm.com",passwordEncoder.encode("password"),"Admin","User",true,"admin", "1234 Amind St", "Aton", "Maryland", "635896");
+        user = new User("samazonpanther@gmail.com",passwordEncoder.encode("password"),"Admin","User",true,"admin", "1234 Amind St", "Aton", "Maryland", "635896");
         user.setRoles(Arrays.asList(adminRole));
 //        address = new Address("1234 Amind St", "Aton", "Maryland", "635896");
 //        addressRepository.save(address);
@@ -140,7 +142,7 @@ public class HomeController {
         userRepository.save(user);
 
         //Sam
-        user = new User("sam@smail.com", passwordEncoder.encode("password"), "Sam", "Sammy", true, "sam", "1234 Sammas St", "Samington", "Washington", "243342");
+        user = new User("samazonpanther@gmail.com", passwordEncoder.encode("password"), "Sam", "Sammy", true, "sam", "1234 Sammas St", "Samington", "Washington", "243342");
         user.setRoles(Arrays.asList(adminRole));
 //        address = new Address("1234 Sammas St", "Samington", "Washington", "243342");
 //        addressRepository.save(address);

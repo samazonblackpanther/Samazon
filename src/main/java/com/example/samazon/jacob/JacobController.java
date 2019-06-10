@@ -179,7 +179,6 @@ public class JacobController {
             model.addAttribute("cartnumber", cartCount);
         }
         model.addAttribute("products", productRepository.findAll());
-        model.addAttribute("history", userService.getCurrentUser().getHistory());
         model.addAttribute("user", userService.getCurrentUser());
 
 

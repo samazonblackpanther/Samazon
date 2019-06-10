@@ -30,7 +30,7 @@
         <div th:text="${product.category}"></div>
         <div th:text="${product.price}"></div>
         <div th:text="${product.description}"></div>
-        <img th:src="${product.image}" alt="Product Image"/>
+        <a th:href="@{/productdetails/{id}(id=${product.id})}"><img th:src="${product.image}" alt="Product Image"/></a>
     </div>
 
     <!--History-->
@@ -45,7 +45,7 @@
                 <div th:text="${product.category}"></div>
                 <div th:text="${product.price}"></div>
                 <div th:text="${product.description}"></div>
-                <img th:src="${product.image}" alt="Product Image"/>
+                <a th:href="@{/productdetails/{id}(id=${product.id})}"><img th:src="${product.image}" alt="Product Image"/></a>
             </div>
         </div>
     </div>
