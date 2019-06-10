@@ -48,9 +48,34 @@ public class JacobController {
     @Autowired
     CloudinaryConfig cloudc;
 
+    @Autowired
+    ShoppingCartService shoppingCartService;
+
 
     @RequestMapping("/homepage")
     public String homePage(Model model){
+
+        User user = userService.getCurrentUser();
+        shoppingCartService.shoppingCartLoader(model);
+
+
+
+//        model.addAttribute("cart", userService.getCurrentUser().getCarts());
+//        model.addAttribute("products", userService.getCurrentUser().getCarts().getProducts());
+
+
+
+        return "security/index";
+    }
+
+
+    @GetMapping("/addproduct")
+    public String showProductPage(Model model) {
+
+        User user = userService.getCurrentUser();
+
+        model.addAttribute("product", new Product());
+        model.addAttribute("currentuser", userService.getCurrentUser());
 
         // Shopping Cart
         if (userService.getCurrentUser() != null){
@@ -65,22 +90,9 @@ public class JacobController {
         }
 
 
-        model.addAttribute("products", productRepository.findAll());
+        model.addAttribute("history", userService.getCurrentUser().getHistory());
         model.addAttribute("user", userService.getCurrentUser());
 
-//        model.addAttribute("cart", userService.getCurrentUser().getCarts());
-//        model.addAttribute("products", userService.getCurrentUser().getCarts().getProducts());
-
-
-
-        return "security/index";
-    }
-
-
-    @GetMapping("/addproduct")
-    public String showProductPage(Model model) {
-        model.addAttribute("product", new Product());
-        model.addAttribute("currentuser", userService.getCurrentUser());
         return "jacob/addproduct";
     }
 
@@ -103,6 +115,22 @@ public class JacobController {
             }
 
         }
+
+        // Shopping Cart
+        if (userService.getCurrentUser() != null){
+            //For Shopping Cart
+            int cartCount = 0;
+
+            if (userService.getCurrentUser().getCarts() != null){
+                cartCount += cartService.countItems(userService.getCurrentUser().getCarts());
+            }
+            model.addAttribute("cart", userService.getCurrentUser().getCarts());
+            model.addAttribute("cartnumber", cartCount);
+        }
+
+
+        model.addAttribute("history", userService.getCurrentUser().getHistory());
+        model.addAttribute("user", userService.getCurrentUser());
 
         productRepository.save(product);
         return "redirect:/homepage";
@@ -150,9 +178,8 @@ public class JacobController {
             model.addAttribute("cart", userService.getCurrentUser().getCarts());
             model.addAttribute("cartnumber", cartCount);
         }
-
-
         model.addAttribute("products", productRepository.findAll());
+        model.addAttribute("history", userService.getCurrentUser().getHistory());
         model.addAttribute("user", userService.getCurrentUser());
 
 

@@ -30,14 +30,14 @@
                     <thead>
                     <tr>
                         <th></th>
-                        <th>Product</th>
+                        <th>Item</th>
                         <th>Price</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr th:each="product : ${products}">
                         <td>
-                            <img th:src="${product.image}" width="70" height="70"/>
+                            <img th:src="${product.image}" width="80" height="80"/>
                         </td>
                         <td th:text="${product.name}"></td>
                         <td th:text="${product.price}"></td>
