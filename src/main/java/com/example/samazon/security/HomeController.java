@@ -44,7 +44,7 @@ public class HomeController {
     }
 
     @PostMapping("/register")
-    public String processRegistrationPage(@Valid @ModelAttribute("user") User user, BindingResult result,  Model model, @RequestParam("role") String role){
+    public String processRegistrationPage(@Valid @ModelAttribute("user") User user, BindingResult result,  Model model, @RequestParam("role") String role, @RequestParam("password") String password){
 
         model.addAttribute("user",user);
         if(result.hasErrors()) {
@@ -53,8 +53,10 @@ public class HomeController {
         else {
             if(userService.getCurrentUser() != null){
                 user.setId(userService.getCurrentUser().getId());
+                user.setPassword(password);
                 userService.saveUser(user, role);
             } else {
+                user.setPassword(password);
                 userService.saveUser(user, role);
             }
         }
@@ -115,6 +117,7 @@ public class HomeController {
         loaded and right before the Spring Application run method is
         completed.
      */
+
 //    @PostConstruct
 //    public void filltables(){
 //

@@ -26,9 +26,11 @@ public class ShoppingCartService {
             int cartCount = 0;
             if (user.getCarts() != null) {
                 System.out.println(user.getCarts().getId());
-                int cartProduct = user.getCarts().getProducts().size();
-                if (cartProduct >= 1){
-                    cartCount = cartCount + cartProduct;
+                if (user.getCarts().getProducts() != null){
+                    int cartProduct = user.getCarts().getProducts().size();
+                    if (cartProduct >= 1){
+                        cartCount = cartCount + cartProduct;
+                    }
                 }
             }
             model.addAttribute("cart", user.getCarts());
@@ -37,6 +39,7 @@ public class ShoppingCartService {
             model.addAttribute("user", userService.getCurrentUser());
 
             model.addAttribute("history", userService.getCurrentUser().getHistory());
+            model.addAttribute("wishlist", userService.getCurrentUser().getWishlist());
         }
     }
 }

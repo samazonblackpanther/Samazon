@@ -8,6 +8,9 @@ nav {
     width: 100%;
 
 }
+.rounded_img{
+    border-radius: 50%;
+}
 .col-md-4 {
     height: 500px;
 
@@ -68,7 +71,15 @@ ul.dropdown-cart li .item-right{
 ul.dropdown-cart li .item-right button{
     margin-top:14px;
 }
-
+.footer {
+    /*position: fixed;*/
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: darkslategrey;
+    color: white;
+    text-align: center;
+}
 
 
 .icon-cart {

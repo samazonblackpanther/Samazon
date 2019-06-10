@@ -18,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.mail.internet.MimeMessage;
+import java.text.DecimalFormat;
 import java.util.Collection;
 import java.util.HashSet;
 
@@ -57,6 +58,7 @@ public class ChauController {
 
     @Autowired
     private ShoppingCartService shoppingCartService;
+
 
 
     @PostMapping("/addcart")
