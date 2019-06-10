@@ -68,7 +68,7 @@
                             <div th:if="${history != null}">
                                 <a style="color: black;" class="dropdown-item" href="/showOrderHistory">Order History</a>
                             </div>
-                            <div th:if="${history != null}">
+                            <div th:if="${wishlist != null}">
                                 <a style="color: black;" class="dropdown-item" href="/wishlist">View Wishlist</a>
                             </div>
                         <a style="color: black;" class="dropdown-item" href="/addproduct" sec:authorize="hasAuthority('ADMIN')">Add a Product</a>

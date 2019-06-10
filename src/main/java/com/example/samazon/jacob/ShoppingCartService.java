@@ -37,6 +37,7 @@ public class ShoppingCartService {
             model.addAttribute("user", userService.getCurrentUser());
 
             model.addAttribute("history", userService.getCurrentUser().getHistory());
+            model.addAttribute("wishlist", userService.getCurrentUser().getWishlist());
         }
     }
 }
