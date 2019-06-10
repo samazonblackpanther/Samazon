@@ -44,11 +44,21 @@
         <p th:inline="text">We have sent a confirmation email to: [[${email}]]</p>
 
     <form th:href="@{/checkout}" method="post">
-        <input type="submit" value="Add to History"/>
+        <!--<input type="submit" value="Add to History"/>-->
+
+        <input button type="submit" class="btn btn-warning"  value="Add to History"/>
     </form>
 
     </div>
 </div>
+
+
+<br><br><br><br><br><br><br><br><br><br><br><br>
+<div class="footer">
+    Copyright Java Program &copy; <br>
+    Developed by: Jinsook Kwon, Chau Nguyen, Betelihem Kabtiymer, Jacob Lefler
+</div>
+
 <!--<div th:replace="base::footer"></div>-->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
