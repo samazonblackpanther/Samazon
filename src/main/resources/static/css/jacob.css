@@ -1,17 +1,22 @@
 body {
-    background-color: white;
+    background-color: floralwhite;
 }
 nav {
     background-color:coral;
     background-image: none;
     background-repeat: no-repeat;
     width: 100%;
-
 }
-
-
-
-
+.col-md-4 {
+    height: 500px;
+}
+.card-img-top {
+    height: 350px;
+    width: 350px;
+}
+.card-body {
+    background-color: floralwhite;
+}
 ul.dropdown-cart{
     min-width:250px;
 }
